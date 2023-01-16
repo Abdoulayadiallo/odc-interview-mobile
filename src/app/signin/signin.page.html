@@ -1,9 +1,22 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>signin</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
-</ion-content>
+  <div class="container">
+		<div class="title"><img src="assets/Logo.png" alt="odc-interview-logo"></div>
+			<form method="post" action="MonServlet">
+				<div class="user-details">
+					<div class="input-box">
+						<label for="email">E-mail: </label>
+						<input type="text" id="pseudo" name="email" placeholder="Entrez votre Email" required>
+					</div>
+					<div class="input-box">
+						<label for="password">Mot de passe: </label>
+						<input type="password" id="password" name="password" placeholder="Entrez le mot de passe" required>
+					</div>
+          <div class="passf">Mot de passe oublié</div>
+					<div class="button">
+					<input type="button" value="Connecter">
+					
+					</div>
+				</div>
+			</form>
+			<div></div>
+	</div></ion-content>
