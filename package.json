@@ -30,6 +30,7 @@
     "@fortawesome/free-brands-svg-icons": "^6.2.1",
     "@fortawesome/free-regular-svg-icons": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
+    "@iconify-icons/fluent": "^1.2.18",
     "@ionic/angular": "^6.1.9",
     "font-awesome": "^4.7.0",
     "ionicons": "^6.0.3",
