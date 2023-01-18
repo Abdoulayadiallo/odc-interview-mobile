@@ -1,36 +1,124 @@
 <ion-header>
-    <ion-toolbar>
-            <ion-grid>
-              <ion-row class="ion-align-items-center">
-                <ion-col size="2">
-                  <ion-avatar>
-                    <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-                  </ion-avatar>
-                </ion-col>
-                <ion-col size="8">
-                <ion-card-header>
-                  <h6>Bonjour,<span> Ibrahim</span></h6>
-                  <p>Juge de <span color="primary">l'entretien 1</span></p>
-                </ion-card-header>
-              </ion-col>
-              <ion-col size="2" class="ion-justify-content-center">
-                <ion-button fill="clear" size="small">
-                    <ion-icon  size="small" name="notifications"></ion-icon>
-                    <ion-badge class="notif-badge">5</ion-badge>
-                </ion-button>
-              </ion-col>
-              </ion-row>
-            </ion-grid> 
-    </ion-toolbar>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="2">
+          <ion-avatar>
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+        </ion-col>
+        <ion-col size="8">
+          <ion-card-header>
+            <h6>Bonjour,<span> Ibrahim</span></h6>
+            <p>Juge de <span color="primary">l'entretien 1</span></p>
+          </ion-card-header>
+        </ion-col>
+        <ion-col size="2" class="ion-justify-content-center">
+          <ion-button fill="clear" size="small">
+            <ion-icon size="small" name="notifications"></ion-icon>
+            <ion-badge class="notif-badge">5</ion-badge>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-card>
-        <ion-card-header class="align-self-center">
-          Card Header
-        </ion-card-header>
-        <ion-card-content>
-          <p>Content goes here</p>
-        </ion-card-content>
-      </ion-card>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <h4>Les postulants par genre</h4>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <div class="container">
+          <div class="rowline">
+            <div class="col1">
+              <div class="progress blue">
+                <span class="progress-left">
+                  <span class="progress-bar"></span>
+                </span>
+                <span class="progress-right">
+                  <span class="progress-bar"></span>
+                </span>
+                <div class="progress-value">90%</div>
+              </div>
+              <div class="status">
+                Homme
+              </div>
+            </div>
+            <div class="col2">
+              <div class="progress blue">
+                <span class="progress-left">
+                  <span class="progress-bar"></span>
+                </span>
+                <span class="progress-right">
+                  <span class="progress-bar"></span>
+                </span>
+                <div class="progress-value">90%</div>
+              </div>
+              <div class="status">
+                Femme
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-card color="primary">
+            <ion-card-header>
+              <ion-card-title>Card Title</ion-card-title>
+              <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+            </ion-card-header>
+          
+            <ion-card-content>
+              Card Content
+            </ion-card-content>
+          </ion-card>          
+        </ion-col>
+        <ion-col>
+          <ion-card color="primary">
+            <ion-card-header>
+              <ion-card-title>Card Title</ion-card-title>
+              <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              Card Content
+            </ion-card-content>
+          </ion-card>          
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-card color="primary">
+            <ion-card-header>
+              <ion-card-title>Card Title</ion-card-title>
+              <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+            </ion-card-header>
+          
+            <ion-card-content>
+              Card Content
+            </ion-card-content>
+          </ion-card>          
+        </ion-col>
+        <ion-col>
+          <ion-card color="primary">
+            <ion-card-header>
+              <ion-card-title>Card Title</ion-card-title>
+              <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+            </ion-card-header>
+          
+            <ion-card-content>
+              Card Content
+            </ion-card-content>
+          </ion-card>          
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
 
 </ion-content>

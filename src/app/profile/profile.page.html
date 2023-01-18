@@ -5,5 +5,61 @@
 </ion-header>
 
 <ion-content>
+  <ion-card>
+    <ion-grid>
+      <ion-row>
+        <h3>Profil</h3>
+      </ion-row>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="2">
+          <ion-avatar>
+            <label for="image">
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </label>
+            <input id="image" type="file" style="visibility: hidden;"/>
+          </ion-avatar>
+        </ion-col>
+        <ion-col size="10">
+          <ion-card-header>
+            <ion-card-title>Modifier Photo</ion-card-title>
+            <ion-card-subtitle><ion-button class="eval">Modifier</ion-button></ion-card-subtitle>
+          </ion-card-header>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  <div class="container">
+			<form>
+				<div class="user-details">
+					<div class="input-box">
+						<label for="nom">Nom: </label>
+						<input value="Diallo" type="text" name="nom" placeholder="Entrez votre nom" required>
+					</div>
+					<div class="input-box">
+						<label for="prenom">Prenom: </label>
+						<input value="Abdoulaye" type="text" name="prenom" placeholder="Entrez votre prenom" required>
+					</div>
+					<div class="input-box">
+						<label for="email">E-mail: </label>
+						<input value="d.abdoulayead28@gmail.com" type="text" name="email" placeholder="Entrez votre Email" required>
+					</div>
+          <div class="input-box">
+						<label for="numero">Numero: </label>
+						<input value="Numero" type="text" name="numero" placeholder="Entrez votre numero" required>
+					</div>
+          <div class="input-box">
+						<label for="birthd">Date de naissance: </label>
+						<input value="2018-07-22" type="date" name="birthd" placeholder="Entrez votre date de naissance" required>
+					</div>
+          <div class="input-box">
+						<label for="bio">Bio: </label>
+						<input value="je suis .........................." type="text" name="bio" placeholder="Entrez votre Bio" required>
+					</div>
+					<div class="button">
+					<input type="button" value="Enregistrer">
+					</div>
+				</div>
+			</form>
+      </div>
 
 </ion-content>

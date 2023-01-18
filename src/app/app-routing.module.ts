@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { NoteComponent } from './note/note.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,18 @@ const routes: Routes = [
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
   },
+  {
+    path: 'postulant-details',
+    loadChildren: () => import('./postulant-details/postulant-details.module').then( m => m.PostulantDetailsPageModule)
+  },
+  {
+    path: 'entretien',
+    loadChildren: () => import('./entretien/entretien.module').then( m => m.EntretienPageModule)
+  },
+  {
+    path: 'note', component:NoteComponent
+  }
+
 ];
 
 @NgModule({

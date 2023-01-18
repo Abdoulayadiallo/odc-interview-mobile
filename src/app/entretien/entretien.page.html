@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-buttons>
+    <ion-title>Entretien</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <!--  -->
+  <ion-card>
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="2">
+          <ion-avatar>
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+        </ion-col>
+        <ion-col size="10">
+          <ion-card-header>
+            <ion-card-title>Ibrahim Keita</ion-card-title>
+            <ion-card-subtitle>Status: Postulant</ion-card-subtitle>
+          </ion-card-header>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  <!--  -->
+  <ion-header>
+    <ion-toolbar class="critere">
+      <ion-title>Critere d'evaluation</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-grid class="note">
+    <ion-row>
+      <ion-col>Question</ion-col>
+      <ion-col>2</ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="note">
+    <ion-row class="entete">
+      <ion-col>Question</ion-col>
+      <ion-col>Elimination</ion-col>
+      <ion-col>
+         <ion-button expand="block" (click)="openModal()">Open</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="contenu">
+      <ion-col>Disponibilité</ion-col>
+      <ion-col><ion-button class="pt">Oui</ion-button></ion-col>
+      <ion-col>Note</ion-col>
+    </ion-row>
+    <ion-row class="contenu">
+      <ion-col>Motivation</ion-col>
+      <ion-col><ion-button class="pt">Oui</ion-button></ion-col>
+      <ion-col>Note</ion-col>
+    </ion-row>
+    <ion-row class="contenu">
+      <ion-col>Ordinateur</ion-col>
+      <ion-col><ion-button class="pt">Oui</ion-button></ion-col>
+      <ion-col>Note</ion-col>
+    </ion-row>
+    <ion-row class="contenu">
+      <ion-col>Moyen de deplacement</ion-col>
+      <ion-col><ion-button class="pt">Oui</ion-button></ion-col>
+      <ion-col>Note</ion-col>
+    </ion-row>
+    <ion-row class="contenu">
+      <ion-col>Socialibité</ion-col>
+      <ion-col><ion-button class="pt">Oui</ion-button></ion-col>
+      <ion-col>Note</ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

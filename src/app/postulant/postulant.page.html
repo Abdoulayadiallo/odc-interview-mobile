@@ -42,7 +42,7 @@
       </ion-row>
       <ion-row>
           <ion-button fill="outline" class="evaluation">Non Evaluer</ion-button>
-          <ion-button class="interview">Interview</ion-button>
+          <ion-button class="interview" [routerLink]="['/postulant-details']">Interview</ion-button>
       </ion-row>
     </ion-grid> 
   </ion-card>
@@ -68,7 +68,7 @@
       </ion-row>
       <ion-row>
           <ion-button fill="outline" class="evaluation">Non Evaluer</ion-button>
-          <ion-button class="interview">Interview</ion-button>
+          <ion-button class="interview" [routerLink]="['/postulant-details']">Interview</ion-button>
       </ion-row>
     </ion-grid> 
   </ion-card>
@@ -94,7 +94,33 @@
       </ion-row>
       <ion-row>
           <ion-button fill="outline" class="evaluation">Non Evaluer</ion-button>
-          <ion-button class="interview">Interview</ion-button>
+          <ion-button class="interview" [routerLink]="['/postulant-details']" >Interview</ion-button>
+      </ion-row>
+    </ion-grid> 
+  </ion-card>
+    <!-- Fin Card postulant -->
+  <!-- Card postulant -->
+  <ion-card>
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="2">
+          <ion-avatar>
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+        </ion-col>
+        <ion-col size="8">
+        <ion-card-header>
+          <ion-card-title>Ibrahim Keita</ion-card-title>
+          <ion-card-subtitle>Status: Postulant</ion-card-subtitle>
+        </ion-card-header>
+      </ion-col>
+      <ion-col size="2" class="ion-justify-content-center">
+        <ion-icon  size="large" name="arrow-forward-circle-outline"></ion-icon>
+      </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-button fill="outline" class="evaluation">Non Evaluer</ion-button>
+          <ion-button class="interview" [routerLink]="['/postulant-details']" >Interview</ion-button>
       </ion-row>
     </ion-grid> 
   </ion-card>
@@ -120,33 +146,7 @@
       </ion-row>
       <ion-row>
           <ion-button fill="outline" class="evaluation">Non Evaluer</ion-button>
-          <ion-button class="interview">Interview</ion-button>
-      </ion-row>
-    </ion-grid> 
-  </ion-card>
-    <!-- Fin Card postulant -->
-  <!-- Card postulant -->
-  <ion-card>
-    <ion-grid>
-      <ion-row class="ion-align-items-center">
-        <ion-col size="2">
-          <ion-avatar>
-            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-          </ion-avatar>
-        </ion-col>
-        <ion-col size="8">
-        <ion-card-header>
-          <ion-card-title>Ibrahim Keita</ion-card-title>
-          <ion-card-subtitle>Status: Postulant</ion-card-subtitle>
-        </ion-card-header>
-      </ion-col>
-      <ion-col size="2" class="ion-justify-content-center">
-        <ion-icon size="large" name="arrow-forward-circle-outline"></ion-icon>
-      </ion-col>
-      </ion-row>
-      <ion-row>
-          <ion-button fill="outline" class="evaluation">Non Evaluer</ion-button>
-          <ion-button class="interview">Interview</ion-button>
+          <ion-button  class="interview" [routerLink]="['/postulant-details']">Interview</ion-button>
       </ion-row>
     </ion-grid> 
   </ion-card>

@@ -1,0 +1,38 @@
+ion-content{
+    --background: #F2F7FA; 
+}
+ion-title{
+    color: #FF7900;
+}
+.critere{
+    padding: 0;
+}
+
+// ion-card-header {
+//     padding: 5px 16px;
+//   }
+ion-card-title{
+    font-size: 18px;
+}
+ion-avatar{
+    max-width: 3rem;
+    height: 3rem;
+}
+.note{
+    --ion-grid-padding:0px;
+    --ion-grid-column-padding:1px;
+    --ion-grid-col-padding:3px;
+}
+ .note ion-col {
+
+    background: #fff;
+    border-bottom: solid 1px #cacaca;
+    text-align: center;
+    padding: 5px;
+  }
+  .entete{
+    color: #845EC2;
+  }
+.pt{
+    margin: 0;
+}
