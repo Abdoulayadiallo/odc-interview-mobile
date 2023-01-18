@@ -7,13 +7,10 @@ import { NoteComponent } from '../note/note.component';
   templateUrl: './entretien.page.html',
   styleUrls: ['./entretien.page.scss'],
 })
-export class EntretienPage implements OnInit {
+export class EntretienPage {
   //message = 'This modal example uses the modalController to present and dismiss modals.';
 
   constructor(private modalCtrl: ModalController) {}
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
 
   async openModal() {
     const modal = await this.modalCtrl.create({

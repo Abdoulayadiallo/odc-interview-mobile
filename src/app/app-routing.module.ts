@@ -41,7 +41,7 @@ const routes: Routes = [
     loadChildren: () => import('./entretien/entretien.module').then( m => m.EntretienPageModule)
   },
   {
-    path: 'note', component:NoteComponent
+    path: 'note', component: NoteComponent
   }
 
 ];
