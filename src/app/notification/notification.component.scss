@@ -8,10 +8,7 @@ ion-content{
 ion-title{
     color: #FF7900;
 }
-ion-card{
-    border-left: solid #FF7900;
 
-};
 
 ion-card-header {
     padding: 5px 16px;
@@ -20,20 +17,20 @@ ion-card-title{
     font-size: 18px;
 }
 
-.interview{
+.nview{
     --background: #845EC2;
     width: 90px;
     height: 25px;
     padding: 0px;
     
 }
-.evaluation{
+.view{
     --color: #000;
-    --border-radius: 15px;
+    // --border-radius: 15px;
     --border-color: #CACACA;
-    width: 125px;
+    width: 50px;
     height: 25px;
-    padding: 0px 5px;
+    // padding: 0px 5px;
 }
 .interview ,.evaluation{
     --border-radius: 15px;
@@ -61,12 +58,4 @@ ion-grid{
     --border-width: 1px;
     --padding-start: 30px;
     --padding-end: 30px;   
-}
-// ion-card{
-//     border-radius: var(--timelineCardBorderRadius, 2px);
-//     // --box-shadow: var(--timelineCardBoxShadow, 0 1px 3px 0 rgba(0, 0, 0, .12), 0 1px 2px 0 rgba(0, 0, 0, .24));
-//     // --background-color: var(--timelineCardBackgroundColor, #fff);
-//   }
-.titre{
-    color: #FF7900;
 }

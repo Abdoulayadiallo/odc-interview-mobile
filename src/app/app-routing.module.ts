@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { NoteComponent } from './note/note.component';
+import { NotificationComponent } from './notification/notification.component';
 
 const routes: Routes = [
   {
@@ -9,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'tabs',
+    redirectTo: 'signin',
     pathMatch: 'full'
   },
   {
@@ -29,7 +30,7 @@ const routes: Routes = [
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   },
   {
-    path: 'tabs',
+    path: '',
     loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
   },
   {
@@ -42,6 +43,13 @@ const routes: Routes = [
   },
   {
     path: 'note', component: NoteComponent
+  },
+  {
+    path:'notification', component: NotificationComponent
+  },
+  {
+    path: 'jury-details',
+    loadChildren: () => import('./jury-details/jury-details.module').then( m => m.JuryDetailsPageModule)
   }
 
 ];

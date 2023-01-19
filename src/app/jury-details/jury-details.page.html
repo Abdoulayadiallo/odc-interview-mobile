@@ -5,7 +5,7 @@
         <ion-icon name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Postulant detail</ion-title>
+    <ion-title>Jury details</ion-title>
     <ion-buttons slot="end">
       <ion-button>
         <ion-icon name="ellipsis-horizontal"></ion-icon>
@@ -15,8 +15,9 @@
 
 </ion-header>
 
+
 <ion-content>
-  <!-- Card postulant -->
+  <!-- Card jury -->
   <ion-card>
     <ion-grid>
       <ion-row class="ion-align-items-center">
@@ -28,12 +29,9 @@
         <ion-col size="10">
           <ion-card-header>
             <ion-card-title>Ibrahim Keita</ion-card-title>
-            <ion-card-subtitle>Status: Postulant</ion-card-subtitle>
+            <ion-card-subtitle>Status: Jury</ion-card-subtitle>
           </ion-card-header>
         </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-button class="evaluation" [routerLink]="['/entretien']">Evaluer</ion-button>
       </ion-row>
     </ion-grid>
   </ion-card>
@@ -49,10 +47,8 @@
     <ion-item>Email </ion-item>
     <ion-item>Status </ion-item>
     <ion-item>Date de naissance </ion-item>
-    <ion-item>Evaluation 7</ion-item>
-    <ion-item>Item 8</ion-item>
-    <ion-item>Item 9</ion-item>
-    <ion-item>Item 10</ion-item>
   </ion-list>
-  <!-- Fin Card postulant -->
+  <!-- Fin Card jury -->
+  <ion-button class="evaluation" [routerLink]="['/postulant']">Voir les Postulant</ion-button>
+
 </ion-content>

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
+import { NotificationComponent } from '../notification/notification.component';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +9,19 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor(private pvrCtlr: PopoverController) {}
+
+  async openNotif() {
+    const popup = await this.pvrCtlr.create({
+      component: NotificationComponent,
+    });
+    popup.present();
+
+    const { data, role } = await popup.onWillDismiss();
+
+    if (role === 'confirm') {
+     // this.message = `Hello, ${data}!`;
+    }
+  }
 
 }

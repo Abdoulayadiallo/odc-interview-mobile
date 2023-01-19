@@ -14,7 +14,7 @@
           </ion-card-header>
         </ion-col>
         <ion-col size="2" class="ion-justify-content-center">
-          <ion-button fill="clear" size="small">
+          <ion-button fill="clear" size="small" (click)="openNotif()">
             <ion-icon size="small" name="notifications"></ion-icon>
             <ion-badge class="notif-badge">5</ion-badge>
           </ion-button>
@@ -24,7 +24,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-grid>
+    <ion-grid class="mesgrid">
       <ion-row>
         <ion-col>
           <h4>Les postulants par genre</h4>
@@ -34,7 +34,7 @@
         <div class="container">
           <div class="rowline">
             <div class="col1">
-              <div class="progress blue">
+              <div class="progress violet">
                 <span class="progress-left">
                   <span class="progress-bar"></span>
                 </span>
@@ -48,7 +48,7 @@
               </div>
             </div>
             <div class="col2">
-              <div class="progress blue">
+              <div class="progress green">
                 <span class="progress-left">
                   <span class="progress-bar"></span>
                 </span>
@@ -65,55 +65,52 @@
         </div>
       </ion-row>
     </ion-grid>
-    <ion-grid>
+    <ion-grid class="mesgrid">
       <ion-row>
         <ion-col>
-          <ion-card color="primary">
-            <ion-card-header>
-              <ion-card-title>Card Title</ion-card-title>
-              <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-            </ion-card-header>
-          
-            <ion-card-content>
-              Card Content
-            </ion-card-content>
+          <ion-card class="desc"color="primary">
+            <div class="cardbody">
+              <h6>Postulant</h6>
+              <p class="nbre">300</p>
+            </div>
+            <div class="cardicon">
+              <ion-icon name="person"></ion-icon>
+            </div>
           </ion-card>          
         </ion-col>
         <ion-col>
-          <ion-card color="primary">
-            <ion-card-header>
-              <ion-card-title>Card Title</ion-card-title>
-              <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-            </ion-card-header>
-            <ion-card-content>
-              Card Content
-            </ion-card-content>
+          <ion-card class="desc"color="primary">
+            <div class="cardbody">
+              <h6>Jury</h6>
+              <p class="nbre">300</p>
+            </div>
+            <div class="cardicon">
+              <ion-icon name="person"></ion-icon>
+            </div>
           </ion-card>          
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-card color="primary">
-            <ion-card-header>
-              <ion-card-title>Card Title</ion-card-title>
-              <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-            </ion-card-header>
-          
-            <ion-card-content>
-              Card Content
-            </ion-card-content>
+          <ion-card class="desc"color="primary">
+            <div class="cardbody">
+              <h6>Entretien</h6>
+              <p class="nbre">300</p>
+            </div>
+            <div class="cardicon">
+              <ion-icon name="person"></ion-icon>
+            </div>
           </ion-card>          
         </ion-col>
         <ion-col>
-          <ion-card color="primary">
-            <ion-card-header>
-              <ion-card-title>Card Title</ion-card-title>
-              <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-            </ion-card-header>
-          
-            <ion-card-content>
-              Card Content
-            </ion-card-content>
+          <ion-card class="desc"color="primary">
+            <div class="cardbody">
+              <h6>Postulant</h6>
+              <p class="nbre">300</p>
+            </div>
+            <div class="cardicon">
+              <ion-icon name="person"></ion-icon>
+            </div>
           </ion-card>          
         </ion-col>
       </ion-row>
