@@ -1,0 +1,268 @@
+ion-title {
+  color: #FF7900;
+}
+ion-content{
+  background: #F2F7FA;
+}
+
+
+ion-card-header {
+  margin: 0 3px auto 0;
+  padding: 0 2px 0 16px;
+}
+
+p {
+  font-size: 15px;
+}
+
+ion-avatar {
+  max-width: 3rem;
+  height: 3rem;
+}
+
+.notif-badge {
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  background: none;
+
+}
+
+.notif-badge.ios {
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  background: none;
+
+}
+/////////---------------///////::
+ion-content{
+  background: #F2F7FA;
+}
+///////////Postulant//////////
+h4{
+  margin: auto;
+  text-align: center;
+  border-bottom: 1px solid #cacaca;
+}
+
+///////////// Debut Cercle////////////
+.progress {
+  width: 100px;
+  height: 100px;
+  line-height: 150px;
+  background: none;
+  margin: 0 auto;
+  box-shadow: none;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.progress:after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 12px solid #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.progress>span {
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+}
+
+.progress .progress-left {
+  left: 0;
+}
+
+.progress .progress-bar {
+  width: 100%;
+  height: 100%;
+  background: none;
+  border-width: 12px;
+  border-style: solid;
+  position: absolute;
+  top: 0;
+}
+
+.progress .progress-left .progress-bar {
+  left: 100%;
+  border-top-right-radius: 80px;
+  border-bottom-right-radius: 80px;
+  border-left: 0;
+  -webkit-transform-origin: center left;
+  transform-origin: center left;
+}
+
+.progress .progress-right {
+  right: 0;
+}
+
+.progress .progress-right .progress-bar {
+  left: -100%;
+  border-top-left-radius: 80px;
+  border-bottom-left-radius: 80px;
+  border-right: 0;
+  -webkit-transform-origin: center right;
+  transform-origin: center right;
+  animation: loading-1 1.8s linear forwards;
+}
+
+.progress .progress-value {
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+  background: #ffffff;
+  font-size: 24px;
+  line-height: 90px;
+  text-align: center;
+  position: absolute;
+  top: 5%;
+  left: 5%;
+}
+
+.progress.violet .progress-value {
+  color: #845EC2;
+}
+.progress.green .progress-value {
+  color: #50BE87;
+}
+.progress.violet .progress-bar {
+  border-color: #845EC2;
+}
+.progress.green .progress-bar {
+  border-color: #50BE87;
+}
+
+.progress.green .progress-left .progress-bar {
+  animation: loading-2 1.5s linear forwards 1.8s;
+}
+.progress.violet .progress-left .progress-bar {
+  animation: loading-2 1.5s linear forwards 1.8s;
+}
+
+
+
+.rowline {
+  margin: 5px auto;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 50px;
+  align-items:center;
+}
+
+.mesgrid{
+  margin: 10px auto;
+  border: solid 1px #cacaca;
+}
+
+
+
+
+
+@keyframes loading-1 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes loading-2 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(144deg);
+    transform: rotate(144deg);
+  }
+}
+
+@keyframes loading-3 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+}
+
+@keyframes loading-4 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(36deg);
+    transform: rotate(36deg);
+  }
+}
+
+@keyframes loading-5 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(126deg);
+    transform: rotate(126deg);
+  }
+}
+///////////// Fin Cercle////////////
+
+.status{
+  text-align: center;
+  color: #555;
+}
+
+////card//////////::after
+
+  ion-col{
+    padding: 3px;
+  }
+  .desc{
+    background: #845EC2;
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+    // padding: 0 5px;
+    padding: 5px;
+    margin: 0;
+    h6{
+      color: #fff;
+      margin: 5px auto;
+    }
+    .cardicon{
+      width: 0px;
+      font-size: 50px;
+      // right: 15px;
+      color: #cacaca;
+      opacity: 0.4;
+    }
+  }
+  .nbre{
+      padding: 5px;
+      margin: 5px;
+      text-align: center;
+      font-size: 22px;
+      color: #fff;
+      font-weight: 500;
+  }

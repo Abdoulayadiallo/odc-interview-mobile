@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button ion-button navPop>
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Entretien</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <!--  -->
+  <ion-card>
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="2">
+          <ion-avatar>
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+        </ion-col>
+        <ion-col size="10">
+          <ion-card-header>
+            <ion-card-title>Ibrahim Keita</ion-card-title>
+            <ion-card-subtitle>Status: Postulant</ion-card-subtitle>
+          </ion-card-header>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  <!--  -->
+  <ion-header>
+    <ion-toolbar class="critere">
+      <ion-title>Critere d'evaluation</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-grid class="note">
+    <ion-row class="qtion">
+      <ion-col class="status">Question</ion-col>
+      <ion-col>
+        <div class="container">
+          <div class="rowline">
+            <div class="col1">
+              <div class="progress violet">
+                <span class="progress-left">
+                  <span class="progress-bar"></span>
+                </span>
+                <span class="progress-right">
+                  <span class="progress-bar"></span>
+                </span>
+                <div class="progress-value">90%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="note">
+    <ion-row class="entete">
+      <ion-col size="5">Question</ion-col>
+      <ion-col size="3">Elimination</ion-col>
+      <ion-col size="4">Note</ion-col>
+    </ion-row>
+    <ion-row class="contenu">
+      <ion-col size="5">Disponibilité</ion-col>
+      <ion-col size="3"><ion-button class="pt">Oui</ion-button></ion-col>
+      <ion-col><ion-button class="notez" expand="block" (click)="openModal()">Notez</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="contenu">
+      <ion-col size="5">Motivation</ion-col>
+      <ion-col size="3"><ion-button class="pt">Oui</ion-button></ion-col>
+      <ion-col size="4">Note</ion-col>
+    </ion-row>
+    <ion-row class="contenu">
+      <ion-col size="5">Ordinateur</ion-col>
+      <ion-col size="3"><ion-button class="pt">Oui</ion-button></ion-col>
+      <ion-col size="4">Note</ion-col>
+    </ion-row>
+    <ion-row class="contenu">
+      <ion-col size="5">Moyen de deplacement</ion-col>
+      <ion-col size="3"><ion-button class="pt">Oui</ion-button></ion-col>
+      <ion-col size="4">Note</ion-col>
+    </ion-row>
+    <ion-row class="contenu">
+      <ion-col size="5">Socialibité</ion-col>
+      <ion-col size="3"><ion-button class="pt">Oui</ion-button></ion-col>
+      <ion-col size="4">Note</ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
