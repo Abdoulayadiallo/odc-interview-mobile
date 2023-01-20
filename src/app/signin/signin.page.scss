@@ -1,5 +1,5 @@
 
-.container{
+.form-content{
     display: flex;
     height: 100vh;
     flex-direction: column;
@@ -15,13 +15,13 @@
     /* border-radius: 5px; */
 }
 
-.container .title{
+.form-content .title{
     font-size: 25px;
     font-weight: 500;
     position: relative;
 
 }
-.container .title::before {
+.form-content .title::before {
     content:'';
     position: absolute;
     left:0;
@@ -31,21 +31,21 @@
     background: linear-gradient(135deg, #71b7e6, #9b59b6);
 }
 
- .container form .user-details{
+ .form-content form .user-details{
     margin: 20px 0 12px 0;
 }
 
-form .user-details .input-box{
+form .user-details .form-group{
     margin-bottom: 15px;
 }
-.user-details .input-box .details{
+.user-details .form-group .details{
     display: block;
     margin: 20px 0 12px 0;
     margin-bottom: 5px;
 
 }
 
-.user-details .input-box input{
+.user-details .form-group input{
     height: 45px ;
     width: 100%;
     outline: none;
@@ -61,8 +61,8 @@ form .user-details .input-box{
     flex-direction: row-reverse;
 }
 
-.user-details .input-box input:focus,
-.user-details .input-box input:valid{
+.user-details .form-group input:focus,
+.user-details .form-group input:valid{
     border-color: #9b59b6;
 
 }
@@ -89,3 +89,7 @@ form .button input{
 form .button input:hover {
     background: linear-gradient(-135deg, #FF7900, #9b59b6);
  }
+
+ span.help-block {
+    color: #FF7900;
+}
