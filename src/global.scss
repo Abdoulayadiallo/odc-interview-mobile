@@ -26,6 +26,9 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 
+popover-content.ios {
+    width: calc(100% - 10px);
+}
 
 :root {
 

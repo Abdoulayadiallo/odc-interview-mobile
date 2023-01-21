@@ -16,17 +16,29 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <p class="postdetail">Total <span>224</span></p>
-    <p class="postdetail">Interview <span>24</span></p>
-    <p class="postdetail">Non-Interview <span>200</span></p>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <p class="postdetail">Total <span>224</span></p>
+          <p class="postdetail">Interview <span>24</span></p>
+          <p class="postdetail">Non-Interview <span>200</span></p>
+        </ion-col>
+        <ion-col class="align-items-center">
+          <ion-button id="popover-button" class="absolute" color="secondary" fill=""><ion-icon
+              name="funnel-outline"></ion-icon>
+            Filtrer</ion-button>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
+  <ng-container *ngSwitchCase="'APP_LOADED'">
   <!-- Card postulant -->
   <ion-card *ngFor="let post of postulants">
     <ion-grid>
-      <ion-row class="ion-align-items-center" >
+      <ion-row class="ion-align-items-center">
         <ion-col size="2">
           <ion-avatar>
             <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
@@ -48,9 +60,6 @@
       </ion-row>
     </ion-grid>
   </ion-card>
-  
-  <ion-button id="popover-button" class="absolute" color="secondary" fill=""><ion-icon name="funnel-outline"></ion-icon>
-    Filtrer</ion-button>
   <ion-popover trigger="popover-button" [dismissOnSelect]="true">
     <ng-template>
       <ion-content>
@@ -67,4 +76,13 @@
       </ion-content>
     </ng-template>
   </ion-popover>
+  <div class="pagination">
+    <a >&laquo;</a>
+    <li *ngFor= "let number of [].constructor(totalPages); let i = index">
+      <a  (click)="gotToPage(i,1,'','')">{{i+1}}</a>
+    </li>
+    <a >&raquo;</a>
+  </div>
+</ng-container>
+
 </ion-content>

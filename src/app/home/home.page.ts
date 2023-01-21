@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 import { Postulant } from '../Model/postulant';
+import { Postulantresponse } from '../Model/postulantresponse';
 import { NotificationComponent } from '../notification/notification.component';
 import { AccountService } from '../Service/account.service';
 import { PostulantService } from '../Service/postulant.service';
@@ -12,7 +13,9 @@ import { PostulantService } from '../Service/postulant.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  postulants!: Postulant[];
+  postulantresponse!: Postulantresponse ;
+  totalElement=0
+  test:any;
 
   constructor(
     private pvrCtlr: PopoverController,
@@ -34,8 +37,10 @@ export class HomePage implements OnInit {
   getPost(){
       this.postulantService.getAllPostulant().subscribe(data => {
         console.log(data)
-        this.postulants = data
-        
+        this.postulantresponse = data
+        this.totalElement=data.totalElements
+        this.test=Postulantresponse;
+        console.log(this.test)
       })
     }
 }
