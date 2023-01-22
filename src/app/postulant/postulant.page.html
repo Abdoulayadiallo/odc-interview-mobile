@@ -75,7 +75,7 @@
             <ion-button fill="outline" class="evaluation"
               >Non Evaluer</ion-button
             >
-            <ion-button [ngClass]="i % 3 == 0 ? ' iorange' : (i % 3 == 1 ? ' iviolet':' ivert')" [routerLink]="['/postulant-details']"
+            <ion-button [ngClass]="i % 3 == 0 ? ' iorange' : (i % 3 == 1 ? ' iviolet':' ivert')" (click)="postulantDetails(post.id)"
               >Interview</ion-button
             >
           </ion-row>
@@ -106,7 +106,7 @@
         >
           <a [ngClass]="i == (currentPage$ | async) ? ' active' : ''" (click)="gotToPage('',i,10,'','')">{{i+1}}</a>
         </li>
-        <li class="page-item pointer" [ngClass]=" (state.appData.totalPages - 1) == (currentPage$ | async) ? ' disabled' : ''">
+        <li class="page-item pointer" [ngClass]=" (state.appData?.totalPages - 1) == (currentPage$ | async) ? ' disabled' : ''">
           <a (click)="goToNextOrPreviousPage('forward','')">&raquo;</a>
         </li>
       </div>

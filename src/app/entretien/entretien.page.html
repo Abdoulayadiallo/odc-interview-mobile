@@ -61,13 +61,14 @@
       <ion-col size="3">Elimination</ion-col>
       <ion-col size="4">Note</ion-col>
     </ion-row>
-    <ion-row class="contenu">
-      <ion-col size="5">Disponibilité</ion-col>
-      <ion-col size="3"><ion-button class="pt">Oui</ion-button></ion-col>
+    <ion-row class="contenu" *ngFor= "let critere of criteres; let i=index">
+      <ion-col size="5">{{critere.questionList.id}}</ion-col>
+      <ion-col *ngIf="critere.elimination ===true " size="3"><ion-button  [ngClass]="(critere.elimination ===true ? ' yes' :' no')">Oui</ion-button></ion-col>
+      <ion-col *ngIf="critere.elimination === false " size="3"><ion-button  class="no">Non</ion-button></ion-col>
       <ion-col><ion-button class="notez" expand="block" (click)="openModal()">Notez</ion-button>
       </ion-col>
     </ion-row>
-    <ion-row class="contenu">
+    <!-- <ion-row class="contenu">
       <ion-col size="5">Motivation</ion-col>
       <ion-col size="3"><ion-button class="pt">Oui</ion-button></ion-col>
       <ion-col size="4">Note</ion-col>
@@ -86,6 +87,6 @@
       <ion-col size="5">Socialibité</ion-col>
       <ion-col size="3"><ion-button class="pt">Oui</ion-button></ion-col>
       <ion-col size="4">Note</ion-col>
-    </ion-row>
+    </ion-row> -->
   </ion-grid>
 </ion-content>

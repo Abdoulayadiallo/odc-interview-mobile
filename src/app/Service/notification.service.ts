@@ -13,7 +13,7 @@ export class NotificationService {
   
   constructor(private http:HttpClient) { }
 
-  getAllNotif(): Observable<Notification[]> {
-    return this.http.get<Notification[]>(`${this.host}/notification/list`);
+  getAllNotif(): Observable<Notification> {
+    return this.http.get<Notification>(`${this.host}/notification/list`);
   }
 }

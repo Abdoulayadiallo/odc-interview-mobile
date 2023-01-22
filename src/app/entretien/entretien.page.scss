@@ -46,7 +46,7 @@ ion-avatar{
     height: 100%;
     border-bottom: 1px #fff;
 }
-.pt{
+.yes{
     background-color: #FF7900;
     margin: auto;
     width: 35px;
@@ -55,8 +55,17 @@ ion-avatar{
     border-radius: 5px;
     color: #fff;
 }
+.no {
+    --background: #50BE87;
+    margin: auto;
+    width: 35px;
+    height: 25px;
+    line-height: 25px;
+    border-radius: 5px;
+    color: #fff;
+}
 .notez{
-    background-color: #FF7900;
+    --background-color: #FF7900;
     margin: auto;
     height: 25px;
     width: 60px;

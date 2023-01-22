@@ -32,7 +32,7 @@ export class AccountService {
 
   logOut(): void {
     this.token = null;
-    localStorage.removeItem('token');
+    localStorage.removeItem('toke');
   }
 
   saveToken(token: string): void {

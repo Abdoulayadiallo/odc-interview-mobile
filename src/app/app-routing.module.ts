@@ -36,15 +36,15 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
   },
-  {
-    path: 'postulant-details',
-    loadChildren: () => import('./postulant-details/postulant-details.module').then( m => m.PostulantDetailsPageModule)
-  },
+  // {
+  //   path: 'postulant-details',
+  //   loadChildren: () => import('./postulant-details/postulant-details.module').then( m => m.PostulantDetailsPageModule)
+  // },
   {
     path: 'postulant-details/:id',
     loadChildren: () => import('./postulant-details/postulant-details.module').then( m => m.PostulantDetailsPageModule),
-    canActivate: [AuthenticationGuard],
-    resolve:{resolvedPostulant:PostulantresolverService}
+    // canActivate: [AuthenticationGuard],
+    // resolve:{resolvedPostulant:PostulantresolverService}
   },
   {
     path: 'entretien',
@@ -57,7 +57,7 @@ const routes: Routes = [
     path:'notification', component: NotificationComponent
   },
   {
-    path: 'jury-details',
+    path: 'jury-details:id',
     loadChildren: () => import('./jury-details/jury-details.module').then( m => m.JuryDetailsPageModule)
   },
 

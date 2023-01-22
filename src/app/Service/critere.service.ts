@@ -2,17 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Question } from '../Model/question';
+import { Critere } from '../Model/critere';
 
 @Injectable({
   providedIn: 'root'
 })
-export class QuestionService {
+export class CritereService {
   public host = environment.host;
   public clientHost = environment.client;
   constructor(private http:HttpClient) { }
 
-  getAllQuestion(): Observable<Question> {
-    return this.http.get<Question>(`${this.host}/question/list`);
+  getAllCritere(): Observable<Critere[]> {
+    return this.http.get<Critere[]>(`${this.host}/critere/list`);
   }
 }

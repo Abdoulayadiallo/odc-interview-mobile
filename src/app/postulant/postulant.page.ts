@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Page } from '@ionic/core';
+import { Router } from '@angular/router';
 import { map, startWith, catchError, of, BehaviorSubject, Observable } from 'rxjs';
 import { Postulant } from '../Model/postulant';
 import { Postulantresponse } from '../Model/postulantresponse';
@@ -24,7 +24,7 @@ export class PostulantPage implements OnInit {
   currentPage$ = this.currentPageSubject.asObservable();
 
 
-  constructor(private postulantService:PostulantService) { }
+  constructor(private postulantService:PostulantService,private router: Router ) { }
 
   ngOnInit() :void{
     this.postulantState$ =this.postulantService.getAllPostulant().pipe(
@@ -71,5 +71,8 @@ export class PostulantPage implements OnInit {
   }
   goToNextOrPreviousPage(direction: string, name?: string): void {
     this.gotToPage(name, direction === 'forward' ? this.currentPageSubject.value + 1 : this.currentPageSubject.value - 1);
+  }
+  postulantDetails(id: number){
+    this.router.navigate(['postulant-details', id]);
   }
 }

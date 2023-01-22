@@ -15,8 +15,8 @@ export class PostulantService {
 
   constructor(private http:HttpClient) { }
   
-  getOnePostulantById(regionId: number): Observable<Postulant> {
-    return this.http.get<Postulant>(`${this.host}/postulant/${regionId}`);
+  getOnePostulantById(postId: number): Observable<Postulant> {
+    return this.http.get<Postulant>(`${this.host}/postulant/${postId}`);
   }
 
   getAllPostulant(pageNo:number = 0,pageSize:number = 10,sortBy:string ="",sortDir:string=""): Observable<Postulantresponse> {

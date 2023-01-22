@@ -4,6 +4,6 @@ export class Critere {
     id!: number;
     critereNom!: string;
     barem!: string;
-    elimination!: string;
-    questionList!: Question[]; 
+    elimination!: boolean;
+    questionList!: Question; 
 }
