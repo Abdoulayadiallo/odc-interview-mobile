@@ -8,8 +8,16 @@ ion-content{
 ion-title{
     color: #FF7900;
 }
-ion-card{
+.violet{
+    border-left: solid #845EC2;
+
+};
+.orange{
     border-left: solid #FF7900;
+
+};
+.vert{
+    border-left: solid #50BE87;
 
 };
 
@@ -21,12 +29,30 @@ ion-card-title{
 }
 
 .interview{
-    --background: #845EC2;
+    // --background: #845EC2;
+    // width: 90px;
+    // height: 25px;
+    // padding: 0px;
+    
+}
+.iorange,.ivert,.iviolet{
     width: 90px;
     height: 25px;
     padding: 0px;
-    
+    color: #FFF;
 }
+.iviolet{
+    --background: #845EC2;
+
+};
+.iorange{
+    --background: #FF7900;
+
+};
+.ivert{
+    --background: #50BE87;
+
+};
 .evaluation{
     --color: #000;
     --border-radius: 15px;
@@ -71,6 +97,7 @@ ion-grid{
     color: #FF7900;
 }
 
+//Debut Pagination
 .pagination {
     display: inline-block;
   }
@@ -87,7 +114,18 @@ ion-grid{
     text-decoration: none;
   }
   
-  .pagination li.active {
+  .pagination a.active {
     background-color: #FF7900;
     color: white;
   }
+
+  .disabled {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+//Fin pagination

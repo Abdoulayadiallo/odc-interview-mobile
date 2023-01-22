@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Page } from '@ionic/core';
-import { map, startWith, catchError, of, BehaviorSubject } from 'rxjs';
+import { map, startWith, catchError, of, BehaviorSubject, Observable } from 'rxjs';
 import { Postulant } from '../Model/postulant';
 import { Postulantresponse } from '../Model/postulantresponse';
 import { PostulantService } from '../Service/postulant.service';
@@ -17,6 +17,8 @@ export class PostulantPage implements OnInit {
   postulantResponse!: Postulantresponse;
   totalPages!: number;
 
+  postulantState$!: Observable<{ appState: string; appData?: Postulantresponse; error?: HttpErrorResponse; }>;
+
   private currentPageSubject = new BehaviorSubject<number>(0);
   responseSubject = new BehaviorSubject<Postulantresponse>(this.postulantResponse);
   currentPage$ = this.currentPageSubject.asObservable();
@@ -24,8 +26,8 @@ export class PostulantPage implements OnInit {
 
   constructor(private postulantService:PostulantService) { }
 
-  ngOnInit() {
-    this.postulantService.getAllPostulant().pipe(
+  ngOnInit() :void{
+    this.postulantState$ =this.postulantService.getAllPostulant().pipe(
       map((response: Postulantresponse) => {
         // this.loadingService.loadingOff();
         this.responseSubject.next(response);
@@ -38,6 +40,7 @@ export class PostulantPage implements OnInit {
         // this.loadingService.loadingOff();
         return of({ appState: 'APP_ERROR', error })}
         )
+      
     )
   }  
 
@@ -49,9 +52,9 @@ export class PostulantPage implements OnInit {
   //     this.totalPages=data.totalPages
   //   })
   // }
-  gotToPage( pageNo:number = 0,pageSize:number = 10,sortBy:string ="",sortDir:string=""): void {
+  gotToPage( name:string,pageNo:number = 0,pageSize:number = 10,sortBy:string ="",sortDir:string=""): void {
     // this.loadingService.loadingOn();
-    this.postulantService.getAllPostulant(pageNo,pageSize,sortBy,sortDir).pipe(
+    this.postulantState$ = this.postulantService.getAllPostulant(pageNo,pageSize,sortBy,sortDir).pipe(
       map((response: Postulantresponse) => {
         // this.loadingService.loadingOff();
         this.responseSubject.next(response);
@@ -65,5 +68,8 @@ export class PostulantPage implements OnInit {
         return of({ appState: 'APP_ERROR', error })}
         )
     )
+  }
+  goToNextOrPreviousPage(direction: string, name?: string): void {
+    this.gotToPage(name, direction === 'forward' ? this.currentPageSubject.value + 1 : this.currentPageSubject.value - 1);
   }
 }

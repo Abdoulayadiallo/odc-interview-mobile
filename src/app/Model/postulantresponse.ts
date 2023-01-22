@@ -5,6 +5,6 @@ export class Postulantresponse {
     pageNo!:number;
     pageSize!: number;
     totalElements!: number;
-    totalPages!:number;
+    totalPages!:number ;
     last!: false
 }

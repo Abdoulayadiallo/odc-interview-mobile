@@ -1,88 +1,115 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-grid>
-      <ion-row class="ion-justify-content-between">
-        <ion-col size="10">
-          <ion-title>
-            <h5>Postulants</h5>
-          </ion-title>
-        </ion-col>
-        <ion-col size="2">
-          <ion-buttons>
-            <ion-button>
-              <ion-icon slot="icon-only" size="large" name="search"></ion-icon>
-            </ion-button>
-          </ion-buttons>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <p class="postdetail">Total <span>224</span></p>
-          <p class="postdetail">Interview <span>24</span></p>
-          <p class="postdetail">Non-Interview <span>200</span></p>
-        </ion-col>
-        <ion-col class="align-items-center">
-          <ion-button id="popover-button" class="absolute" color="secondary" fill=""><ion-icon
-              name="funnel-outline"></ion-icon>
-            Filtrer</ion-button>
-        </ion-col>
-      </ion-row>
-
-    </ion-grid>
-  </ion-toolbar>
-</ion-header>
-<ion-content>
-  <ng-container *ngSwitchCase="'APP_LOADED'">
-  <!-- Card postulant -->
-  <ion-card *ngFor="let post of postulants">
-    <ion-grid>
-      <ion-row class="ion-align-items-center">
-        <ion-col size="2">
-          <ion-avatar>
-            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-          </ion-avatar>
-        </ion-col>
-        <ion-col size="8">
-          <ion-card-header>
-            <ion-card-title>{{post.prenom}} {{post.nom}}</ion-card-title>
-            <ion-card-subtitle>{{post.participant}}</ion-card-subtitle>
-          </ion-card-header>
-        </ion-col>
-        <ion-col size="2" class="ion-justify-content-center">
-          <ion-icon size="large" name="arrow-forward-circle-outline"></ion-icon>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-button fill="outline" class="evaluation">Non Evaluer</ion-button>
-        <ion-button class="interview" [routerLink]="['/postulant-details']">Interview</ion-button>
-      </ion-row>
-    </ion-grid>
-  </ion-card>
-  <ion-popover trigger="popover-button" [dismissOnSelect]="true">
-    <ng-template>
-      <ion-content>
-        <ion-list>
-          <ion-item class="titre" [detail]="false">Filter par</ion-item>
-          <ion-item [button]="true" [detail]="false"> Nom</ion-item>
-          <ion-item [button]="true" [detail]="false"> Prenom</ion-item>
-          <ion-item [button]="true" [detail]="false"> Points</ion-item>
-          <ion-item [button]="true" [detail]="false"> Status</ion-item>
-          <ion-item class="titre" [detail]="false">Ordonner par</ion-item>
-          <ion-item [button]="true" [detail]="false"> Ascendant</ion-item>
-          <ion-item [button]="true" [detail]="false"> Descendant</ion-item>
-        </ion-list>
-      </ion-content>
-    </ng-template>
-  </ion-popover>
-  <div class="pagination">
-    <a >&laquo;</a>
-    <li *ngFor= "let number of [].constructor(totalPages); let i = index">
-      <a  (click)="gotToPage(i,1,'','')">{{i+1}}</a>
-    </li>
-    <a >&raquo;</a>
-  </div>
+<ng-container
+  *ngIf="(postulantState$ | async) as state"
+  [ngSwitch]="state.appState"
+>
+  <ion-header>
+    <ion-toolbar>
+      <ion-grid>
+        <ion-row class="ion-justify-content-between">
+          <ion-col size="10">
+            <ion-title>
+              <h5>Postulants</h5>
+            </ion-title>
+          </ion-col>
+          <ion-col size="2">
+            <ion-buttons>
+              <ion-button>
+                <ion-icon
+                  slot="icon-only"
+                  size="large"
+                  name="search"
+                ></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <p class="postdetail">Total <span>224</span></p>
+            <p class="postdetail">Interview <span>24</span></p>
+            <p class="postdetail">Non-Interview <span>200</span></p>
+          </ion-col>
+          <ion-col class="align-items-center">
+            <ion-button
+              id="popover-button"
+              class="absolute"
+              color="secondary"
+              fill=""
+              ><ion-icon name="funnel-outline"></ion-icon> Filtrer</ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ng-container *ngSwitchCase="'APP_LOADED'">
+      <!-- Card postulant -->
+      <ion-card *ngFor="let post of state.appData?.contenu ;let i = index" [ngClass]="i % 3 == 0 ? ' orange' : (i % 3 == 1 ? 'violet':'vert')">
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="2">
+              <ion-avatar>
+                <img
+                  alt="Silhouette of a person's head"
+                  src="https://ionicframework.com/docs/img/demos/avatar.svg"
+                />
+              </ion-avatar>
+            </ion-col>
+            <ion-col size="8">
+              <ion-card-header>
+                <ion-card-title>{{post.prenom}} {{post.nom}}</ion-card-title>
+                <ion-card-subtitle>{{post.participant}}</ion-card-subtitle>
+              </ion-card-header>
+            </ion-col>
+            <ion-col size="2" class="ion-justify-content-center">
+              <ion-icon
+                size="large"
+                name="arrow-forward-circle-outline"
+              ></ion-icon>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-button fill="outline" class="evaluation"
+              >Non Evaluer</ion-button
+            >
+            <ion-button [ngClass]="i % 3 == 0 ? ' iorange' : (i % 3 == 1 ? ' iviolet':' ivert')" [routerLink]="['/postulant-details']"
+              >Interview</ion-button
+            >
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+      <ion-popover trigger="popover-button" [dismissOnSelect]="true">
+        <ng-template>
+          <ion-content>
+            <ion-list>
+              <ion-item class="titre" [detail]="false">Filter par</ion-item>
+              <ion-item [button]="true" [detail]="false"> Nom</ion-item>
+              <ion-item [button]="true" [detail]="false"> Prenom</ion-item>
+              <ion-item [button]="true" [detail]="false"> Points</ion-item>
+              <ion-item [button]="true" [detail]="false"> Status</ion-item>
+              <ion-item class="titre" [detail]="false">Ordonner par</ion-item>
+              <ion-item [button]="true" [detail]="false"> Ascendant</ion-item>
+              <ion-item [button]="true" [detail]="false"> Descendant</ion-item>
+            </ion-list>
+          </ion-content>
+        </ng-template>
+      </ion-popover>
+      <div class="pagination">
+        <li class="page-item pointer" [ngClass]="0 == (currentPage$ | async) ? ' disabled' : ''">
+          <a (click)="goToNextOrPreviousPage('backward','')"> &laquo;</a>
+        </li>
+        <li
+          *ngFor="let number of [].constructor(state.appData?.totalPages); let i = index"
+        >
+          <a [ngClass]="i == (currentPage$ | async) ? ' active' : ''" (click)="gotToPage('',i,10,'','')">{{i+1}}</a>
+        </li>
+        <li class="page-item pointer" [ngClass]=" (state.appData.totalPages - 1) == (currentPage$ | async) ? ' disabled' : ''">
+          <a (click)="goToNextOrPreviousPage('forward','')">&raquo;</a>
+        </li>
+      </div>
+    </ng-container>
+  </ion-content>
 </ng-container>
-
-</ion-content>
