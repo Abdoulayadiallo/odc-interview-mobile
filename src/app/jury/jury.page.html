@@ -7,7 +7,7 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-item>Total 25</ion-item>
+  <ion-item>Total {{jurys}}</ion-item>
 </ion-header>
 <ion-content>
   <!-- Card jury -->
@@ -106,7 +106,7 @@
   <!-- Card jury -->
   <ion-card [ngClass]="{true:'ion-card-active', false:'ion-card-inactive'}">
     <ion-grid>
-      <ion-row class="ion-align-items-center">
+      <ion-row class="ion-align-items-center" *ngFor="let jury of jurys">
         <ion-col size="2">
           <ion-avatar>
             <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
@@ -114,12 +114,12 @@
         </ion-col>
         <ion-col size="8">
           <ion-card-header>
-            <ion-card-title>Ibrahim Keita</ion-card-title>
-            <ion-card-subtitle>Status: Jury<br>Postulant jugé: 5</ion-card-subtitle>
+            <ion-card-title>{{jury.prenom}} {{jury.nom}}</ion-card-title>
+            <ion-card-subtitle>Status: {{jury.role.roleName}}<br>Postulant jugé: </ion-card-subtitle>
           </ion-card-header>
         </ion-col>
         <ion-col size="2" class="ion-justify-content-center">
-          <ion-button fill="clear" [routerLink]="['/jury-details']">
+          <ion-button fill="clear" (click)="postulantDetails(jury.username)">
             <ion-icon size="large" name="arrow-forward-circle-outline"></ion-icon>
           </ion-button>
         </ion-col>

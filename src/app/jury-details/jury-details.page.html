@@ -28,8 +28,8 @@
         </ion-col>
         <ion-col size="10">
           <ion-card-header>
-            <ion-card-title>Ibrahim Keita</ion-card-title>
-            <ion-card-subtitle>Status: Jury</ion-card-subtitle>
+            <ion-card-title>{{jury.prenom}} {{jury.nom}}</ion-card-title>
+            <ion-card-subtitle>Status: {{jury.role.roleName}}</ion-card-subtitle>
           </ion-card-header>
         </ion-col>
       </ion-row>
@@ -41,12 +41,11 @@
     </ion-toolbar>
   </ion-header>
   <ion-list>
-    <ion-item>N° Matricule </ion-item>
-    <ion-item>Nom </ion-item>
-    <ion-item>Prenom </ion-item>
-    <ion-item>Email </ion-item>
-    <ion-item>Status </ion-item>
-    <ion-item>Date de naissance </ion-item>
+    <ion-item>Nom {{jury.nom}}</ion-item>
+    <ion-item>Prenom {{jury.prenom}</ion-item>
+    <ion-item>Email {{jury.email}}</ion-item>
+    <ion-item>Status {{jury.role.roleName}}</ion-item>
+    <ion-item>Date de naissance{{jury.dateCreation | date }} </ion-item>
   </ion-list>
   <!-- Fin Card jury -->
   <ion-button class="evaluation" [routerLink]="['/postulant']">Voir les Postulant</ion-button>

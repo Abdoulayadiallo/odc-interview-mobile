@@ -57,7 +57,7 @@ const routes: Routes = [
     path:'notification', component: NotificationComponent
   },
   {
-    path: 'jury-details:id',
+    path: 'jury-details/:id',
     loadChildren: () => import('./jury-details/jury-details.module').then( m => m.JuryDetailsPageModule)
   },
 

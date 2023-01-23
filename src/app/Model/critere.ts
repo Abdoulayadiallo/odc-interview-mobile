@@ -5,5 +5,5 @@ export class Critere {
     critereNom!: string;
     barem!: string;
     elimination!: boolean;
-    questionList!: Question; 
+    questionList!: Question[]; 
 }

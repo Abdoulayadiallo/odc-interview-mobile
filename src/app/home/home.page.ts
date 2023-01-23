@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 import { Postulant } from '../Model/postulant';
 import { Postulantresponse } from '../Model/postulantresponse';
+import { Utilisateur } from '../Model/utilisateur';
 import { NotificationComponent } from '../notification/notification.component';
 import { AccountService } from '../Service/account.service';
 import { PostulantService } from '../Service/postulant.service';
@@ -14,18 +15,20 @@ import { PostulantService } from '../Service/postulant.service';
 })
 export class HomePage implements OnInit {
   postulantresponse!: Postulantresponse ;
+  jurys: Utilisateur[];
   totalElement=0
-  test:any;
+  nbreJury:number
 
   constructor(
     private pvrCtlr: PopoverController,
     private accountService: AccountService,
     private router: Router,
-    private postulantService:PostulantService
+    private postulantService:PostulantService,
     ) {}
 
     ngOnInit() {
       this.getPost();
+      this.getJury();
     }
 
   async openNotif() {
@@ -39,8 +42,13 @@ export class HomePage implements OnInit {
         console.log(data)
         this.postulantresponse = data
         this.totalElement=data.totalElements
-        this.test=Postulantresponse;
-        console.log(this.test)
+      })
+    }
+  getJury(){
+      this.accountService.getAllJury().subscribe(data => {
+        console.log(data)
+        this.jurys = data
+        this.nbreJury = data.length
       })
     }
 }

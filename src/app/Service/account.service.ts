@@ -95,4 +95,10 @@ export class AccountService {
         }
       );
   }
+  getAllJury(): Observable<Utilisateur[]> {
+    return this.http.get<Utilisateur[]>(`${this.host}/utilisateur/jurylist`);
+  }
+  getOneJuryById(juryId: number): Observable<Utilisateur> {
+    return this.http.get<Utilisateur>(`${this.host}/utillsateur/${juryId}`);
+  }
 }

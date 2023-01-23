@@ -1,3 +1,4 @@
+import {Participant} from "../Model/participant"
 export class Utilisateur {
     id!: number;
     image!: string;
@@ -8,7 +9,10 @@ export class Utilisateur {
     numero!: string;
     genre!: string;
     bio!: string;
-    dateCreation!: string;
-    participant!: string;
-    role!: string;
+    dateCreation!: Date;
+    participant!: Participant[];
+    role!: {
+        id: number,
+        roleName: string,
+    }
 }
