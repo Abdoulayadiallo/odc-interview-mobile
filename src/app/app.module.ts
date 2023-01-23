@@ -16,6 +16,11 @@ import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { CacheInterceptor } from './interceptor/cache.interceptor';
 import { PostulantService } from './Service/postulant.service';
 import { PostulantresolverService } from './Service/postulantresolver.service';
+import { NoteService } from './Service/note.service';
+import { CritereService } from './Service/critere.service';
+import { Entretien } from './Model/entretien';
+import { EntretienService } from './Service/entretien.service';
+import { QuestionService } from './Service/question.service';
 
 @NgModule({
   declarations: [AppComponent,NoteComponent,NotificationComponent],
@@ -31,6 +36,10 @@ import { PostulantresolverService } from './Service/postulantresolver.service';
        useClass: IonicRouteStrategy,
      },
       AccountService,
+      NoteService,
+      CritereService,
+      EntretienService,
+      QuestionService,
       PostulantresolverService,
       PostulantService,
       AuthenticationGuard,

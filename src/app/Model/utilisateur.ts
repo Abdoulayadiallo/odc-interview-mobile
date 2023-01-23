@@ -11,8 +11,10 @@ export class Utilisateur {
     bio!: string;
     dateCreation!: Date;
     participant!: Participant[];
-    role!: {
-        id: number,
-        roleName: string,
-    }
+    role!:role 
+}
+
+export class role{
+    id: number;
+    roleName: string
 }

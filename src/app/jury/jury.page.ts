@@ -25,7 +25,7 @@ export class JuryPage implements OnInit {
       console.log(data)
       this.jurys = data
     })
-  }
+  };
   postulantDetails(id: string){
     this.router.navigate(['jury-details', id]);
   }
