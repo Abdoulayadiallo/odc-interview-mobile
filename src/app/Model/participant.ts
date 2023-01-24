@@ -1,3 +1,4 @@
+import { Entretien } from "./entretien";
 import { Notification } from "./notification";
 import { Utilisateur } from "./utilisateur";
 
@@ -9,4 +10,5 @@ export class Participant {
         status!: string;
         notifications!: Notification[];
         utilisateurs!: Utilisateur[];
+        entretien: Entretien;
 }

@@ -4,13 +4,13 @@
       <ion-row class="ion-align-items-center">
         <ion-col size="2">
           <ion-avatar>
-            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            <img src="{{ userpicture }}{{ utilisateur?.id }}.png" />
           </ion-avatar>
         </ion-col>
         <ion-col size="8">
           <ion-card-header>
-            <h6>Bonjour,<span> Ibrahim</span></h6>
-            <p>Juge de <span color="primary">l'entretien 1</span></p>
+            <h6>Bonjour,<span> {{userpre}}</span></h6>
+            <p>{{rolename}} de<span color="primary"> {{nomEntretien}}</span></p>
           </ion-card-header>
         </ion-col>
         <ion-col size="2" class="ion-justify-content-center">

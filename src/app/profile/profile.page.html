@@ -10,61 +10,56 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
+  <form #updateProfileForm="ngForm" (ngSubmit)="onUpdateUser(updateProfileForm.value)" enctype="multipart/form-data">
+    <input type="hidden" class="form-control" name="id" ngModel="{{ utilisateur?.id }}" required />
     <ion-grid>
-      <ion-row>
-        <h3>Profil</h3>
-      </ion-row>
-      <ion-row class="ion-align-items-center">
-        <ion-col size="2">
-          <ion-avatar>
-            <label for="image">
-            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      <ion-row class="ion-justify-content-center marge">
+        <ion-avatar class="avtar">
+          <label for="image">
+            <img src="{{ userpicture }}{{ utilisateur?.id }}.png" />
           </label>
-            <input id="image" type="file" style="visibility: hidden;"/>
-          </ion-avatar>
-        </ion-col>
-        <ion-col size="10">
-          <ion-card-header>
-            <ion-card-title>Modifier Photo</ion-card-title>
-            <ion-card-subtitle><ion-button class="eval">Modifier</ion-button></ion-card-subtitle>
-          </ion-card-header>
-        </ion-col>
+          <input id="image" style="visibility: hidden;" (change)="onProfilePictureSelected($event)" #fileToUpload
+            type="file" class="form-control-file" name="file" placeholder="photo" accept="image/*"
+            (click)="fileToUpload.click()" />
+        </ion-avatar>
       </ion-row>
     </ion-grid>
-  </ion-card>
-  <div class="container">
-			<form>
-				<div class="user-details">
-					<div class="input-box">
-						<label for="nom">Nom: </label>
-						<input value="Diallo" type="text" name="nom" placeholder="Entrez votre nom" required>
-					</div>
-					<div class="input-box">
-						<label for="prenom">Prenom: </label>
-						<input value="Abdoulaye" type="text" name="prenom" placeholder="Entrez votre prenom" required>
-					</div>
-					<div class="input-box">
-						<label for="email">E-mail: </label>
-						<input value="d.abdoulayead28@gmail.com" type="text" name="email" placeholder="Entrez votre Email" required>
-					</div>
-          <div class="input-box">
-						<label for="numero">Numero: </label>
-						<input value="Numero" type="text" name="numero" placeholder="Entrez votre numero" required>
-					</div>
-          <div class="input-box">
-						<label for="birthd">Date de naissance: </label>
-						<input value="2018-07-22" type="date" name="birthd" placeholder="Entrez votre date de naissance" required>
-					</div>
-          <div class="input-box">
-						<label for="bio">Bio: </label>
-						<input value="je suis .........................." type="text" name="bio" placeholder="Entrez votre Bio" required>
-					</div>
-					<div class="button">
-					<input type="button" value="Enregistrer">
-					</div>
-				</div>
-			</form>
+    <div class="container">
+      <div class="user-details">
+        <div class="form-group">
+          <label for="nom">Nom: </label>
+          <input value="Diallo" type="text" ngModel="{{ utilisateur?.nom }}" class="form-control" id="nom" name="nom"
+            placeholder="Entrez votre nom" required>
+        </div>
+        <div class="form-group">
+          <label for="prenom">Prenom: </label>
+          <input value="Abdoulaye" type="text" id="prenom" name="prenom" ngModel="{{ utilisateur?.prenom }}"
+            class="form-control" placeholder="Entrez votre prenom" required>
+        </div>
+        <div class="form-group">
+          <label for="email">E-mail: </label>
+          <input value="d.abdoulayead28@gmail.com" type="text" id="email" name="email"
+            ngModel="{{ utilisateur?.email }}" class="form-control" placeholder="Entrez votre Email" required>
+        </div>
+        <div class="form-group">
+          <label for="numero">Numero: </label>
+          <input value="Numero" type="text" name="numero" id="numero" ngModel="{{ utilisateur?.numero}}"
+            class="form-control" placeholder="Entrez votre numero" required>
+        </div>
+        <!-- <div class="form-group">
+          <label for="birthd">Date de naissance: </label>
+          <input value="2018-07-22" type="date" name="birthd" ngModel="{{ utilisateur?.dateNaissance }}" class="form-control" placeholder="Entrez votre date de naissance" required>
+        </div> -->
+        <div class="form-group">
+          <label for="bio">Bio: </label>
+          <textarea value="je suis .........................." name="bio" id="bio" cols="30" rows="10"
+            ngModel="{{ utilisateur?.bio }}" class="form-control" placeholder="Entrez votre Bio" required></textarea>
+        </div>
+        <div class="button">
+          <input type="submit" value="Enregistrer">
+        </div>
       </div>
+    </div>
+  </form>
 
 </ion-content>

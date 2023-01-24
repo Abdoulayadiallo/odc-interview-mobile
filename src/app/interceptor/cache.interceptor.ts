@@ -13,9 +13,9 @@ import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class CacheInterceptor implements HttpInterceptor {
-  private host = environment.host;
+  host = environment.host;
 
-  constructor(private cacheService: CacheService) {}
+  constructor(private cacheService: CacheService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
@@ -43,14 +43,15 @@ export class CacheInterceptor implements HttpInterceptor {
     const cachedResponse: HttpResponse<any> | null = this.cacheService.getCache(req.url);
 
     if (cachedResponse) {
-      return of (cachedResponse);
+      return of(cachedResponse);
     }
 
     return next.handle(req)
-    .pipe(tap(event => {
-      if (event instanceof HttpResponse) {
-      this.cacheService.cacheRequest(req.url, event);
-    }}));
+      .pipe(tap(event => {
+        if (event instanceof HttpResponse) {
+          this.cacheService.cacheRequest(req.url, event);
+        }
+      }));
 
   }
 }

@@ -17,6 +17,7 @@ export class AccountService {
   public loggInUsername!: string;
   public redirectUrl!: string;
   private jwtHelper = new JwtHelperService();
+  public userPicture =`${this.host}/image/user/`;
 
   constructor(private http: HttpClient) { }
 
@@ -32,7 +33,7 @@ export class AccountService {
 
   logOut(): void {
     this.token = null;
-    localStorage.removeItem('toke');
+    localStorage.removeItem('token');
   }
 
   saveToken(token: string): void {

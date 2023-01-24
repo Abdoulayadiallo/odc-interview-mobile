@@ -20,14 +20,9 @@ export class JuryDetailsPage implements OnInit {
 
     this.accountService.getUserInformation(this.username).subscribe( data => {
       this.jury = data;
-      this.roleName=this.jury.role
+      this.roleName=this.jury.role.roleName
       console.log(this.jury.role.roleName)
     });
-
-    setTimeout(()=>{
-      //this.jury = new Utilisateur();
-      
-    },1000)
     
   }
   

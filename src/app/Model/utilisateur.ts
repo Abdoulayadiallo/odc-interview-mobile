@@ -10,7 +10,7 @@ export class Utilisateur {
     genre!: string;
     bio!: string;
     dateCreation!: Date;
-    participant!: Participant[];
+    participant!: Participant;
     role!:role 
 }
 

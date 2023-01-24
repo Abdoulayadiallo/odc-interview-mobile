@@ -22,7 +22,7 @@ export class SigninPage implements OnInit, OnDestroy {
       if (this.accountService.redirectUrl) {
         this.router.navigateByUrl(this.accountService.redirectUrl);
       } else {
-        this.router.navigateByUrl('/tabs/accueil');
+        this.router.navigateByUrl('/tabs/home');
       }
     } else {
       this.router.navigateByUrl('/signin');

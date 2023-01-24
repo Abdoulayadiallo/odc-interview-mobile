@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 import { Postulant } from '../Model/postulant';
 import { Postulantresponse } from '../Model/postulantresponse';
 import { Utilisateur } from '../Model/utilisateur';
@@ -14,19 +15,28 @@ import { PostulantService } from '../Service/postulant.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+  private subscriptions: Subscription[] = [];
   postulantresponse!: Postulantresponse ;
   jurys: Utilisateur[];
   totalElement=0
   nbreJury:number
+  loggInUsername: string;
+  utilisateur: Utilisateur;
+  nomEntretien: string;
+  userpicture: string;
+  userpre: string ='';
+  rolename: string ='';
+
 
   constructor(
     private pvrCtlr: PopoverController,
     private accountService: AccountService,
-    private router: Router,
     private postulantService:PostulantService,
     ) {}
 
     ngOnInit() {
+      this.userpicture = this.accountService.userPicture;
+      this.getUserInfo(this.accountService.loggInUsername);
       this.getPost();
       this.getJury();
     }
@@ -36,6 +46,24 @@ export class HomePage implements OnInit {
       component: NotificationComponent,
     });
     popup.present();
+  }
+  getUserInfo(username: string): void {
+    this.subscriptions.push(
+      this.accountService.getUserInformation(username).subscribe(
+      (response: Utilisateur) => {
+        this.utilisateur = response;
+        this.nomEntretien= response.participant.entretien.entretienNom
+        this.userpre=response.prenom
+        this.rolename=response.role.roleName
+        console.log(response)
+        console.log(this.nomEntretien)
+        console.log(this.utilisateur)
+      },
+      error => {
+        console.log(error);
+        this.utilisateur = null;
+      }
+    ));
   }
   getPost(){
       this.postulantService.getAllPostulant().subscribe(data => {

@@ -20,20 +20,20 @@ const routes: Routes = [
     path: 'signin',
     loadChildren: () => import('./signin/signin.module').then( m => m.SigninPageModule)
   },
+  // {
+  //   path: 'postulant',
+  //   loadChildren: () => import('./postulant/postulant.module').then( m => m.PostulantPageModule)
+  // },
+  // {
+  //   path: 'jury',
+  //   loadChildren: () => import('./jury/jury.module').then( m => m.JuryPageModule)
+  // },
+  // {
+  //   path: 'profile',
+  //   loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  // },
   {
-    path: 'postulant',
-    loadChildren: () => import('./postulant/postulant.module').then( m => m.PostulantPageModule)
-  },
-  {
-    path: 'jury',
-    loadChildren: () => import('./jury/jury.module').then( m => m.JuryPageModule)
-  },
-  {
-    path: 'profile',
-    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
-  },
-  {
-    path: '',
+    path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
   },
   // {
