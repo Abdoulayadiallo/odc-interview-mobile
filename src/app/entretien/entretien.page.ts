@@ -27,9 +27,12 @@ export class EntretienPage implements OnInit{
       this.criteres = data;
     })
   }
-  async openModal() {
+  async openModal(critere:Critere) {
     const modal = await this.modalCtrl.create({
       component: NoteComponent,
+      componentProps:{
+        'data':critere
+      }
     });
     modal.present();
 

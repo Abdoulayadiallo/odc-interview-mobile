@@ -5,7 +5,7 @@
   <ion-header>
     <ion-toolbar>
       <ion-grid>
-        <ion-row class="ion-justify-content-between">
+        <ion-row class="ion-justify-content-between" *ngIf= "!isSearchBarOpened">
           <ion-col size="10">
             <ion-title>
               <h5>Postulants</h5>
@@ -13,7 +13,7 @@
           </ion-col>
           <ion-col size="2">
             <ion-buttons>
-              <ion-button>
+              <ion-button *ngIf="!isSearchBarOpened" (click)="isSearchBarOpened=true">
                 <ion-icon
                   slot="icon-only"
                   size="large"
@@ -23,10 +23,13 @@
             </ion-buttons>
           </ion-col>
         </ion-row>
+        <ion-row *ngIf="isSearchBarOpened">
+          <ion-searchbar showCancelButton="true" (ionCancel)="isSearchBarOpened=false"></ion-searchbar>
+        </ion-row>
       </ion-grid>
       <ion-grid>
         <ion-row>
-          <ion-col>
+          <ion-col size="6">
             <p class="postdetail">Total <span>224</span></p>
             <p class="postdetail">Interview <span>24</span></p>
             <p class="postdetail">Non-Interview <span>200</span></p>
@@ -34,7 +37,7 @@
           <ion-col class="align-items-center">
             <ion-button
               id="popover-button"
-              class="absolute"
+              class="head-filter"
               color="secondary"
               fill=""
               ><ion-icon name="funnel-outline"></ion-icon> Filtrer</ion-button

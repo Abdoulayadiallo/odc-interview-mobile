@@ -1,30 +1,48 @@
-.postdetail{
+.postdetail {
     margin: 2px 0;
     padding: 0 20px;
+    width: 150%;
+    // margin-left: 12px;
+
 }
-ion-content{
-    --background: #F2F7FA; 
+
+ion-content {
+    --background: #F2F7FA;
 }
-ion-title{
+
+ion-title {
     color: #FF7900;
 }
-.violet{
+
+.violet {
     border-left: solid #845EC2;
 
-};
-.orange{
+}
+
+;
+
+.orange {
     border-left: solid #FF7900;
 
-};
-.vert{
+}
+
+;
+
+.vert {
     border-left: solid #50BE87;
 
-};
+}
+
+;
+.orange,.vert,.violet{
+    margin: 10px;
+}
 
 ion-card-header {
     padding: 5px 16px;
-  }
-ion-card-title{
+}
+
+ion-card-title {
     font-size: 18px;
 }
 
@@ -33,27 +51,39 @@ ion-card-title{
 //     // width: 90px;
 //     // height: 25px;
 //     // padding: 0px;
-    
+
 // }
-.iorange,.ivert,.iviolet{
+.iorange,
+.ivert,
+.iviolet {
     width: 90px;
     height: 25px;
     padding: 0px;
     color: #FFF;
 }
-.iviolet{
+
+.iviolet {
     --background: #845EC2;
 
-};
-.iorange{
+}
+
+;
+
+.iorange {
     --background: #FF7900;
 
-};
-.ivert{
+}
+
+;
+
+.ivert {
     --background: #50BE87;
 
-};
-.evaluation{
+}
+
+;
+
+.evaluation {
     --color: #000;
     --border-radius: 15px;
     --border-color: #CACACA;
@@ -61,65 +91,99 @@ ion-card-title{
     height: 25px;
     padding: 0px 5px;
 }
-.interview ,.evaluation{
+
+.evaluation.ios {
+    --color: #000;
+    --border-radius: 15px;
+    --border-color: #CACACA;
+    width: 115px;
+    height: 25px;
+    padding: 0px 5px;
+}
+
+.interview,
+.evaluation {
     --border-radius: 15px;
     --font-size: 12px;
     --font-weight: 400;
 }
-ion-avatar{
+
+ion-avatar {
     max-width: 3rem;
     height: 3rem;
 }
-ion-grid{
-    --ion-grid-padding:2px;
-    --ion-grid-column-padding:1px;
+
+ion-grid {
+    --ion-grid-padding: 2px;
+    --ion-grid-column-padding: 1px;
 }
-.absolute{
-    position: sticky;
+
+.head-filter {
+    // position: sticky;
     bottom: 10px;
     margin: auto;
     left: 25%;
     --background: #FFF;
     --color: #CACACA;
-     --border-radius: 30px;
+    --border-radius: 30px;
     --border-color: #cacaca;
     --border-style: solid;
     --border-width: 1px;
-    --padding-start: 30px;
-    --padding-end: 30px;   
+    height: 30px;
+    // justify-content: center;
+    // --padding-start: 30px;
+    // --padding-end: 30px;   
 }
+
+.head-filter.ios {
+    // position: sticky;
+    bottom: 10px;
+    margin: auto;
+    left: 25%;
+    --background: #FFF;
+    --color: #CACACA;
+    --border-radius: 30px;
+    --border-color: #cacaca;
+    --border-style: solid;
+    --border-width: 1px;
+    height: 30px;
+    // --padding-start: 30px;
+    // --padding-end: 30px;   
+}
+
 // ion-card{
 //     border-radius: var(--timelineCardBorderRadius, 2px);
 //     // --box-shadow: var(--timelineCardBoxShadow, 0 1px 3px 0 rgba(0, 0, 0, .12), 0 1px 2px 0 rgba(0, 0, 0, .24));
 //     // --background-color: var(--timelineCardBackgroundColor, #fff);
 //   }
-.titre{
+.titre {
     color: #FF7900;
 }
 
 //Debut Pagination
 .pagination {
     display: inline-block;
-  }
-  
-  li{
+}
+
+li {
     list-style-type: none;
     display: inline;
 
-  }
-  .pagination a {
+}
+
+.pagination a {
     color: black;
     float: left;
     padding: 8px 16px;
     text-decoration: none;
-  }
-  
-  .pagination a.active {
+}
+
+.pagination a.active {
     background-color: #FF7900;
     color: white;
-  }
+}
 
-  .disabled {
+.disabled {
     pointer-events: none;
     opacity: 0.6;
 }

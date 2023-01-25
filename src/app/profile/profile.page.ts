@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Utilisateur } from '../Model/utilisateur';
 import { AccountService } from '../Service/account.service';
+import { AlertService } from '../Service/alert.service';
 
 @Component({
   selector: 'app-profile',
@@ -15,21 +16,23 @@ export class ProfilePage implements OnInit {
   private subscriptions: Subscription[] = [];
   utilisateur: Utilisateur;
   userpicture: string;
-  constructor(private accountService:AccountService,private router:Router) { }
+  username: string;
+  constructor(private accountService:AccountService,private router:Router,private alertService:AlertService) { }
 
   ngOnInit() {
     this.userpicture = this.accountService.userPicture;
     this.getUserInfo(this.accountService.loggInUsername);
+    this.username=this.accountService.loggInUsername;
   }
   logOut(): void {
     // this.loadingService.isLoading.next(true);
     this.accountService.logOut();
     this.router.navigateByUrl('/signin');
     // this.loadingService.isLoading.next(false);
-    // this.alertService.showAlert(
-    //   'You have been successfully logged out.',
-    //   AlertType.SUCCESS
-    // );
+    this.alertService.presentToast(
+      "Vous vous êtes deconnecter avec succès.",
+      "success"
+    );
   }
   getUserInfo(username: string): void {
     this.subscriptions.push(
@@ -63,18 +66,18 @@ export class ProfilePage implements OnInit {
             this.accountService.uploadeUserProfilePicture(this.profilePicture);
           }
           // this.loadingService.isLoading.next(false);
-          // this.alertService.showAlert(
-          //   'Profile updated successfully.',
-          //   AlertType.SUCCESS
-          // );
+          this.alertService.presentToast(
+            "Profile mise à jour avec succès.",
+            "success"
+          );
         },
         error => {
           console.log(error);
           // this.loadingService.isLoading.next(false);
-          // this.alertService.showAlert(
-          //   'Profile update failed. Please try again..',
-          //   AlertType.DANGER
-          // );
+          this.alertService.presentToast(
+            "La mise à jour du profile a échoué, essayer encore ...",
+            "danger"
+          );
         }
       )
     );

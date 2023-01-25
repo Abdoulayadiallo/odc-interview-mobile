@@ -14,6 +14,7 @@
     <input type="hidden" class="form-control" name="id" ngModel="{{ utilisateur?.id }}" required />
     <ion-grid>
       <ion-row class="ion-justify-content-center marge">
+        <div class="form-group">
         <ion-avatar class="avtar">
           <label for="image">
             <img src="{{ userpicture }}{{ utilisateur?.id }}.png" />
@@ -22,19 +23,25 @@
             type="file" class="form-control-file" name="file" placeholder="photo" accept="image/*"
             (click)="fileToUpload.click()" />
         </ion-avatar>
+      </div>
       </ion-row>
     </ion-grid>
     <div class="container">
       <div class="user-details">
         <div class="form-group">
           <label for="nom">Nom: </label>
-          <input value="Diallo" type="text" ngModel="{{ utilisateur?.nom }}" class="form-control" id="nom" name="nom"
+          <input value="Diallo" type="text" ngModel="{{ utilisateur?.nom }}" class="form-control" id="nom" name="nom" aria-describedby="nom"
             placeholder="Entrez votre nom" required>
         </div>
         <div class="form-group">
           <label for="prenom">Prenom: </label>
           <input value="Abdoulaye" type="text" id="prenom" name="prenom" ngModel="{{ utilisateur?.prenom }}"
-            class="form-control" placeholder="Entrez votre prenom" required>
+            class="form-control" aria-describedby="prenom" placeholder="Entrez votre prenom" required>
+        </div>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input ngModel="{{ utilisateur?.username }}" type="text" class="form-control" name="username" id="username"
+            placeholder="Username" disabled />
         </div>
         <div class="form-group">
           <label for="email">E-mail: </label>

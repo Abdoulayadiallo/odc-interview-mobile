@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
+import { Critere } from '../Model/critere';
+import { Note } from '../Model/note';
+import { NoteService } from '../Service/note.service';
 
 @Component({
   selector: 'app-note',
@@ -10,8 +13,10 @@ import { ModalController } from '@ionic/angular';
 export class NoteComponent implements OnInit {
 
   name!: string;
+  note: Note;
+  
 
-  constructor(private modalCtrl: ModalController,private formBuilder: FormBuilder) {}
+  constructor(private modalCtrl: ModalController,private noteService: NoteService) {}
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }
@@ -24,4 +29,9 @@ export class NoteComponent implements OnInit {
     return this.modalCtrl.dismiss(this.name, 'confirm');
   }
 
+  // Notez(){
+  //   this.noteService.addNote(this.note,).subscribe(
+  //     this.note
+  //   )
+  // }
 }

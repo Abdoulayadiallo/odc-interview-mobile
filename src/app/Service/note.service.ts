@@ -14,8 +14,8 @@ export class NoteService {
   public clientHost = environment.client;
   constructor(private http:HttpClient) { }
 
-  addNote(note: Note): Observable<Note> {
-    return this.http.post<Note>(`${this.host}/note/add`, Note);
+  addNote(note: Note,critereId:number,postulantId:number,Jury:string): Observable<Note> {
+    return this.http.post<Note>(`${this.host}/note/add/${critereId}/${postulantId}/${Jury}`, note);
   }
  DelNote(id: number): Observable<Object> {
     return this.http.delete(`${this.host}/note/delete/${id}`);
@@ -24,8 +24,8 @@ export class NoteService {
   getAllNote(): Observable<Note[]> {
     return this.http.get<Note[]>(`${this.host}/note/list`);
   }
-  updateNote(id: number, Note: Note): Observable<Object>{
-    return this.http.put(`${this.host}/note/update/${id}`, Note);
+  updateNote(id: number, note: Note): Observable<Object>{
+    return this.http.put(`${this.host}/note/update/${id}`, note);
   }
 }
 

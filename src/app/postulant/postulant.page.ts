@@ -12,6 +12,7 @@ import { PostulantService } from '../Service/postulant.service';
   styleUrls: ['./postulant.page.scss'],
 })
 export class PostulantPage implements OnInit {
+  public isSearchBarOpened = false;
   postulant: Postulant = new Postulant();
   postulants!: Postulant[];
   postulantResponse!: Postulantresponse;
