@@ -26,6 +26,7 @@ export class HomePage implements OnInit {
   userpicture: string;
   userpre: string ='';
   rolename: string ='';
+  entretienNombre: number;
 
 
   constructor(
@@ -53,6 +54,7 @@ export class HomePage implements OnInit {
       (response: Utilisateur) => {
         this.utilisateur = response;
         this.nomEntretien= response.participant.entretien.entretienNom
+        this.entretienNombre=response.participant.entretien.entretienNom.length
         this.userpre=response.prenom
         this.rolename=response.role.roleName
         console.log(response)

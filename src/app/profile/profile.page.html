@@ -11,7 +11,6 @@
 
 <ion-content>
   <form #updateProfileForm="ngForm" (ngSubmit)="onUpdateUser(updateProfileForm.value)" enctype="multipart/form-data">
-    <input type="hidden" class="form-control" name="id" ngModel="{{ utilisateur?.id }}" required />
     <ion-grid>
       <ion-row class="ion-justify-content-center marge">
         <div class="form-group">
@@ -20,7 +19,7 @@
             <img src="{{ userpicture }}{{ utilisateur?.id }}.png" />
           </label>
           <input id="image" style="visibility: hidden;" (change)="onProfilePictureSelected($event)" #fileToUpload
-            type="file" class="form-control-file" name="file" placeholder="photo" accept="image/*"
+            type="file" class="form-control-file" name="image" placeholder="photo" accept="image/*"
             (click)="fileToUpload.click()" />
         </ion-avatar>
       </div>
@@ -28,29 +27,30 @@
     </ion-grid>
     <div class="container">
       <div class="user-details">
+        <input type="hidden" class="form-control" name="id" ngModel="{{ utilisateur.id }}" required />
         <div class="form-group">
           <label for="nom">Nom: </label>
-          <input value="Diallo" type="text" ngModel="{{ utilisateur?.nom }}" class="form-control" id="nom" name="nom" aria-describedby="nom"
+          <input  type="text" ngModel="{{ utilisateur.nom }}" class="form-control" id="nom" name="nom" aria-describedby="nom"
             placeholder="Entrez votre nom" required>
         </div>
         <div class="form-group">
           <label for="prenom">Prenom: </label>
-          <input value="Abdoulaye" type="text" id="prenom" name="prenom" ngModel="{{ utilisateur?.prenom }}"
+          <input  type="text" id="prenom" name="prenom" ngModel="{{ utilisateur.prenom }}"
             class="form-control" aria-describedby="prenom" placeholder="Entrez votre prenom" required>
         </div>
         <div class="form-group">
           <label for="username">Username</label>
-          <input ngModel="{{ utilisateur?.username }}" type="text" class="form-control" name="username" id="username"
+          <input ngModel="{{ username }}" type="text" class="form-control" name="username" id="username"
             placeholder="Username" disabled />
         </div>
         <div class="form-group">
           <label for="email">E-mail: </label>
-          <input value="d.abdoulayead28@gmail.com" type="text" id="email" name="email"
-            ngModel="{{ utilisateur?.email }}" class="form-control" placeholder="Entrez votre Email" required>
+          <input  type="email" id="email" name="email"
+            ngModel="{{ utilisateur.email }}" class="form-control" placeholder="Entrez votre Email" required>
         </div>
         <div class="form-group">
           <label for="numero">Numero: </label>
-          <input value="Numero" type="text" name="numero" id="numero" ngModel="{{ utilisateur?.numero}}"
+          <input  type="tel" name="numero" id="numero" ngModel="{{ utilisateur.numero}}"
             class="form-control" placeholder="Entrez votre numero" required>
         </div>
         <!-- <div class="form-group">
@@ -59,11 +59,10 @@
         </div> -->
         <div class="form-group">
           <label for="bio">Bio: </label>
-          <textarea value="je suis .........................." name="bio" id="bio" cols="30" rows="10"
-            ngModel="{{ utilisateur?.bio }}" class="form-control" placeholder="Entrez votre Bio" required></textarea>
+          <textarea name="bio" id="bio" ngModel="{{ utilisateur.bio }}" class="form-control" placeholder="Entrez votre Bio" required></textarea>
         </div>
         <div class="button">
-          <input type="submit" value="Enregistrer">
+          <input type="submit" value="Enregistrer" [disabled]="updateProfileForm.invalid">
         </div>
       </div>
     </div>
