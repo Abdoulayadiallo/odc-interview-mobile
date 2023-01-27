@@ -56,9 +56,9 @@ export class PostulantPage implements OnInit {
   // }
   
 
-  gotToPage(name: string, pageNo: number = 0, pageSize: number = 10, sortBy: string = "", sortDir: string = ""): void {
+  gotToPage(name?: string, pageNo: number = 0, pageSize: number = 10, sortBy: string = "", sortDir: string = "",genre:string =""): void {
     // this.loadingService.loadingOn();
-    this.postulantState$ = this.postulantService.getAllPostulant(pageNo, pageSize, sortBy, sortDir).pipe(
+    this.postulantState$ = this.postulantService.getAllPostulant(pageNo, pageSize, sortBy, sortDir,genre,name).pipe(
       map((response: Postulantresponse) => {
         // this.loadingService.loadingOff();
         this.responseSubject.next(response);
@@ -79,5 +79,8 @@ export class PostulantPage implements OnInit {
   }
   postulantDetails(id: number) {
     this.router.navigate(['postulant-details', id]);
+  }
+  entretienDetails(idEntretien: number) {
+    this.router.navigate(['entretien', idEntretien]);
   }
 }

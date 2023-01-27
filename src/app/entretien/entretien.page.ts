@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { async } from 'rxjs';
 import { Critere } from '../Model/critere';
+import { Postulant } from '../Model/postulant';
 import { NoteComponent } from '../note/note.component';
 import { CritereService } from '../Service/critere.service';
+import { PostulantService } from '../Service/postulant.service';
 
 @Component({
   selector: 'app-entretien',
@@ -12,13 +16,24 @@ import { CritereService } from '../Service/critere.service';
 export class EntretienPage implements OnInit{
   critere: Critere;
   criteres!: Critere[];
+  id: number
+  postulant: Postulant
   
 
   //message = 'This modal example uses the modalController to present and dismiss modals.';
 
-  constructor(private modalCtrl: ModalController,private critereService:CritereService) {}
+  constructor(private modalCtrl: ModalController,
+    private critereService:CritereService,
+    private route: ActivatedRoute, 
+    private postulantService: PostulantService) {}
   ngOnInit(): void {
-    this.getCritere()
+    this.getCritere();
+    this.id = this.route.snapshot.params['id'];
+
+    this.postulant = new Postulant();
+    this.postulantService.getOnePostulantById(this.id).subscribe( data => {
+      this.postulant = data;
+    });
   }
 
   getCritere(){
@@ -27,11 +42,11 @@ export class EntretienPage implements OnInit{
       this.criteres = data;
     })
   }
-  async openModal(critere:Critere) {
+  async openModal(id:number) {
     const modal = await this.modalCtrl.create({
       component: NoteComponent,
       componentProps:{
-        'data':critere
+        'data':id
       }
     });
     modal.present();

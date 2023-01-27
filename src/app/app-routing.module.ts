@@ -47,7 +47,7 @@ const routes: Routes = [
     // resolve:{resolvedPostulant:PostulantresolverService}
   },
   {
-    path: 'entretien',
+    path: 'entretien/:id',
     loadChildren: () => import('./entretien/entretien.module').then( m => m.EntretienPageModule)
   },
   {

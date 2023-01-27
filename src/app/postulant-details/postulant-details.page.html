@@ -33,7 +33,7 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-button class="evaluation" [routerLink]="['/entretien']">Evaluer</ion-button>
+        <ion-button class="evaluation" [routerLink]="['/entretien',postulant.id]">Evaluer</ion-button>
       </ion-row>
     </ion-grid>
   </ion-card>
@@ -48,11 +48,7 @@
     <ion-item>Prenom {{postulant.prenom}} </ion-item>
     <ion-item>Email {{postulant.email}} </ion-item>
     <ion-item>Status {{postulant.decisionFinal}} </ion-item>
-    <ion-item>Date de naissance {{postulant.dateCreation | date : "medium"}} </ion-item>
-    <ion-item>Evaluation 7</ion-item>
-    <ion-item>Item 8</ion-item>
-    <ion-item>Item 9</ion-item>
-    <ion-item>Item 10</ion-item>
+    <ion-item>Date d'ajout {{postulant.dateCreation | date : "medium"}} </ion-item>
   </ion-list>
   <!-- Fin Card postulant -->
 </ion-content>
