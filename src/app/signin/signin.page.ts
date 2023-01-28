@@ -48,7 +48,6 @@ export class SigninPage implements OnInit, OnDestroy {
           } else {
             this.router.navigateByUrl('/tabs/home');
           }
-          this.loadingService.presentLoading()
           // this.loadingService.isLoading.next(false);
         },
         error => {

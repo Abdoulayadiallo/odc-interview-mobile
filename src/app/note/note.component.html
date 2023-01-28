@@ -5,22 +5,22 @@
     </ion-buttons>
     <ion-title>Welcome</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="confirm()">Confirm</ion-button>
+      <ion-button (click)="confirm(AddNote.value)">Confirm</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
   <div class="container">
     <div class="title"><img src="assets/Logo.png" alt="odc-interview-logo"></div>
-    <form method="post">
+    <form #AddNote="ngForm" (ngSubmit)="ajouterNote(AddNote.value)">
       <div class="user-details">
-        <div class="input-box">
-          <label for="email">Note: </label>
-          <input type="text" id="pseudo" name="email" placeholder="Entrez votre Email" required>
+        <div class="form-group">
+          <label for="note">Note: </label>
+          <input type="number" id="note" class="form-control" name="note" placeholder="Donner une note" required>
         </div>
-        <div class="input-box">
-          <label for="Commentaire">Commentaire: </label>
-          <textarea id="story" name="Commentaire"></textarea>
+        <div class="form-group">
+          <label for="commentaire">Commentaire: </label>
+          <textarea id="Commentaire" class="form-control" name="commentaire" placeholder="Commenter l'utilisateur"></textarea>
         </div>
       </div>
     </form>

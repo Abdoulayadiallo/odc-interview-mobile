@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { info } from 'console';
 import { async } from 'rxjs';
 import { Critere } from '../Model/critere';
 import { Postulant } from '../Model/postulant';
@@ -18,6 +19,8 @@ export class EntretienPage implements OnInit{
   criteres!: Critere[];
   id: number
   postulant: Postulant
+  info: FormData;
+
   
 
   //message = 'This modal example uses the modalController to present and dismiss modals.';
@@ -33,6 +36,7 @@ export class EntretienPage implements OnInit{
     this.postulant = new Postulant();
     this.postulantService.getOnePostulantById(this.id).subscribe( data => {
       this.postulant = data;
+      console.log(data)
     });
   }
 
@@ -46,7 +50,7 @@ export class EntretienPage implements OnInit{
     const modal = await this.modalCtrl.create({
       component: NoteComponent,
       componentProps:{
-        'data':id
+        'data':{"postulant":this.postulant,"critere":this.criteres}
       }
     });
     modal.present();

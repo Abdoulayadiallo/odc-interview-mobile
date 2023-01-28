@@ -10,14 +10,6 @@ export class LoadingService {
 
   constructor(public loadingController: LoadingController) { }
   
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      message: 'Bienvenue',
-      duration: 2000
-    });
-    await loading.present();
-    console.log('Loading dismissed!');
-  }
 
   async presentLoadingWithOptions() {
     const loading = await this.loadingController.create({

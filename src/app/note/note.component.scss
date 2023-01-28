@@ -37,17 +37,17 @@
      margin: 20px 0 12px 0;
 }
 
-form .user-details .input-box{
+form .user-details .form-group{
     margin-bottom: 15px;
 }
-.user-details .input-box .details{
+.user-details .form-group .details{
     display: block;
     margin: 20px 0 12px 0;
     margin-bottom: 5px;
 
 }
 
-.user-details .input-box input ,textarea{
+.user-details .form-group input ,textarea{
     height: 45px ;
     width: 100%;
     outline: none;
@@ -66,8 +66,8 @@ textarea{
 //     flex-direction: row-reverse;
 // }
 
-.user-details .input-box input:focus,
-.user-details .input-box input:valid{
+.user-details .form-group input:focus,
+.user-details .form-group input:valid{
     border-color: #9b59b6;
 
 }
