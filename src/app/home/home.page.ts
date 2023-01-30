@@ -27,6 +27,7 @@ export class HomePage implements OnInit {
   userpre: string ='';
   rolename: string ='';
   entretienNombre: number;
+  idEntretien: number;
 
 
   constructor(
@@ -38,7 +39,7 @@ export class HomePage implements OnInit {
     ngOnInit() {
       this.userpicture = this.accountService.userPicture;
       this.getUserInfo(this.accountService.loggInUsername);
-      this.getPost();
+      this.getPost(this.idEntretien);
       this.getJury();
     }
 
@@ -57,6 +58,7 @@ export class HomePage implements OnInit {
         this.entretienNombre=response.participant.entretien.entretienNom.length
         this.userpre=response.prenom
         this.rolename=response.role.roleName
+        this.idEntretien=response.participant.entretien.id
         console.log(response)
         console.log(this.nomEntretien)
         console.log(this.utilisateur)
@@ -67,8 +69,8 @@ export class HomePage implements OnInit {
       }
     ));
   }
-  getPost(){
-      this.postulantService.getAllPostulant().subscribe(data => {
+  getPost(entretienId:number){
+      this.postulantService.getAllPostulantByEntretien(entretienId).subscribe(data => {
         console.log(data)
         this.postulantresponse = data
         this.totalElement=data.totalElements
