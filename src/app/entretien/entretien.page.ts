@@ -20,6 +20,7 @@ export class EntretienPage implements OnInit{
   id: number
   postulant: Postulant
   info: FormData;
+  critereNombre:number
 
   
 
@@ -44,13 +45,14 @@ export class EntretienPage implements OnInit{
     this.critereService.getAllCritere().subscribe(data => {
       console.log(data)
       this.criteres = data;
+      this.critereNombre=data.length
     })
   }
   async openModal(id:number) {
     const modal = await this.modalCtrl.create({
       component: NoteComponent,
       componentProps:{
-        'data':{"postulant":this.postulant,"critere":this.criteres}
+        'data':{"postulant":this.postulant,"critereId":id}
       }
     });
     modal.present();

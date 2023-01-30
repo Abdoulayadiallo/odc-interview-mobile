@@ -21,7 +21,7 @@ import { CritereService } from './Service/critere.service';
 import { Entretien } from './Model/entretien';
 import { EntretienService } from './Service/entretien.service';
 import { QuestionService } from './Service/question.service';
-
+import { NgCircleProgressModule } from 'ng-circle-progress';
 @NgModule({
   declarations: [AppComponent,NoteComponent,NotificationComponent],
   imports: [
@@ -31,6 +31,15 @@ import { QuestionService } from './Service/question.service';
     FormsModule,
     HttpClientModule, 
     ReactiveFormsModule,
+    NgCircleProgressModule.forRoot({
+      // set defaults here
+      radius: 100,
+      outerStrokeWidth: 16,
+      innerStrokeWidth: 8,
+      outerStrokeColor: "#78C000",
+      innerStrokeColor: "#C7E596",
+      animationDuration: 300,
+    })
   ],
   providers: [{ provide: RouteReuseStrategy,
        useClass: IonicRouteStrategy,

@@ -15,6 +15,8 @@ import { PostulantService } from '../Service/postulant.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+
+  rootPage:any;
   private subscriptions: Subscription[] = [];
   postulantresponse!: Postulantresponse ;
   jurys: Utilisateur[];
@@ -27,7 +29,7 @@ export class HomePage implements OnInit {
   userpre: string ='';
   rolename: string ='';
   entretienNombre: number;
-  idEntretien: number;
+  public idEntretien: number;
 
 
   constructor(
@@ -39,7 +41,9 @@ export class HomePage implements OnInit {
     ngOnInit() {
       this.userpicture = this.accountService.userPicture;
       this.getUserInfo(this.accountService.loggInUsername);
-      this.getPost(this.idEntretien);
+      setTimeout(()=>{
+        this.getPost()},1000
+      )
       this.getJury();
     }
 
@@ -59,6 +63,7 @@ export class HomePage implements OnInit {
         this.userpre=response.prenom
         this.rolename=response.role.roleName
         this.idEntretien=response.participant.entretien.id
+        console.log(this.idEntretien)
         console.log(response)
         console.log(this.nomEntretien)
         console.log(this.utilisateur)
@@ -69,8 +74,8 @@ export class HomePage implements OnInit {
       }
     ));
   }
-  getPost(entretienId:number){
-      this.postulantService.getAllPostulantByEntretien(entretienId).subscribe(data => {
+  getPost(){
+      this.postulantService.getAllPostulantByEntretien(this.idEntretien).subscribe(data => {
         console.log(data)
         this.postulantresponse = data
         this.totalElement=data.totalElements

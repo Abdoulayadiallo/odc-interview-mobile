@@ -2,7 +2,8 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button ion-button navPop>
-        <ion-icon name="arrow-back"></ion-icon>
+        <ion-back-button text="" icon="arrow-back"></ion-back-button>
+        <!-- <ion-icon name="arrow-back"></ion-icon> -->
       </ion-button>
     </ion-buttons>
     <ion-title>Entretien</ion-title>
@@ -48,7 +49,7 @@
                 <span class="progress-right">
                   <span class="progress-bar"></span>
                 </span>
-                <div class="progress-value">90%</div>
+                <div class="progress-value">{{critereNombre}}</div>
               </div>
             </div>
           </div>
@@ -62,10 +63,11 @@
       <ion-col size="3">Elimination</ion-col>
       <ion-col size="4">Note</ion-col>
     </ion-row>
-    <ion-row class="contenu" *ngFor= "let critere of criteres; let i=index">
+    <ion-row class="contenu" *ngFor="let critere of criteres; let i=index">
       <ion-col size="5">{{critere.questionList[0].questionNom}}</ion-col>
-      <ion-col *ngIf="critere.elimination ===true " size="3"><ion-button  [ngClass]="(critere.elimination ===true ? ' yes' :' no')">Oui</ion-button></ion-col>
-      <ion-col *ngIf="critere.elimination === false " size="3"><ion-button  class="no">Non</ion-button></ion-col>
+      <ion-col *ngIf="critere.elimination ===true " size="3"><ion-button
+          [ngClass]="(critere.elimination ===true ? ' yes' :' no')">Oui</ion-button></ion-col>
+      <ion-col *ngIf="critere.elimination === false " size="3"><ion-button class="no">Non</ion-button></ion-col>
       <ion-col><ion-button class="notez" expand="block" (click)="openModal(critere.id)">Notez</ion-button>
       </ion-col>
     </ion-row>

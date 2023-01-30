@@ -17,10 +17,11 @@ import { NoteService } from '../Service/note.service';
 export class NoteComponent implements OnInit {
   private subscriptions: Subscription[] = [];
   name: string;
-  note: Note;
   data:any
   utilisateur:Utilisateur
   username:string
+  note: Note = new Note();
+
 
   constructor(private modalCtrl: ModalController,private noteService: NoteService,private accountService:AccountService) {}
   ngOnInit(): void {
@@ -46,12 +47,12 @@ export class NoteComponent implements OnInit {
     return this.modalCtrl.dismiss(null, 'cancel');
   }
 
-  confirm(note:Note) {
-    this.ajouterNote(note)
+  confirm() {
+    this.ajouterNote()
     return this.modalCtrl.dismiss(this.name, 'confirm');
   }
-  ajouterNote(note:Note){
-    this.noteService.addNote(note,this.data.critere.id,this.data.postulant.id,this.utilisateur.username).subscribe(response =>
+  ajouterNote(){
+    this.noteService.addNote(this.note,this.data.critereId,this.data.postulant.id,this.utilisateur.username).subscribe(response =>
       console.log(response)
     )
   }

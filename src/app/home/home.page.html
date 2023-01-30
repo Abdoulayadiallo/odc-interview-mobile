@@ -37,29 +37,34 @@
         <div class="container">
           <div class="rowline">
             <div class="col1">
-              <div class="progress violet">
-                <span class="progress-left">
-                  <span class="progress-bar"></span>
-                </span>
-                <span class="progress-right">
-                  <span class="progress-bar"></span>
-                </span>
-                <div class="progress-value">90%</div>
-              </div>
+              <circle-progress
+              [percent]="85"
+              [radius]="100"
+              [outerStrokeWidth]="10"
+              [innerStrokeWidth]="5"
+              [outerStrokeColor]="'#50BE87'"
+              [innerStrokeColor]="'#C7E596'"
+              [animation]="true"
+              [animationDuration]="300"
+              [radius]="60"
+            ></circle-progress>
               <div class="status">
                 Homme
               </div>
             </div>
             <div class="col2">
-              <div class="progress green">
-                <span class="progress-left">
-                  <span class="progress-bar"></span>
-                </span>
-                <span class="progress-right">
-                  <span class="progress-bar"></span>
-                </span>
-                <div class="progress-value">90%</div>
-              </div>
+              <circle-progress
+              [percent]="85"
+              [radius]="100"
+              [outerStrokeWidth]="10"
+              [innerStrokeWidth]="5"
+              [outerStrokeColor]="'#845EC2'"
+              [innerStrokeColor]="'#C7E596'"
+              [animation]="true"
+              [animationDuration]="300"
+              [radius]="60"
+            ></circle-progress>
+              
               <div class="status">
                 Femme
               </div>

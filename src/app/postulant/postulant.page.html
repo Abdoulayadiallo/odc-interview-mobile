@@ -54,7 +54,8 @@
               <ion-card-header>
                 <ion-card-title>{{post.prenom}} {{post.nom}}</ion-card-title>
                 <ion-card-subtitle *ngIf="post.decisionFinal == null">Status: Postulant</ion-card-subtitle>
-                <ion-card-subtitle *ngIf="post.decisionFinal != null">Status: Apprenant</ion-card-subtitle>              </ion-card-header>
+                <ion-card-subtitle *ngIf="post.decisionFinal != null">Status: Apprenant</ion-card-subtitle>
+              </ion-card-header>
             </ion-col>
             <ion-col size="2" class="ion-justify-content-center">
               <ion-icon size="large" name="arrow-forward-circle-outline" (click)="postulantDetails(post.id)"></ion-icon>
@@ -91,8 +92,7 @@
           <a (click)="goToNextOrPreviousPage('backward','searchForm.value.nomOrprenom')"> &laquo;</a>
         </li>
         <li *ngFor="let number of [].constructor(state.appData?.totalPages); let i = index">
-          <a [ngClass]="i == (currentPage$ | async) ? ' active' : ''"
-            (click)="gotToPage('',i,10)">{{i+1}}</a>
+          <a [ngClass]="i == (currentPage$ | async) ? ' active' : ''" (click)="gotToPage('',i,10)">{{i+1}}</a>
         </li>
         <li class="page-item pointer"
           [ngClass]=" (state.appData?.totalPages - 1) == (currentPage$ | async) ? ' disabled' : ''">
