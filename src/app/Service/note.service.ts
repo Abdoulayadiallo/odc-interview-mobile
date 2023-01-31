@@ -24,6 +24,9 @@ export class NoteService {
   getAllNote(): Observable<Note[]> {
     return this.http.get<Note[]>(`${this.host}/note/list`);
   }
+  getNoteByCritere(idCritere:number): Observable<Note[]> {
+    return this.http.get<Note[]>(`${this.host}/note/critere/${idCritere}`);
+  }
   updateNote(id: number, note: Note): Observable<Object>{
     return this.http.put(`${this.host}/note/update/${id}`, note);
   }

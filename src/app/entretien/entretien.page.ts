@@ -7,6 +7,7 @@ import { Critere } from '../Model/critere';
 import { Postulant } from '../Model/postulant';
 import { NoteComponent } from '../note/note.component';
 import { CritereService } from '../Service/critere.service';
+import { NoteService } from '../Service/note.service';
 import { PostulantService } from '../Service/postulant.service';
 
 @Component({
@@ -21,6 +22,7 @@ export class EntretienPage implements OnInit{
   postulant: Postulant
   info: FormData;
   critereNombre:number
+  note: any = [];
 
   
 
@@ -29,7 +31,8 @@ export class EntretienPage implements OnInit{
   constructor(private modalCtrl: ModalController,
     private critereService:CritereService,
     private route: ActivatedRoute, 
-    private postulantService: PostulantService) {}
+    private postulantService: PostulantService,
+    private noteService:NoteService) {}
   ngOnInit(): void {
     this.getCritere();
     this.id = this.route.snapshot.params['id'];
@@ -46,8 +49,25 @@ export class EntretienPage implements OnInit{
       console.log(data)
       this.criteres = data;
       this.critereNombre=data.length
+      for(let i = 0; i < this.critereNombre; i++){
+        console.log(this.criteres[i].id)
+        if(this.criteres[i].id == i+1){
+          this.noteService.getNoteByCritere(this.criteres[i].id).subscribe(data =>{
+            console.log(data)
+            this.note.push(data[i].point)
+          })
+        }
+
+      }
+      console.log(this.note)
     })
   }
+  // getnoteByCritere(critereId:number){
+  //   this.noteService.getNoteByCritere(critereId).subscribe(data =>{
+  //     console.log(data)
+  //     this.note=data[0].point
+  //   })
+  // }
   async openModal(id:number) {
     const modal = await this.modalCtrl.create({
       component: NoteComponent,

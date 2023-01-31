@@ -21,6 +21,7 @@ export class NoteComponent implements OnInit {
   utilisateur:Utilisateur
   username:string
   note: Note = new Note();
+  userconnected: string;
 
 
   constructor(private modalCtrl: ModalController,private noteService: NoteService,private accountService:AccountService) {}
@@ -34,6 +35,7 @@ export class NoteComponent implements OnInit {
       this.accountService.getUserInformation(username).subscribe(
       (response: Utilisateur) => {
         this.utilisateur = response;
+        this.userconnected=response.username;
         console.log(response)
         console.log(this.utilisateur)
       },
@@ -52,7 +54,7 @@ export class NoteComponent implements OnInit {
     return this.modalCtrl.dismiss(this.name, 'confirm');
   }
   ajouterNote(){
-    this.noteService.addNote(this.note,this.data.critereId,this.data.postulant.id,this.utilisateur.username).subscribe(response =>
+    this.noteService.addNote(this.note,this.data.critereId,this.data.postulant.id,this.userconnected).subscribe(response =>
       console.log(response)
     )
   }

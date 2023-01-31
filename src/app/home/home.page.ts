@@ -30,6 +30,9 @@ export class HomePage implements OnInit {
   rolename: string ='';
   entretienNombre: number;
   public idEntretien: number;
+  MasculinNOmbre: any;
+  FemininNOmbre: any;
+
 
 
   constructor(
@@ -40,11 +43,23 @@ export class HomePage implements OnInit {
 
     ngOnInit() {
       this.userpicture = this.accountService.userPicture;
-      this.getUserInfo(this.accountService.loggInUsername);
+      const username=this.accountService.loggInUsername
       setTimeout(()=>{
-        this.getPost()},1000
+        this.getUserInfo(username)}
+        ,500
       )
-      this.getJury();
+      
+      setTimeout(()=>{
+        this.getPost()}
+        ,1000
+      )
+      setTimeout(()=>{
+        this.getPostulantPargenre("M")
+        this.getPostulantPargenre("F")
+        this.getJuryNombreByEntretien();
+      },2000
+      )
+  
     }
 
   async openNotif() {
@@ -81,13 +96,24 @@ export class HomePage implements OnInit {
         this.totalElement=data.totalElements
       })
     }
-  getJury(){
-      this.accountService.getAllJury().subscribe(data => {
+  getJuryNombreByEntretien(){
+      this.accountService.GetJuryNombrebyEntretien(this.idEntretien).subscribe(data => {
         console.log(data)
-        this.jurys = data
-        this.nbreJury = data.length
+        this.nbreJury = data.totalListe
       })
     }
+  getPostulantPargenre(genre:string){
+    this.postulantService.getPostulantParGenre(this.idEntretien,genre).subscribe(
+      data => { console.log(data)
+      if(genre=="M"){
+        this.MasculinNOmbre=data.pourcentage;
+      }
+      if(genre=="F"){
+        this.FemininNOmbre=data.pourcentage;
+      }
+    },
+    )
+  }
 }
 
   

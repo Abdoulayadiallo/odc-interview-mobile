@@ -5,6 +5,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
 import { Utilisateur } from '../Model/utilisateur';
 import { PasswordChange } from '../Model/password-change';
+import { JuryResponse } from '../Model/jury-response';
 
 
 @Injectable({
@@ -100,6 +101,9 @@ export class AccountService {
     return this.http.get<Utilisateur[]>(`${this.host}/utilisateur/jurylist`);
   }
   getOneJuryById(juryId: number): Observable<Utilisateur> {
-    return this.http.get<Utilisateur>(`${this.host}/utillsateur/${juryId}`);
+    return this.http.get<Utilisateur>(`${this.host}/utilisateur/${juryId}`);
+  }
+  GetJuryNombrebyEntretien(entretienId: number): Observable<JuryResponse> {
+    return this.http.get<JuryResponse>(`${this.host}/utilisateur/entretien/${entretienId}`);
   }
 }

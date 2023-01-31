@@ -128,25 +128,25 @@ h4{
   left: 5%;
 }
 
-.progress.violet .progress-value {
-  color: #845EC2;
-}
-.progress.green .progress-value {
-  color: #50BE87;
-}
-.progress.violet .progress-bar {
-  border-color: #845EC2;
-}
-.progress.green .progress-bar {
-  border-color: #50BE87;
-}
+// .progress.violet .progress-value {
+//   color: #845EC2;
+// }
+// .progress.green .progress-value {
+//   color: #50BE87;
+// }
+// .progress.violet .progress-bar {
+//   border-color: #845EC2;
+// }
+// .progress.green .progress-bar {
+//   border-color: #50BE87;
+// }
 
-.progress.green .progress-left .progress-bar {
-  animation: loading-2 1.5s linear forwards 1.8s;
-}
-.progress.violet .progress-left .progress-bar {
-  animation: loading-2 1.5s linear forwards 1.8s;
-}
+// .progress.green .progress-left .progress-bar {
+//   animation: loading-2 1.5s linear forwards 1.8s;
+// }
+// .progress.violet .progress-left .progress-bar {
+//   animation: loading-2 1.5s linear forwards 1.8s;
+// }
 
 
 
@@ -154,7 +154,7 @@ h4{
   margin: 5px auto;
   display: grid;
   grid-template-columns: auto auto;
-  grid-gap: 50px;
+  grid-gap: 20px;
   align-items:center;
 }
 

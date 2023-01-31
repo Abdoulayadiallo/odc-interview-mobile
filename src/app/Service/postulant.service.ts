@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { EnvironmentInjector } from '@ionic/angular/di/r3_injector';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { NombreResponse } from '../Model/nombre-response';
 import { Postulant } from '../Model/postulant';
 import { Postulantresponse } from '../Model/postulantresponse';
 
@@ -26,4 +27,7 @@ export class PostulantService {
     return this.http.get<Postulantresponse>(`${this.host}/postulant/list/${idEntretien}?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}&sortDir=${sortDir}&genre=${genre}&nom=${nom}`);
   }
   
+  getPostulantParGenre(idEntretien:number,genre:string):Observable<NombreResponse>{
+    return this.http.get<NombreResponse>(`${this.host}/postulant/nombreGenre/${idEntretien}/${genre}`);
+  }
 }
