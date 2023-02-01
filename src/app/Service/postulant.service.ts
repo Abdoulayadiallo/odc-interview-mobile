@@ -20,11 +20,11 @@ export class PostulantService {
     return this.http.get<Postulant>(`${this.host}/postulant/${postId}`);
   }
 
-  getAllPostulant(pageNo:number = 0,pageSize:number = 10,sortBy:string ="",sortDir:string="",genre:string="",nom:string=""): Observable<Postulantresponse> {
-    return this.http.get<Postulantresponse>(`${this.host}/postulant/list?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}&sortDir=${sortDir}&genre=${genre}&nom=${nom}`);
+  getAllPostulant(pageNo:number = 0,pageSize:number = 10,sortBy:string ="",sortDir:string="",genre:string="",keyword:string=""): Observable<Postulantresponse> {
+    return this.http.get<Postulantresponse>(`${this.host}/postulant/list?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}&sortDir=${sortDir}&keyword=${keyword}&genre=${genre}`);
   }
-  getAllPostulantByEntretien(idEntretien:number,pageNo:number = 0,pageSize:number = 10,sortBy:string ="",sortDir:string="",genre:string="",nom:string=""): Observable<Postulantresponse> {
-    return this.http.get<Postulantresponse>(`${this.host}/postulant/list/${idEntretien}?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}&sortDir=${sortDir}&genre=${genre}&nom=${nom}`);
+  getAllPostulantByEntretien(idEntretien:number,pageNo:number = 0,pageSize:number = 10,sortBy:string ="",sortDir:string="",genre:string="",keyword:string=""): Observable<Postulantresponse> {
+    return this.http.get<Postulantresponse>(`${this.host}/postulant/list/PostulantEntretien/${idEntretien}?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}&sortDir=${sortDir}&genre=${genre}&keyword=${keyword}`);
   }
   
   getPostulantParGenre(idEntretien:number,genre:string):Observable<NombreResponse>{

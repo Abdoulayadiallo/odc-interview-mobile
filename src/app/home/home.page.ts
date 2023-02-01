@@ -7,6 +7,7 @@ import { Postulantresponse } from '../Model/postulantresponse';
 import { Utilisateur } from '../Model/utilisateur';
 import { NotificationComponent } from '../notification/notification.component';
 import { AccountService } from '../Service/account.service';
+import { EntretienService } from '../Service/entretien.service';
 import { PostulantService } from '../Service/postulant.service';
 
 @Component({
@@ -39,6 +40,7 @@ export class HomePage implements OnInit {
     private pvrCtlr: PopoverController,
     private accountService: AccountService,
     private postulantService:PostulantService,
+    private entretienService:EntretienService
     ) {}
 
     ngOnInit() {
@@ -46,18 +48,19 @@ export class HomePage implements OnInit {
       const username=this.accountService.loggInUsername
       setTimeout(()=>{
         this.getUserInfo(username)}
-        ,500
+        ,100
       )
       
       setTimeout(()=>{
         this.getPost()}
-        ,1000
+        ,300
       )
       setTimeout(()=>{
         this.getPostulantPargenre("M")
         this.getPostulantPargenre("F")
         this.getJuryNombreByEntretien();
-      },2000
+        this.getEntretien()
+      },500
       )
   
     }
@@ -74,7 +77,6 @@ export class HomePage implements OnInit {
       (response: Utilisateur) => {
         this.utilisateur = response;
         this.nomEntretien= response.participant.entretien.entretienNom
-        this.entretienNombre=response.participant.entretien.entretienNom.length
         this.userpre=response.prenom
         this.rolename=response.role.roleName
         this.idEntretien=response.participant.entretien.id
@@ -111,8 +113,13 @@ export class HomePage implements OnInit {
       if(genre=="F"){
         this.FemininNOmbre=data.pourcentage;
       }
-    },
-    )
+    },)
+  }
+  getEntretien(){
+    this.entretienService.getAllEntretien(this.utilisateur.username).subscribe(data=>{
+      console.log(data)
+      this.entretienNombre=data.totalElements
+    })
   }
 }
 

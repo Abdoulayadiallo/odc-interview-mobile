@@ -7,18 +7,30 @@ import { Subject } from 'rxjs';
 })
 export class LoadingService {
   public isLoading: Subject<boolean> =  new Subject();
+  constructor(private loadingController: LoadingController) { }
 
-  constructor(public loadingController: LoadingController) { }
+    async loadingPresent(message: string = null, duration: number = null) {
+        const loading = await this.loadingController.create({ message, duration });
+        return await loading.present();
+    }
+
+    async loadingDismiss() {
+        setTimeout(() => {
+            return this.loadingController.dismiss();
+        }, 1000);
+    }
+
+    loaderPromise(message: string = null, duration: number = null) {
+      this.loadingController.create({
+        message: message,
+        duration: duration,
+      }).then((res) => {
+        res.present();
   
-
-  async presentLoadingWithOptions() {
-    const loading = await this.loadingController.create({
-      spinner: null,
-      duration: 5000,
-      message: 'Please wait...',
-      translucent: true,
-      cssClass: 'custom-class custom-loading'
-    });
-    return await loading.present();
+        res.onDidDismiss().then((dis) => {
+          console.log('Loading dismissed, after'+ duration + 'Seconds', dis);
+        });
+      });
   }
+
 }

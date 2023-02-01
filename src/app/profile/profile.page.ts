@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Utilisateur } from '../Model/utilisateur';
 import { AccountService } from '../Service/account.service';
 import { AlertService } from '../Service/alert.service';
+import { LoadingService } from '../Service/loading.service';
 
 @Component({
   selector: 'app-profile',
@@ -17,7 +18,11 @@ export class ProfilePage implements OnInit {
   utilisateur: Utilisateur;
   userpicture: string;
   username: string;
-  constructor(private accountService:AccountService,private router:Router,private alertService:AlertService) { }
+  constructor(
+    private accountService:AccountService,
+    private router:Router,
+    private alertService:AlertService,
+    private loadingService:LoadingService) { }
 
   ngOnInit() {
     this.userpicture = this.accountService.userPicture;
@@ -25,10 +30,10 @@ export class ProfilePage implements OnInit {
     this.username=this.accountService.loggInUsername;
   }
   logOut(): void {
-    // this.loadingService.isLoading.next(true);
+     this.loadingService.isLoading.next(true);
     this.accountService.logOut();
     this.router.navigateByUrl('/signin');
-    // this.loadingService.isLoading.next(false);
+    this.loadingService.isLoading.next(false);
     this.alertService.presentToast(
       "Vous vous êtes deconnecter avec succès.",
       "success"
@@ -57,7 +62,7 @@ export class ProfilePage implements OnInit {
   }
 
   onUpdateUser(updatedUser: Utilisateur): void {
-    // this.loadingService.isLoading.next(true);
+    this.loadingService.isLoading.next(true);
     this.subscriptions.push(
       this.accountService.updateUser(updatedUser).subscribe(
         response => {
@@ -65,7 +70,7 @@ export class ProfilePage implements OnInit {
           if (this.profilePictureChange) {
             this.accountService.uploadeUserProfilePicture(this.profilePicture);
           }
-          // this.loadingService.isLoading.next(false);
+          this.loadingService.isLoading.next(false);
           this.alertService.presentToast(
             "Profile mise à jour avec succès.",
             "success"
@@ -73,7 +78,7 @@ export class ProfilePage implements OnInit {
         },
         error => {
           console.log(error);
-          // this.loadingService.isLoading.next(false);
+          this.loadingService.isLoading.next(false);
           this.alertService.presentToast(
             "La mise à jour du profile a échoué, essayer encore ...",
             "danger"
@@ -82,5 +87,11 @@ export class ProfilePage implements OnInit {
       )
     );
   }
+
+  gotoPasswordChangePage(): void {
+      this.router.navigate(['/changepassword', this.username]);
+      console.log(this.username);
+    }
+  
   
 }

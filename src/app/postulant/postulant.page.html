@@ -17,8 +17,8 @@
           </ion-col>
         </ion-row>
         <ion-row *ngIf="isSearchBarOpened">
-          <form #searchForm="ngForm" (ngSubmit)="gotToPage(searchForm.value.nomOrprenom)">
-            <ion-searchbar name="nomOrprenom" type="search" ngModel class="form-control" showCancelButton="true"
+          <form #searchForm="ngForm" (ngSubmit)="gotToPage(searchForm.value.keyword)">
+            <ion-searchbar name="keyword" type="search" ngModel class="form-control" showCancelButton="true"
               (ionCancel)="isSearchBarOpened=false"></ion-searchbar>
           </form>
         </ion-row>
@@ -26,9 +26,9 @@
       <ion-grid>
         <ion-row>
           <ion-col size="6">
-            <p class="postdetail">Total <span>224</span></p>
+            <p class="postdetail">Total <span>{{state.appData.totalElements}}</span></p>
             <p class="postdetail">Interview <span>24</span></p>
-            <p class="postdetail">Non-Interview <span>200</span></p>
+            <p class="postdetail">Non-Interview <span>20</span></p>
           </ion-col>
           <ion-col class="align-items-center">
             <ion-button id="popover-button" class="head-filter" color="secondary" fill=""><ion-icon
@@ -54,7 +54,8 @@
               <ion-card-header>
                 <ion-card-title>{{post.prenom}} {{post.nom}}</ion-card-title>
                 <ion-card-subtitle *ngIf="post.decisionFinal == null">Status: Postulant</ion-card-subtitle>
-                <ion-card-subtitle *ngIf="post.decisionFinal != null">Status: Apprenant</ion-card-subtitle>
+                <ion-card-subtitle *ngIf="post.decisionFinal == 'Refuser'">Status: Refuser</ion-card-subtitle>
+                <ion-card-subtitle *ngIf="post.decisionFinal == 'Accepter'">Status: Apprenant</ion-card-subtitle>
               </ion-card-header>
             </ion-col>
             <ion-col size="2" class="ion-justify-content-center">
@@ -89,14 +90,14 @@
 
       <div class="pagination">
         <li class="page-item pointer" [ngClass]="0 == (currentPage$ | async) ? ' disabled' : ''">
-          <a (click)="goToNextOrPreviousPage('backward','searchForm.value.nomOrprenom')"> &laquo;</a>
+          <a (click)="goToNextOrPreviousPage('backward','searchForm.value.keyword')"> &laquo;</a>
         </li>
         <li *ngFor="let number of [].constructor(state.appData?.totalPages); let i = index">
           <a [ngClass]="i == (currentPage$ | async) ? ' active' : ''" (click)="gotToPage('',i,10)">{{i+1}}</a>
         </li>
         <li class="page-item pointer"
           [ngClass]=" (state.appData?.totalPages - 1) == (currentPage$ | async) ? ' disabled' : ''">
-          <a (click)="goToNextOrPreviousPage('forward','searchForm.value.nomOrprenom')">&raquo;</a>
+          <a (click)="goToNextOrPreviousPage('forward','searchForm.value.keyword')">&raquo;</a>
         </li>
       </div>
     </ng-container>

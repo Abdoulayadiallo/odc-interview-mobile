@@ -60,6 +60,11 @@ const routes: Routes = [
     path: 'jury-details/:id',
     loadChildren: () => import('./jury-details/jury-details.module').then( m => m.JuryDetailsPageModule)
   },
+  {
+    path: 'changepassword/:username',
+    loadChildren: () => import('./changepassword/changepassword.module').then( m => m.ChangepasswordPageModule)
+  },
+
 
 ];
 
