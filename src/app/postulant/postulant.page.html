@@ -32,7 +32,7 @@
           </ion-col>
           <ion-col class="align-items-center">
             <ion-button id="popover-button" class="head-filter" color="secondary" fill=""><ion-icon
-                name="funnel-outline"></ion-icon> Filtrer</ion-button>
+                name="funnel-outline"></ion-icon> Filtrer </ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -75,13 +75,13 @@
           <ion-content>
             <ion-list>
               <ion-item class="titre" [detail]="false">Filter par</ion-item>
-              <ion-item [button]="true" [detail]="false"> Nom</ion-item>
-              <ion-item [button]="true" [detail]="false"> Prenom</ion-item>
+              <ion-item [button]="true" [detail]="false" (click)="gotToPage('',0,10,'nom')"> Nom</ion-item>
+              <ion-item [button]="true" [detail]="false" (click)="gotToPage('',0,10,'prenom')"> Prenom</ion-item>
               <ion-item [button]="true" [detail]="false"> Points</ion-item>
-              <ion-item [button]="true" [detail]="false"> Status</ion-item>
+              <ion-item [button]="true" [detail]="false" > Status</ion-item>
               <ion-item class="titre" [detail]="false">Ordonner par</ion-item>
-              <ion-item [button]="true" [detail]="false"> Ascendant</ion-item>
-              <ion-item [button]="true" [detail]="false"> Descendant</ion-item>
+              <ion-item [button]="true" [detail]="false" (click)="gotToPage('',0,10,'','asc')"> Ascendant</ion-item>
+              <ion-item [button]="true" [detail]="false" (click)="gotToPage('',0,10,'','desc')"> Descendant</ion-item>
             </ion-list>
           </ion-content>
         </ng-template>

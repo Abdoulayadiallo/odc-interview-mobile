@@ -23,6 +23,7 @@ export class EntretienPage implements OnInit{
   info: FormData;
   critereNombre:number
   note: any = [];
+  isnote:boolean;
 
   
 
@@ -55,6 +56,11 @@ export class EntretienPage implements OnInit{
           this.noteService.getNoteByCritere(this.criteres[i].id).subscribe(data =>{
             console.log(data)
             this.note.push(data[i].point)
+            if(this.note[i]==null){
+              this.isnote=false
+            }else{
+              this.isnote=true
+            }
           })
         }
 

@@ -69,8 +69,8 @@
       <ion-col *ngIf="critere.elimination ===true " size="3"><ion-button
           [ngClass]="(critere.elimination ===true ? ' yes' :' no')">Oui</ion-button></ion-col>
       <ion-col *ngIf="critere.elimination === false " size="3"><ion-button class="no">Non</ion-button></ion-col>
-      <ion-col *ngIf="note==null"><ion-button class="notez" expand="block" (click)="openModal(critere.id)">Notez</ion-button></ion-col>
-      <ion-col *ngIf="note!=null"><div>{{note}}</div></ion-col>
+      <ion-col *ngIf="critere === false "><ion-button class="notez" expand="block" (click)="openModal(critere.id)">Notez</ion-button></ion-col>
+      <ion-col *ngIf="critere === true "><div>{{note}}</div></ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

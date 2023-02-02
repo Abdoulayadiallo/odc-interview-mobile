@@ -51,7 +51,7 @@ export class NoteComponent implements OnInit {
 
   confirm() {
     this.ajouterNote()
-    return this.modalCtrl.dismiss(this.name, 'confirm');
+    return this.modalCtrl.dismiss(this.note, 'confirm');
   }
   ajouterNote(){
     this.noteService.addNote(this.note,this.data.critereId,this.data.postulant.id,this.userconnected).subscribe(response =>
@@ -59,10 +59,4 @@ export class NoteComponent implements OnInit {
     )
   }
 
-
-  // Notez(){
-  //   this.noteService.addNote(this.note,).subscribe(
-  //     this.note
-  //   )
-  // }
 }

@@ -63,7 +63,11 @@ const routes: Routes = [
   {
     path: 'changepassword/:username',
     loadChildren: () => import('./changepassword/changepassword.module').then( m => m.ChangepasswordPageModule)
+  },  {
+    path: 'entretien-details',
+    loadChildren: () => import('./entretien-details/entretien-details.module').then( m => m.EntretienDetailsPageModule)
   },
+
 
 
 ];
