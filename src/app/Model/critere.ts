@@ -1,3 +1,4 @@
+import { Entretien } from "./entretien";
 import { Question } from "./question";
 
 export class Critere {
@@ -5,6 +6,6 @@ export class Critere {
     critereNom: string;
     barem: string;
     elimination: boolean;
-    questionList: Question[]; 
-    noted:boolean
+    question: Question[]; 
+    entretien: Entretien; 
 }

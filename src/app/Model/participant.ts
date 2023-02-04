@@ -1,14 +1,13 @@
 import { Entretien } from "./entretien";
 import { Notification } from "./notification";
+import { Postulant } from "./postulant";
 import { Utilisateur } from "./utilisateur";
 
 export class Participant {
         id!: number;
-        nom!: string;
-        prenom!: string;
-        email!: string;
         status!: string;
         notifications!: Notification[];
-        utilisateurs!: Utilisateur[];
+        utilisateur!: Utilisateur;
+        postulant!: Postulant;
         entretien: Entretien;
 }

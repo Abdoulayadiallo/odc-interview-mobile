@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Entretien } from '../Model/entretien';
+import { EntretienService } from '../Service/entretien.service';
 
 @Component({
   selector: 'app-entretien-details',
@@ -6,10 +9,31 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./entretien-details.page.scss'],
 })
 export class EntretienDetailsPage implements OnInit {
-
-  constructor() { }
+  id: number
+  entretien: Entretien
+  entretienNom: string;
+  entretienDebut: string;
+  entretienStatus: string;
+  entretienDescription: String;
+  entretienFin: string;
+  constructor(private entretienService: EntretienService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.id = this.route.snapshot.params['id'];
+    this.getEntretien()
+
+  }
+
+  getEntretien() {
+    this.entretienService.getOneEntretienById(this.id).subscribe(
+      data => {
+        this.entretienNom = data.entretienNom;
+        this.entretienDebut = data.dateDebut;
+        this.entretienStatus = data.etat.status
+        this.entretienDescription = data.description
+        this.entretienFin=data.dateFin
+        console.log(data)
+      })
   }
 
 }

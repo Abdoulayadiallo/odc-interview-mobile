@@ -10,7 +10,7 @@
         <ion-col size="8">
           <ion-card-header>
             <h6 class="userpre">Bonjour,<strong> {{userpre}}</strong></h6>
-            <p>{{rolename}} de<span class="nomentretien"> {{nomEntretien}}</span></p>
+            <p>{{rolename}} de<span class="nomentretien" [routerLink]="['/entretien-details',idEntretien]"> {{nomEntretien}}</span></p>
           </ion-card-header>
         </ion-col>
         <ion-col size="2" class="ion-justify-content-center">

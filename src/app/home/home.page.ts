@@ -8,6 +8,7 @@ import { Utilisateur } from '../Model/utilisateur';
 import { NotificationComponent } from '../notification/notification.component';
 import { AccountService } from '../Service/account.service';
 import { EntretienService } from '../Service/entretien.service';
+import { ParticipantService } from '../Service/participant.service';
 import { PostulantService } from '../Service/postulant.service';
 
 @Component({
@@ -33,6 +34,8 @@ export class HomePage implements OnInit {
   public idEntretien: number;
   MasculinNOmbre: any;
   FemininNOmbre: any;
+  participant: import("c:/Users/dadiallo/Documents/IonicProject/odc-interview-mobile/src/app/Model/participant").Participant;
+  idJury: number;
 
 
 
@@ -40,28 +43,30 @@ export class HomePage implements OnInit {
     private pvrCtlr: PopoverController,
     private accountService: AccountService,
     private postulantService:PostulantService,
-    private entretienService:EntretienService
+    private entretienService:EntretienService,
+    private participantService:ParticipantService,
     ) {}
 
     ngOnInit() {
       this.userpicture = this.accountService.userPicture;
       const username=this.accountService.loggInUsername
-      setTimeout(()=>{
-        this.getUserInfo(username)}
-        ,100
-      )
+      // setTimeout(()=>{
+        this.getUserInfo(username)
+      // }
+        // ,100
+      // )
       
-      setTimeout(()=>{
-        this.getPost()}
-        ,300
-      )
-      setTimeout(()=>{
+      // setTimeout(()=>{
+        this.getOne()
+        this.getPost()
+      // },2000)
+      // setTimeout(()=>{
         this.getPostulantPargenre("M")
         this.getPostulantPargenre("F")
         this.getJuryNombreByEntretien();
         this.getEntretien()
-      },500
-      )
+      // },500
+      // )
   
     }
 
@@ -76,13 +81,12 @@ export class HomePage implements OnInit {
       this.accountService.getUserInformation(username).subscribe(
       (response: Utilisateur) => {
         this.utilisateur = response;
-        this.nomEntretien= response.participant.entretien.entretienNom
+        this.idJury=response.id;
+        console.log(this.idJury)
+        // this.nomEntretien= response.participant.entretien.entretienNom
         this.userpre=response.prenom
         this.rolename=response.role.roleName
-        this.idEntretien=response.participant.entretien.id
-        console.log(this.idEntretien)
-        console.log(response)
-        console.log(this.nomEntretien)
+        // this.idEntretien=response.participant.entretien.id
         console.log(this.utilisateur)
       },
       error => {
@@ -90,6 +94,19 @@ export class HomePage implements OnInit {
         this.utilisateur = null;
       }
     ));
+  }
+  getOne(){
+    this.participantService.getOneParticipantByJury(this.idJury).subscribe(data =>{
+      this.participant=data;
+     // this.nomEntretien= this.participant.entretien.entretienNom
+      console.log("----------nom Entretien---------"+this.nomEntretien)
+      console.log("---------utilisateur id----------"+data.utilisateur.id)
+      //this.userpre=data.utilisateur.prenom
+      //   this.rolename=data.utilisateur.role.roleName
+      //   this.idEntretien=data.entretien.id
+      console.log(data.utilisateur)
+      console.log(data)
+    })
   }
   getPost(){
       this.postulantService.getAllPostulantByEntretien(this.idEntretien).subscribe(data => {

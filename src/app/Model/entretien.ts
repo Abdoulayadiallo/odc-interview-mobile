@@ -7,5 +7,10 @@ export class Entretien {
     dateFin!: string;
     dateCreation!: string;
     nombreParticipant!: number;
-    critereList!: Critere[];
+    description:String;
+    critereList: Critere[];
+    etat:{
+        id:number
+        status:string
+    }
 }
