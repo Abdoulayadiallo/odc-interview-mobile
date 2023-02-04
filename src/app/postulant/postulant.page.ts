@@ -2,11 +2,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { map, startWith, catchError, of, BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { Participant } from '../Model/participant';
 import { Postulant } from '../Model/postulant';
 import { Postulantresponse } from '../Model/postulantresponse';
 import { Utilisateur } from '../Model/utilisateur';
 import { AccountService } from '../Service/account.service';
 import { LoadingService } from '../Service/loading.service';
+import { ParticipantService } from '../Service/participant.service';
 import { PostulantService } from '../Service/postulant.service';
 
 @Component({
@@ -21,6 +23,7 @@ export class PostulantPage implements OnInit {
   postulantResponse!: Postulantresponse;
   totalPages!: number;
   isDataLoaded = false;
+  participant:Participant
 
   postulantState$!: Observable<{ appState: string; appData?: Postulantresponse; error?: HttpErrorResponse; }>;
 
@@ -42,12 +45,14 @@ export class PostulantPage implements OnInit {
     private accountService:AccountService,
     private postulantService: PostulantService,
     private router: Router,
-    private loadingService: LoadingService) { }
+    private loadingService: LoadingService,
+    private participantService:ParticipantService) { }
 
 
   ngOnInit(): void {
     const username = this.accountService.loggInUsername
     this.getUserInfo(username)
+    this.getOne()
 
 
     this.postulantState$ = this.postulantService.getAllPostulantByEntretien(this.idEntretien).pipe(
@@ -85,14 +90,15 @@ export class PostulantPage implements OnInit {
     ));
   }
 
-// getPost(){
-//   this.postulantService.getAllPostulant().subscribe(data => {
-//     console.log(data)
-//     this.postulantResponse = data
-//     this.postulants=data.contenu
-//     this.totalPages=data.totalPages
-//   })
-// }
+  getOne(){
+    this.participantService.getOneParticipantByJury(this.utilisateur.id).subscribe(data =>{
+      this.participant=data;
+      console.log("---------utilisateur id----------"+data.utilisateur.id)
+      this.idEntretien=data.entretien.id
+      console.log(data.utilisateur)
+      console.log(data)
+    })
+  }
 
 
 gotToPage(name: string = '', pageNo: number = 0, pageSize: number = 10, sortBy: string = "", sortDir: string = "", genre: string = ""): void {

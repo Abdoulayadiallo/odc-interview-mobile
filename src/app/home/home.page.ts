@@ -36,6 +36,7 @@ export class HomePage implements OnInit {
   FemininNOmbre: any;
   participant: import("c:/Users/dadiallo/Documents/IonicProject/odc-interview-mobile/src/app/Model/participant").Participant;
   idJury: number;
+  usernameconnected: string;
 
 
 
@@ -50,23 +51,22 @@ export class HomePage implements OnInit {
     ngOnInit() {
       this.userpicture = this.accountService.userPicture;
       const username=this.accountService.loggInUsername
-      // setTimeout(()=>{
-        this.getUserInfo(username)
-      // }
-        // ,100
-      // )
+      setTimeout(()=>{
+        this.getUserInfo(username)}
+        ,100
+      )
       
-      // setTimeout(()=>{
+      setTimeout(()=>{
         this.getOne()
-        this.getPost()
-      // },2000)
-      // setTimeout(()=>{
+      },500)
+      setTimeout(()=>{
         this.getPostulantPargenre("M")
         this.getPostulantPargenre("F")
         this.getJuryNombreByEntretien();
         this.getEntretien()
-      // },500
-      // )
+        this.getPost()
+      },1500
+      )
   
     }
 
@@ -82,6 +82,8 @@ export class HomePage implements OnInit {
       (response: Utilisateur) => {
         this.utilisateur = response;
         this.idJury=response.id;
+        this.usernameconnected=response.username
+        console.log("(-------------------------------)"+this.usernameconnected)
         console.log(this.idJury)
         // this.nomEntretien= response.participant.entretien.entretienNom
         this.userpre=response.prenom
@@ -96,14 +98,14 @@ export class HomePage implements OnInit {
     ));
   }
   getOne(){
-    this.participantService.getOneParticipantByJury(this.idJury).subscribe(data =>{
+    this.participantService.getOneParticipantByJury(this.utilisateur.id).subscribe(data =>{
       this.participant=data;
-     // this.nomEntretien= this.participant.entretien.entretienNom
+      this.nomEntretien= this.participant.entretien.entretienNom
       console.log("----------nom Entretien---------"+this.nomEntretien)
       console.log("---------utilisateur id----------"+data.utilisateur.id)
       //this.userpre=data.utilisateur.prenom
       //   this.rolename=data.utilisateur.role.roleName
-      //   this.idEntretien=data.entretien.id
+      this.idEntretien=data.entretien.id
       console.log(data.utilisateur)
       console.log(data)
     })
@@ -133,7 +135,7 @@ export class HomePage implements OnInit {
     },)
   }
   getEntretien(){
-    this.entretienService.getAllEntretien(this.utilisateur.username).subscribe(data=>{
+    this.entretienService.getAllEntretien(this.usernameconnected).subscribe(data=>{
       console.log(data)
       this.entretienNombre=data.totalElements
     })

@@ -14,7 +14,7 @@ export class EntretienService {
   constructor(private http:HttpClient) { }
   
   getAllEntretien(username:string="",pageNo:number = 0,pageSize:number = 10,sortBy:string ="",sortDir:string=""): Observable<Entretienresponse> {
-    return this.http.get<Entretienresponse>(`${this.host}/entretien/list?${username}&pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}&sortDir=${sortDir}`);
+    return this.http.get<Entretienresponse>(`${this.host}/entretien/list?username=${username}&pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}&sortDir=${sortDir}`);
   }
   getOneEntretienById(id:number):Observable<Entretien>{
     return this.http.get<Entretien>(`${this.host}/entretien/${id}`);

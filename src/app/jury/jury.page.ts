@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Participant } from '../Model/participant';
 import { Postulant } from '../Model/postulant';
 import { Utilisateur } from '../Model/utilisateur';
 import { AccountService } from '../Service/account.service';
+import { ParticipantService } from '../Service/participant.service';
 import { PostulantService } from '../Service/postulant.service';
 
 @Component({
@@ -24,6 +26,7 @@ export class JuryPage implements OnInit {
   loggInUsername: string;
   utilisateur: Utilisateur;
   nomEntretien: string;
+  participant:Participant
   //userpicture: string;
   //userpre: string ='';
   rolename: string ='';
@@ -32,7 +35,10 @@ export class JuryPage implements OnInit {
   nbreJury: number;
   // MasculinNOmbre: any;
   // FemininNOmbre: any;
-  constructor(private accountService: AccountService,private router: Router) { }
+  constructor(
+    private accountService: AccountService,
+    private router: Router,
+    private participantService:ParticipantService) { }
 
   ngOnInit() {
     const username=this.accountService.loggInUsername
@@ -41,6 +47,7 @@ export class JuryPage implements OnInit {
         ,100
       )
       setTimeout(()=>{
+        this.getOne()
         this.getJuryNombreByEntretien();
       },500
       )
@@ -52,6 +59,17 @@ export class JuryPage implements OnInit {
       this.jurys = data
     })
   };
+
+  getOne(){
+    this.participantService.getOneParticipantByJury(this.utilisateur.id).subscribe(data =>{
+      this.participant=data;
+      console.log("---------utilisateur id----------"+data.utilisateur.id)
+      this.idEntretien=data.entretien.id
+      console.log(data.utilisateur)
+      console.log(data)
+    })
+  }
+
   postulantDetails(id: string){
     this.router.navigate(['jury-details', id]);
   }
