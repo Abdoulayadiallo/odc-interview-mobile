@@ -5,7 +5,7 @@ import { Participant } from '../Model/participant';
 import { Postulant } from '../Model/postulant';
 import { Utilisateur } from '../Model/utilisateur';
 import { AccountService } from '../Service/account.service';
-import { ParticipantService } from '../Service/participant.service';
+// import { ParticipantService } from '../Service/participant.service';
 import { PostulantService } from '../Service/postulant.service';
 
 @Component({
@@ -15,10 +15,10 @@ import { PostulantService } from '../Service/postulant.service';
 })
 export class JuryPage implements OnInit {
   jurys: Utilisateur[];
-  id: number
-  jury: Utilisateur
-  rootPage:any;
-   private subscriptions: Subscription[] = [];
+  id: number;
+  jury: Utilisateur;
+  rootPage: any;
+  private subscriptions: Subscription[] = [];
   // postulantresponse!: Postulantresponse ;
   // jurys: Utilisateur[];
   //totalElement=0
@@ -26,81 +26,67 @@ export class JuryPage implements OnInit {
   loggInUsername: string;
   utilisateur: Utilisateur;
   nomEntretien: string;
-  participant:Participant
+  participant: Participant;
   //userpicture: string;
   //userpre: string ='';
-  rolename: string ='';
+  rolename: string = '';
   entretienNombre: number;
-   public idEntretien: number;
+  public idEntretien: number;
   nbreJury: number;
   // MasculinNOmbre: any;
   // FemininNOmbre: any;
-  constructor(
-    private accountService: AccountService,
-    private router: Router,
-    private participantService:ParticipantService) { }
+  constructor(private accountService: AccountService, private router: Router) {}
 
   ngOnInit() {
-    const username=this.accountService.loggInUsername
-      setTimeout(()=>{
-        this.getUserInfo(username)}
-        ,100
-      )
-      setTimeout(()=>{
-        this.getOne()
-        this.getJuryNombreByEntretien();
-      },500
-      )
-
+    const username = this.accountService.loggInUsername;
+    setTimeout(() => {
+      this.getUserInfo(username);
+    }, 100);
+    setTimeout(() => {
+      this.getJuryNombreByEntretien();
+    }, 500);
   }
-  getJury(){
-    this.accountService.getAllJury().subscribe(data => {
-      console.log(data)
-      this.jurys = data
-    })
-  };
-
-  getOne(){
-    this.participantService.getOneParticipantByJury(this.utilisateur.id).subscribe(data =>{
-      this.participant=data;
-      console.log("---------utilisateur id----------"+data.utilisateur.id)
-      this.idEntretien=data.entretien.id
-      console.log(data.utilisateur)
-      console.log(data)
-    })
+  getJury() {
+    this.accountService.getAllJury().subscribe((data) => {
+      console.log(data);
+      this.jurys = data;
+    });
   }
 
-  postulantDetails(id: string){
+
+  postulantDetails(id: string) {
     this.router.navigate(['jury-details', id]);
   }
   getUserInfo(username: string): void {
     this.subscriptions.push(
       this.accountService.getUserInformation(username).subscribe(
-      (response: Utilisateur) => {
-        this.utilisateur = response;
-        this.nomEntretien= response.entretien.entretienNom
-        this.entretienNombre=response.entretien.entretienNom.length
-        // this.userpre=response.prenom
-        this.rolename=response.role.roleName
-        this.idEntretien=response.entretien.id
-        console.log(this.idEntretien)
-        console.log(response)
-        console.log(this.nomEntretien)
-        console.log(this.utilisateur)
-      },
-      error => {
-        console.log(error);
-        this.utilisateur = null;
-      }
-    ));
+        (response: Utilisateur) => {
+          this.utilisateur = response;
+          this.nomEntretien = response.entretien.entretienNom;
+          this.entretienNombre = response.entretien.entretienNom.length;
+          // this.userpre=response.prenom
+          this.rolename = response.role.roleName;
+          this.idEntretien = response.entretien.id;
+          console.log(this.idEntretien);
+          console.log(response);
+          console.log(this.nomEntretien);
+          console.log(this.utilisateur);
+        },
+        (error) => {
+          console.log(error);
+          this.utilisateur = null;
+        }
+      )
+    );
   }
 
-  getJuryNombreByEntretien(){
-    this.accountService.GetJuryNombrebyEntretien(this.idEntretien).subscribe(data => {
-      console.log(data)
-      this.jurys = data.contenu
-      this.nbreJury=data.totalListe
-    })
+  getJuryNombreByEntretien() {
+    this.accountService
+      .GetJuryNombrebyEntretien(this.idEntretien)
+      .subscribe((data) => {
+        console.log(data);
+        this.jurys = data.contenu;
+        this.nbreJury = data.totalListe;
+      });
   }
-  
 }

@@ -9,7 +9,6 @@ import { Utilisateur } from '../Model/utilisateur';
 import { NotificationComponent } from '../notification/notification.component';
 import { AccountService } from '../Service/account.service';
 import { EntretienService } from '../Service/entretien.service';
-import { ParticipantService } from '../Service/participant.service';
 import { PostulantService } from '../Service/postulant.service';
 
 @Component({
@@ -46,7 +45,6 @@ export class HomePage implements OnInit {
     private accountService: AccountService,
     private postulantService:PostulantService,
     private entretienService:EntretienService,
-    // private participantService:ParticipantService,
     ) {}
 
     ngOnInit() {
@@ -99,19 +97,7 @@ export class HomePage implements OnInit {
       }
     ));
   }
-  // getOne(){
-  //   this.participantService.getOneParticipantByJury(this.utilisateur.id).subscribe(data =>{
-  //     this.participant=data;
-  //     this.nomEntretien= this.participant.entretien.entretienNom
-  //     console.log("----------nom Entretien---------"+this.nomEntretien)
-  //     console.log("---------utilisateur id----------"+data.utilisateur.id)
-  //     //this.userpre=data.utilisateur.prenom
-  //     //   this.rolename=data.utilisateur.role.roleName
-  //     this.idEntretien=data.entretien.id
-  //     console.log(data.utilisateur)
-  //     console.log(data)
-  //   })
-  // }
+
   getPost(){
       this.postulantService.getAllPostulantByEntretien(this.idEntretien).subscribe(data => {
         console.log(data)

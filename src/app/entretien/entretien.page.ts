@@ -6,6 +6,7 @@ import { async, Subscription } from 'rxjs';
 import { Critere } from '../Model/critere';
 import { NoteResponse } from '../Model/noteresponse';
 import { Postulant } from '../Model/postulant';
+import { Question } from '../Model/question';
 import { Utilisateur } from '../Model/utilisateur';
 import { NoteComponent } from '../note/note.component';
 import { AccountService } from '../Service/account.service';
@@ -31,6 +32,7 @@ export class EntretienPage implements OnInit{
   utilisateur: Utilisateur;
   idJury: any;
   noteresponse: NoteResponse;
+  nomQuestion:any=[]
 
   
 
@@ -47,7 +49,7 @@ export class EntretienPage implements OnInit{
     this.getUserInfo(username)
     setTimeout(()=>{
       this.getCritere();
-    },1000)
+    },500)
 
     this.id = this.route.snapshot.params['id'];
 
@@ -80,17 +82,12 @@ export class EntretienPage implements OnInit{
       for(let i = 0; i < this.critereNombre; i++){
         console.log(this.criteres[i].id)
         if(this.criteres[i].id == i+1){
+          this.nomQuestion.push(this.criteres[i].question[0].nomQuestion)
+          console.log(this.nomQuestion)
           this.noteService.getNoteByCritere(this.criteres[i].id,this.idJury,this.id,).subscribe(data =>{
             this.noteresponse=data
             this.isnote=data.noted
-            // console.log(data)
-            // this.note.push(data[i].point)
-            // if(this.note[i]==null){
-            //   this.isnote=false
-            // }else{
-            //   this.isnote=true
-            // }
-
+             this.note.push(data.contenu.point)
           })
         }
 

@@ -1,5 +1,5 @@
-import {Participant} from "../Model/participant"
 import { Entretien } from "./entretien";
+import { Notification } from "./notification";
 export class Utilisateur {
     id!: number;
     image!: string;
@@ -13,6 +13,7 @@ export class Utilisateur {
     dateCreation!: Date;
     entretien!: Entretien;
     role!:role 
+    notification:Notification[]
 }
 
 export class role{

@@ -17,10 +17,12 @@
           </ion-col>
         </ion-row>
         <ion-row *ngIf="isSearchBarOpened">
-          <form #searchForm="ngForm" (ngSubmit)="gotToPage(searchForm.value.keyword)">
-            <ion-searchbar name="keyword" type="search" ngModel class="form-control" showCancelButton="true"
-              (ionCancel)="isSearchBarOpened=false"></ion-searchbar>
-          </form>
+          <ion-col>
+            <form #searchForm="ngForm" (ngSubmit)="gotToPage(searchForm.value.keyword)">
+              <ion-searchbar name="keyword" type="search" ngModel class="form-control" showCancelButton="true"
+                (ionCancel)="isSearchBarOpened=false"></ion-searchbar>
+            </form>
+          </ion-col>
         </ion-row>
       </ion-grid>
       <ion-grid>
