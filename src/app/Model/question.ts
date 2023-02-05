@@ -1,5 +1,5 @@
 export class Question {
     id!:number ; 
-    questionNom!: string;
+    nomQuestion!: string;
     type!: string;
 }

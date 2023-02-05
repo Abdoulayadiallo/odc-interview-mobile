@@ -78,11 +78,11 @@ export class JuryPage implements OnInit {
       this.accountService.getUserInformation(username).subscribe(
       (response: Utilisateur) => {
         this.utilisateur = response;
-        this.nomEntretien= response.participant.entretien.entretienNom
-        this.entretienNombre=response.participant.entretien.entretienNom.length
+        this.nomEntretien= response.entretien.entretienNom
+        this.entretienNombre=response.entretien.entretienNom.length
         // this.userpre=response.prenom
         this.rolename=response.role.roleName
-        this.idEntretien=response.participant.entretien.id
+        this.idEntretien=response.entretien.id
         console.log(this.idEntretien)
         console.log(response)
         console.log(this.nomEntretien)

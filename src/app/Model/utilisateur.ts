@@ -1,4 +1,5 @@
 import {Participant} from "../Model/participant"
+import { Entretien } from "./entretien";
 export class Utilisateur {
     id!: number;
     image!: string;
@@ -10,7 +11,7 @@ export class Utilisateur {
     genre!: string;
     bio!: string;
     dateCreation!: Date;
-    participant!: Participant;
+    entretien!: Entretien;
     role!:role 
 }
 

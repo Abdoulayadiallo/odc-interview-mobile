@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 import { Note } from "../Model/note";
+import { NoteResponse } from '../Model/noteresponse';
 
 
 @Injectable({
@@ -24,8 +25,8 @@ export class NoteService {
   getAllNote(): Observable<Note[]> {
     return this.http.get<Note[]>(`${this.host}/note/list`);
   }
-  getNoteByCritere(idCritere:number): Observable<Note[]> {
-    return this.http.get<Note[]>(`${this.host}/note/critere/${idCritere}`);
+  getNoteByCritere(idCritere:number,idJury:number,idPostulant:number): Observable<NoteResponse> {
+    return this.http.get<NoteResponse>(`${this.host}/note/critere/${idCritere}/${idJury}/${idPostulant}`);
   }
   updateNote(id: number, note: Note): Observable<Object>{
     return this.http.put(`${this.host}/note/update/${id}`, note);

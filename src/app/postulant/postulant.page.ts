@@ -78,7 +78,7 @@ export class PostulantPage implements OnInit {
       this.accountService.getUserInformation(username).subscribe(
       (response: Utilisateur) => {
         this.utilisateur = response;
-        this.idEntretien=response.participant.entretien.id
+        this.idEntretien=response.entretien.id
         console.log(this.idEntretien)
         console.log(response)
         console.log(this.utilisateur)
