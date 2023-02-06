@@ -12,7 +12,7 @@ import { LoadingService } from '../Service/loading.service';
   templateUrl: './signin.page.html',
   styleUrls: ['./signin.page.scss'],
 })
-export class SigninPage implements OnInit, OnDestroy {
+export class SigninPage implements OnInit{
   private subscriptions: Subscription[] = [];
   public isForgetpass=false;
   form :any
@@ -93,8 +93,8 @@ export class SigninPage implements OnInit, OnDestroy {
       )
     );
   }
-  ngOnDestroy() {
-    this.subscriptions.forEach(sub => sub.unsubscribe);
-  }
+  // ngOnDestroy() {
+  //   this.subscriptions.forEach(sub => sub.unsubscribe);
+  // }
 
 }

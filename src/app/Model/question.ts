@@ -1,5 +1,8 @@
+import { Critere } from "./critere";
+
 export class Question {
     id!:number ; 
-    nomQuestion!: string;
+    questionNom!: string;
     type!: string;
+    critere:Critere
 }

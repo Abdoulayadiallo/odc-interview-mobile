@@ -7,6 +7,7 @@ import { Note } from '../Model/note';
 import { Postulant } from '../Model/postulant';
 import { Utilisateur } from '../Model/utilisateur';
 import { AccountService } from '../Service/account.service';
+import { AlertService } from '../Service/alert.service';
 import { NoteService } from '../Service/note.service';
 
 @Component({
@@ -17,33 +18,33 @@ import { NoteService } from '../Service/note.service';
 export class NoteComponent implements OnInit {
   private subscriptions: Subscription[] = [];
   name: string;
-  data:any
-  utilisateur:Utilisateur
-  username:string
+  data: any
+  utilisateur: Utilisateur
+  username: string
   note: Note = new Note();
   userconnected: string;
 
 
-  constructor(private modalCtrl: ModalController,private noteService: NoteService,private accountService:AccountService) {}
+  constructor(private modalCtrl: ModalController, private noteService: NoteService, private accountService: AccountService, private alertService: AlertService) { }
   ngOnInit(): void {
     this.getUserInfo(this.accountService.loggInUsername);
-    this.username=this.accountService.loggInUsername;
+    this.username = this.accountService.loggInUsername;
   }
 
   getUserInfo(username: string): void {
     this.subscriptions.push(
       this.accountService.getUserInformation(username).subscribe(
-      (response: Utilisateur) => {
-        this.utilisateur = response;
-        this.userconnected=response.username;
-        console.log(response)
-        console.log(this.utilisateur)
-      },
-      error => {
-        console.log(error);
-        this.utilisateur = null;
-      }
-    ));
+        (response: Utilisateur) => {
+          this.utilisateur = response;
+          this.userconnected = response.username;
+          console.log(response)
+          console.log(this.utilisateur)
+        },
+        error => {
+          console.log(error);
+          this.utilisateur = null;
+        }
+      ));
   }
   cancel() {
     return this.modalCtrl.dismiss(null, 'cancel');
@@ -53,10 +54,26 @@ export class NoteComponent implements OnInit {
     this.ajouterNote()
     return this.modalCtrl.dismiss(this.note, 'confirm');
   }
-  ajouterNote(){
-    this.noteService.addNote(this.note,this.data.critereId,this.data.postulant.id,this.userconnected).subscribe(response =>
+  ajouterNote() {
+    this.noteService.addNote(this.note, this.data.critereId, this.data.postulant.id, this.userconnected).subscribe(response => {
       console.log(response)
-    )
-  }
+      this.alertService.presentToast(
+        "Note ajouté avec succès.",
+        "success"
+      );
+    },
+      error => {
+        console.log(error);
+        this.alertService.presentToast(
+          "Une erreur est survenu lors de l'ajout ...",
+          "danger"
+        );
+      })
 
+  }
+  reloadNote() {
+    this.noteService.getNoteByCritere(this.data.critereId, this.utilisateur.id, this.data.postulant.id).subscribe(data => {
+      console.log(data)
+    })
+  }
 }
