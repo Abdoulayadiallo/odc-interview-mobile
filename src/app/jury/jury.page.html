@@ -1,11 +1,29 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Jury</ion-title>
-    <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon slot="icon-only" size="large" name="search"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+    <ion-grid>
+      <ion-row class="ion-justify-content-between" *ngIf="!isSearchBarOpened">
+        <ion-col size="10" class="ion-justify-content-start">
+          <ion-title>
+            <h5>Jurys</h5>
+          </ion-title>
+        </ion-col>
+        <ion-col size="2">
+          <ion-buttons>
+            <ion-button *ngIf="!isSearchBarOpened" (click)="isSearchBarOpened=true">
+              <ion-icon slot="icon-only" size="large" name="search"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="isSearchBarOpened">
+        <ion-col>
+          <form #searchForm="ngForm">
+            <ion-searchbar name="keyword" type="search" ngModel class="form-control" showCancelButton="true"
+              (ionCancel)="isSearchBarOpened=false"></ion-searchbar>
+          </form>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-toolbar>
   <ion-item>Total {{nbreJury}}</ion-item>
 </ion-header>

@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Critere } from '../Model/critere';
+import { NombreResponse } from '../Model/nombre-response';
+import { NombreQuestionResponse } from '../Model/nombrequestionresponse';
 import { Question } from '../Model/question';
 
 @Injectable({
@@ -19,4 +21,9 @@ export class QuestionService {
   getQuestionByCritere(critereId:number):Observable<Critere>{
     return this.http.get<Critere>(`${this.host}/question/critere/${critereId}`);
   }
+  getNombreQuestionNoteByPostulant(postulantId:number):Observable<NombreQuestionResponse>{
+    return this.http.get<NombreQuestionResponse>(`${this.host}/question/repond/${postulantId}`);
+  }
+
+  
 }

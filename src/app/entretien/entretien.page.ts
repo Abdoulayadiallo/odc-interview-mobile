@@ -36,6 +36,7 @@ export class EntretienPage implements OnInit {
   noteresponse: NoteResponse;
   nomQuestion: any = []
   questions: Question[];
+  nombreRepond: number;
 
 
 
@@ -52,7 +53,20 @@ export class EntretienPage implements OnInit {
     setTimeout(() => {
       // this.getCritere();
       this.getQuestion();
-    }, 1000)
+    }, 200)
+    setTimeout(() => {
+      this.getNombreQuestionNoteByPostulant()
+
+      
+      for (let i = 1; i < this.questions.length; i++) {
+        if (this.questions[i].id == i) {
+          console.log(this.questions[i].critere.id)
+          this.getNote(this.questions[i].critere.id);
+        }
+
+      }
+    }, 400)
+
 
     this.id = this.route.snapshot.params['id'];
 
@@ -81,29 +95,46 @@ export class EntretienPage implements OnInit {
     this.questionService.getAllQuestion().subscribe(
       data => {
         this.questions = data
-        console.log(data)
-        for (let i = 1; i < this.questions.length; i++) {
-          if (this.questions[i].critere.id == i+1) {
-            console.log(this.questions[i].critere.id)
-            this.getNote(this.questions[i].critere.id);
-          }
+        // console.log(data)
+        //  for (let i = 1; i < this.questions.length; i++) {
+        //   if (this.questions[i].id == i) {
+        //     console.log(this.questions[i].critere.id)
+        //     this.getNote(this.questions[i].critere.id);
+        //   }
 
-        }
+        // }
       }
     )
   }
+  getNombreQuestionNoteByPostulant() {
+    this.questionService.getNombreQuestionNoteByPostulant(this.id).subscribe(data => {
+      this.nombreRepond = data.pourcentage
+    })
+  }
+
+
   getNote(i: number): number {
     this.noteService.getNoteByCritere(i, this.idJury, this.id).subscribe(data => {
-      console.log(data)
+      // console.log(data)
       this.noteresponse = data
-      if (this.noteresponse.noted == true) {
+      if (this.noteresponse.contenu == null) {
+        this.note[i] = null
+        console.log(this.note[i] + "noooooooooooooooooooooooooooooooooooote nullllllllllll")
+      }
+      if (this.noteresponse.contenu != null) {
         this.isnote = data.noted
         this.note[i] = data.contenu.point
         console.log(this.note[i])
+        console.log(this.note[i] + "ppppppppppppppppppppppppppppppppppppppppp nullllllllllll")
+
       }
+      console.log(this.isnote + "after if")
+
     })
     return this.note[i]
   }
+
+
 
   // getCritere(){
   //   this.critereService.getAllCritere().subscribe(data => {

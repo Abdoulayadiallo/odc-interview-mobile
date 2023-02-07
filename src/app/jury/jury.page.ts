@@ -14,6 +14,7 @@ import { PostulantService } from '../Service/postulant.service';
   styleUrls: ['./jury.page.scss'],
 })
 export class JuryPage implements OnInit {
+  public isSearchBarOpened = false;
   jurys: Utilisateur[];
   id: number;
   jury: Utilisateur;

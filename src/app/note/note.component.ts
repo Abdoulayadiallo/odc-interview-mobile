@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { Critere } from '../Model/critere';
 import { Note } from '../Model/note';
-import { Postulant } from '../Model/postulant';
+import { Question } from '../Model/question';
 import { Utilisateur } from '../Model/utilisateur';
 import { AccountService } from '../Service/account.service';
 import { AlertService } from '../Service/alert.service';
 import { NoteService } from '../Service/note.service';
+import { QuestionService } from '../Service/question.service';
 
 @Component({
   selector: 'app-note',
@@ -23,9 +23,17 @@ export class NoteComponent implements OnInit {
   username: string
   note: Note = new Note();
   userconnected: string;
+  notesList: Note[];
+  critereList: Critere[];
+  Repond: Question[];
 
 
-  constructor(private modalCtrl: ModalController, private noteService: NoteService, private accountService: AccountService, private alertService: AlertService) { }
+  constructor(
+    private modalCtrl: ModalController, 
+    private noteService: NoteService,
+    private accountService: AccountService,
+    private alertService: AlertService,
+    private questionService:QuestionService) { }
   ngOnInit(): void {
     this.getUserInfo(this.accountService.loggInUsername);
     this.username = this.accountService.loggInUsername;
@@ -49,14 +57,34 @@ export class NoteComponent implements OnInit {
   cancel() {
     return this.modalCtrl.dismiss(null, 'cancel');
   }
+  //RECUPERER TOUS LES NOTES POUR RAFRACHIR LES NOUVELLES DONNEES
+  getAllNote(){
+    this.noteService.getAllNote().subscribe(data=>{
+      this.notesList=data;
+    })
+  }
+  //RECUPERER TOUS LES QUESTIONS NOTES POUR RAFRACHIR LES NOUVELLES DONNEES
+  getNombreQuestionNoteByPostulant() {
+    this.questionService.getAllQuestion().subscribe(data => {
+      this.Repond = data
+    })
+  }
 
   confirm() {
     this.ajouterNote()
+    setTimeout(() => {
+      // Pour rafrachir les nouvelles valeurs
+      // this.getAllNote()
+      // this.getNombreQuestionNoteByPostulant()
+    }, 1000);
+    //Pour fermet le modal
     return this.modalCtrl.dismiss(this.note, 'confirm');
   }
+  //Une methode quiva ajouter des notes a un postulant par l'id critere, l'id postulant et l'id user
   ajouterNote() {
     this.noteService.addNote(this.note, this.data.critereId, this.data.postulant.id, this.userconnected).subscribe(response => {
       console.log(response)
+      //Une alerte de succès
       this.alertService.presentToast(
         "Note ajouté avec succès.",
         "success"
@@ -64,6 +92,7 @@ export class NoteComponent implements OnInit {
     },
       error => {
         console.log(error);
+        //Une alerte d'erreur
         this.alertService.presentToast(
           "Une erreur est survenu lors de l'ajout ...",
           "danger"
@@ -71,9 +100,5 @@ export class NoteComponent implements OnInit {
       })
 
   }
-  reloadNote() {
-    this.noteService.getNoteByCritere(this.data.critereId, this.utilisateur.id, this.data.postulant.id).subscribe(data => {
-      console.log(data)
-    })
-  }
+
 }

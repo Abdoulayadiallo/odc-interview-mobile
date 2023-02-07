@@ -43,7 +43,7 @@
           <div class="rowline">
             <div class="col1">
               <circle-progress
-              [percent]="critereNombre"
+              [percent]="nombreRepond"
               [outerStrokeWidth]="10"
               [innerStrokeWidth]="5"
               [outerStrokeColor]="'#50BE87'"
@@ -69,8 +69,8 @@
       <ion-col *ngIf="question.critere.elimination === true " size="3"><ion-button
           [ngClass]="(question.critere.elimination === true ? ' yes' :' no')">Oui</ion-button></ion-col>
       <ion-col *ngIf="question.critere.elimination === false " size="3"><ion-button class="no">Non</ion-button></ion-col>
-      <ion-col *ngIf="isnote==false"><ion-button class="notez" expand="block" (click)="openModal(question.critere.id)">Notez</ion-button></ion-col>
-      <ion-col *ngIf="isnote==true"><ion-button class="notez" expand="block" >{{getNote(i+1)}}</ion-button></ion-col>
+      <ion-col *ngIf="getNote(i+1)==null"><ion-button class="notez" expand="block" (click)="openModal(question.critere.id)">Notez</ion-button></ion-col>
+      <ion-col *ngIf="getNote(i+1)!=null"><ion-button class="notez" expand="block" >{{getNote(i+1)}}</ion-button></ion-col>
      <!-- <ion-col ><div>{{note}}</div></ion-col> -->
     </ion-row>
   </ion-grid>
