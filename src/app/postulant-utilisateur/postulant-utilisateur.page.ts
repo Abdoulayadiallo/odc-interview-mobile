@@ -1,30 +1,18 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import {
-  map,
-  startWith,
-  catchError,
-  of,
-  BehaviorSubject,
-  Observable,
-  Subscription,
-} from 'rxjs';
-import { Participant } from '../Model/participant';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, BehaviorSubject, Subscription, map, startWith, catchError, of } from 'rxjs';
 import { Postulant } from '../Model/postulant';
 import { Postulantresponse } from '../Model/postulantresponse';
 import { Utilisateur } from '../Model/utilisateur';
-import { AccountService } from '../Service/account.service';
-import { LoadingService } from '../Service/loading.service';
-// import { ParticipantService } from '../Service/participant.service';
 import { PostulantService } from '../Service/postulant.service';
 
 @Component({
-  selector: 'app-postulant',
-  templateUrl: './postulant.page.html',
-  styleUrls: ['./postulant.page.scss'],
+  selector: 'app-postulant-utilisateur',
+  templateUrl: './postulant-utilisateur.page.html',
+  styleUrls: ['./postulant-utilisateur.page.scss'],
 })
-export class PostulantPage implements OnInit {
+export class PostulantUtilisateurPage implements OnInit {
   public isSearchBarOpened = false;
   postulant: Postulant = new Postulant();
   postulants!: Postulant[];
@@ -49,19 +37,16 @@ export class PostulantPage implements OnInit {
   entretienNombre: number;
   idEntretien: number;
   private subscriptions: Subscription[] = [];
+  idUtilisateur: any;
 
   constructor(
-    private accountService: AccountService,
     private postulantService: PostulantService,
-    private router: Router,
-    private loadingService: LoadingService
+    private route: ActivatedRoute,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
-    const username = this.accountService.loggInUsername;
-    this.getUserInfo(username);
-    // this.getOne()
-
+    this.idUtilisateur=this.route.snapshot.params['id'];
     this.postulantState$ = this.postulantService
       .getAllPostulantByEntretien(this.idEntretien)
       .pipe(
@@ -83,51 +68,22 @@ export class PostulantPage implements OnInit {
       );
   }
 
-  getUserInfo(username: string): void {
-    this.subscriptions.push(
-      this.accountService.getUserInformation(username).subscribe(
-        (response: Utilisateur) => {
-          this.utilisateur = response;
-          this.idEntretien = response.entretien.id;
-          console.log(this.idEntretien);
-          console.log(response);
-          console.log(this.utilisateur);
-        },
-        (error) => {
-          console.log(error);
-          this.utilisateur = null;
-        }
-      )
-    );
-  }
-
-  // getOne(){
-  //   this.participantService.getOneParticipantByJury(this.utilisateur.id).subscribe(data =>{
-  //     this.participant=data;
-  //     console.log("---------utilisateur id----------"+data.utilisateur.id)
-  //     this.idEntretien=data.entretien.id
-  //     console.log(data.utilisateur)
-  //     console.log(data)
-  //   })
-  // }
-
   gotToPage(
     name: string = '',
     pageNo: number = 0,
     pageSize: number = 10,
     sortBy: string = '',
     sortDir: string = '',
-    genre: string = ''
   ): void {
     // this.loadingService.loadingOn();
     this.postulantState$ = this.postulantService
-      .getAllPostulantByEntretien(
+      .getAllPostulantByEntretienAndByUtilisateur(
         this.idEntretien,
+        this.idUtilisateur,
         pageNo,
         pageSize,
         sortBy,
         sortDir,
-        genre,
         name
       )
       .pipe(
@@ -156,6 +112,7 @@ export class PostulantPage implements OnInit {
         : this.currentPageSubject.value - 1
     );
   }
+
   postulantDetails(id: number) {
     this.router.navigate(['postulant-details', id]);
   }

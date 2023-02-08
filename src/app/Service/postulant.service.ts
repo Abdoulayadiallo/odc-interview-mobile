@@ -26,6 +26,9 @@ export class PostulantService {
   getAllPostulantByEntretien(idEntretien:number,pageNo:number = 0,pageSize:number = 10,sortBy:string ="",sortDir:string="",genre:string="",keyword:string=""): Observable<Postulantresponse> {
     return this.http.get<Postulantresponse>(`${this.host}/postulant/list/PostulantEntretien/${idEntretien}?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}&sortDir=${sortDir}&genre=${genre}&keyword=${keyword}`);
   }
+  getAllPostulantByEntretienAndByUtilisateur(idEntretien:number,idUtilisateur:number,pageNo:number = 0,pageSize:number = 10,sortBy:string ="",sortDir:string="",genre:string="",keyword:string=""): Observable<Postulantresponse> {
+    return this.http.get<Postulantresponse>(`${this.host}/postulant/list/PostulantUtilisateur/${idEntretien}/${idUtilisateur}?pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}&sortDir=${sortDir}&genre=${genre}&keyword=${keyword}`);
+  }
   
   getPostulantParGenre(idEntretien:number,genre:string):Observable<NombreResponse>{
     return this.http.get<NombreResponse>(`${this.host}/postulant/nombreGenre/${idEntretien}/${genre}`);

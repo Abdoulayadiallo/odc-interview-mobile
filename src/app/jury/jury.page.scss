@@ -36,3 +36,37 @@ ion-grid{
 ion-col ion-button{
     margin: -15px;
 }
+
+//Debut Pagination
+.pagination {
+    display: inline-block;
+}
+
+li {
+    list-style-type: none;
+    display: inline;
+
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.pagination a.active {
+    background-color: #FF7900;
+    color: white;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+//Fin pagination

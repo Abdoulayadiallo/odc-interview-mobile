@@ -65,7 +65,7 @@ export class HomePage implements OnInit {
         this.getJuryNombreByEntretien();
         this.getEntretien()
         this.getPost()
-      },1500
+      },1000
       )
   
     }
@@ -106,9 +106,9 @@ export class HomePage implements OnInit {
       })
     }
   getJuryNombreByEntretien(){
-      this.accountService.GetJuryNombrebyEntretien(this.idEntretien).subscribe(data => {
+      this.accountService.getAllJuryByEntretien(this.idEntretien).subscribe(data => {
         console.log(data)
-        this.nbreJury = data.totalListe
+        this.nbreJury = data.totalElements
       })
     }
   getPostulantPargenre(genre:string){

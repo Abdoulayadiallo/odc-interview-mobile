@@ -68,6 +68,11 @@ const routes: Routes = [
     path: 'entretien-details/:id',
     loadChildren: () => import('./entretien-details/entretien-details.module').then( m => m.EntretienDetailsPageModule)
   },
+  {
+    path: 'postulant-utilisateur/:id',
+    loadChildren: () => import('./postulant-utilisateur/postulant-utilisateur.module').then( m => m.PostulantUtilisateurPageModule)
+  },
+
 
 
 

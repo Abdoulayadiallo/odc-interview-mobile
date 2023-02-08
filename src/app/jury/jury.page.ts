@@ -1,8 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, startWith, Subscription } from 'rxjs';
+import { JuryResponse } from '../Model/jury-response';
 import { Participant } from '../Model/participant';
 import { Postulant } from '../Model/postulant';
+import { Postulantresponse } from '../Model/postulantresponse';
 import { Utilisateur } from '../Model/utilisateur';
 import { AccountService } from '../Service/account.service';
 // import { ParticipantService } from '../Service/participant.service';
@@ -28,31 +31,62 @@ export class JuryPage implements OnInit {
   utilisateur: Utilisateur;
   nomEntretien: string;
   participant: Participant;
-  //userpicture: string;
-  //userpre: string ='';
   rolename: string = '';
   entretienNombre: number;
   public idEntretien: number;
   nbreJury: number;
-  // MasculinNOmbre: any;
-  // FemininNOmbre: any;
+  juryState$!: Observable<{
+    appState: string;
+    appData?: JuryResponse;
+    error?: HttpErrorResponse;
+  }>;
+
+  private currentPageSubject = new BehaviorSubject<number>(0);
+  juryResponse!: JuryResponse;
+
+  responseSubject = new BehaviorSubject<JuryResponse>(
+    this.juryResponse
+  );
+  currentPage$ = this.currentPageSubject.asObservable();
+
   constructor(private accountService: AccountService, private router: Router) {}
 
   ngOnInit() {
     const username = this.accountService.loggInUsername;
-    setTimeout(() => {
-      this.getUserInfo(username);
-    }, 100);
-    setTimeout(() => {
-      this.getJuryNombreByEntretien();
-    }, 500);
+    this.getUserInfo(username);
+
+    this.juryState$ = this.accountService
+      .getAllJuryByEntretien(this.idEntretien)
+      .pipe(
+        map((response: JuryResponse) => {
+          // this.loadingService.loadingOff();
+          this.responseSubject.next(response);
+          this.currentPageSubject.next(response.pageNo);
+          console.log(response);
+          return { appState: 'APP_LOADED', appData: response };
+        }),
+        startWith({
+          appState: 'APP_LOADED',
+          appData: this.responseSubject.value,
+        }),
+        catchError((error: HttpErrorResponse) => {
+          // this.loadingService.loadingOff();
+          return of({ appState: 'APP_ERROR', error });
+        })
+      );
   }
-  getJury() {
+  getAllJurybyEntretien() {
     this.accountService.getAllJury().subscribe((data) => {
       console.log(data);
       this.jurys = data;
     });
   }
+  // getJury() {
+  //   this.accountService.getAllJury().subscribe((data) => {
+  //     console.log(data);
+  //     this.jurys = data;
+  //   });
+  // }
 
 
   postulantDetails(id: string) {
@@ -81,13 +115,57 @@ export class JuryPage implements OnInit {
     );
   }
 
-  getJuryNombreByEntretien() {
-    this.accountService
-      .GetJuryNombrebyEntretien(this.idEntretien)
-      .subscribe((data) => {
-        console.log(data);
-        this.jurys = data.contenu;
-        this.nbreJury = data.totalListe;
-      });
+  gotToPage(
+    name: string = '',
+    pageNo: number = 0,
+    pageSize: number = 10,
+    sortBy: string = '',
+    sortDir: string = '',
+    genre: string = ''
+  ): void {
+    // this.loadingService.loadingOn();
+    this.juryState$ = this.accountService
+      .getAllJuryByEntretien(
+        this.idEntretien,
+        pageNo,
+        pageSize,
+        sortBy,
+        sortDir,
+        name
+      )
+      .pipe(
+        map((response: JuryResponse) => {
+          // this.loadingService.loadingOff();
+          this.responseSubject.next(response);
+          this.currentPageSubject.next(pageNo);
+          console.log(response);
+          return { appState: 'APP_LOADED', appData: response };
+        }),
+        startWith({
+          appState: 'APP_LOADED',
+          appData: this.responseSubject.value,
+        }),
+        catchError((error: HttpErrorResponse) => {
+          // this.loadingService.loadingOff();
+          return of({ appState: 'APP_ERROR', error });
+        })
+      );
   }
+  goToNextOrPreviousPage(direction: string, name?: string): void {
+    this.gotToPage(
+      name,
+      direction === 'forward'
+        ? this.currentPageSubject.value + 1
+        : this.currentPageSubject.value - 1
+    );
+  }
+  // getJuryNombreByEntretien() {
+  //   this.accountService
+  //     .GetJuryNombrebyEntretien(this.idEntretien)
+  //     .subscribe((data) => {
+  //       console.log(data);
+  //       this.jurys = data.contenu;
+  //       this.nbreJury = data.totalListe;
+  //     });
+  // }
 }
