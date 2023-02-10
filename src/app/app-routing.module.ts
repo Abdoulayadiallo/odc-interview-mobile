@@ -3,7 +3,6 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthenticationGuard } from './guard/authentification.guard';
 import { NoteComponent } from './note/note.component';
 import { NotificationComponent } from './notification/notification.component';
-import { PostulantresolverService } from './Service/postulantresolver.service';
 
 const routes: Routes = [
   {
@@ -69,7 +68,7 @@ const routes: Routes = [
     loadChildren: () => import('./entretien-details/entretien-details.module').then( m => m.EntretienDetailsPageModule)
   },
   {
-    path: 'postulant-utilisateur/:id',
+    path: 'postulant-utilisateur/:id/:idUtilisateur',
     loadChildren: () => import('./postulant-utilisateur/postulant-utilisateur.module').then( m => m.PostulantUtilisateurPageModule)
   },
 

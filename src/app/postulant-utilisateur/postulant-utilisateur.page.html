@@ -3,7 +3,12 @@
     <ion-toolbar>
       <ion-grid>
         <ion-row class="ion-justify-content-between" *ngIf="!isSearchBarOpened">
-          <ion-col size="10">
+          <ion-col size="2">
+            <ion-buttons>
+              <ion-back-button text="" icon="arrow-back"></ion-back-button>
+            </ion-buttons>
+          </ion-col>
+          <ion-col size="8">
             <ion-title>
               <h5>Postulants</h5>
             </ion-title>
@@ -29,8 +34,6 @@
         <ion-row>
           <ion-col size="6">
             <p class="postdetail">Total <span>{{state.appData.totalElements}}</span></p>
-            <p class="postdetail">Interview <span>24</span></p>
-            <p class="postdetail">Non-Interview <span>20</span></p>
           </ion-col>
           <ion-col class="align-items-center">
             <ion-button id="popover-button" class="head-filter" color="secondary" fill=""><ion-icon

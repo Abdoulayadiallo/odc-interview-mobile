@@ -36,36 +36,40 @@ export class PostulantUtilisateurPage implements OnInit {
   utilisateur: Utilisateur;
   entretienNombre: number;
   idEntretien: number;
-  private subscriptions: Subscription[] = [];
+  // private subscriptions: Subscription[] = [];
   idUtilisateur: any;
 
   constructor(
     private postulantService: PostulantService,
     private route: ActivatedRoute,
-    private router:Router
-  ) {}
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
-    this.idUtilisateur=this.route.snapshot.params['id'];
-    this.postulantState$ = this.postulantService
-      .getAllPostulantByEntretien(this.idEntretien)
-      .pipe(
-        map((response: Postulantresponse) => {
-          // this.loadingService.loadingOff();
-          this.responseSubject.next(response);
-          this.currentPageSubject.next(response.pageNo);
-          console.log(response);
-          return { appState: 'APP_LOADED', appData: response };
-        }),
-        startWith({
-          appState: 'APP_LOADED',
-          appData: this.responseSubject.value,
-        }),
-        catchError((error: HttpErrorResponse) => {
-          // this.loadingService.loadingOff();
-          return of({ appState: 'APP_ERROR', error });
-        })
-      );
+    this.idUtilisateur = this.route.snapshot.params['idUtilisateur'];
+    this.idEntretien = this.route.snapshot.params['id'];
+    setTimeout(() => {
+      this.postulantState$ = this.postulantService
+        .getAllPostulantByEntretienAndByUtilisateur(this.idEntretien, this.idUtilisateur)
+        .pipe(
+          map((response: Postulantresponse) => {
+            // this.loadingService.loadingOff();
+            this.responseSubject.next(response);
+            this.currentPageSubject.next(response.pageNo);
+            console.log(response);
+            return { appState: 'APP_LOADED', appData: response };
+          }),
+          startWith({
+            appState: 'APP_LOADED',
+            appData: this.responseSubject.value,
+          }),
+          catchError((error: HttpErrorResponse) => {
+            // this.loadingService.loadingOff();
+            return of({ appState: 'APP_ERROR', error });
+          })
+        ), 1000
+    })
+
   }
 
   gotToPage(
