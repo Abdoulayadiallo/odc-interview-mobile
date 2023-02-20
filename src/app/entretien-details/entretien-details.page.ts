@@ -10,18 +10,19 @@ import { EntretienService } from '../Service/entretien.service';
 })
 export class EntretienDetailsPage implements OnInit {
   id: number
-  entretien: Entretien
+  entretien: Entretien = new Entretien
   entretienNom: string;
   entretienDebut: string;
   entretienStatus: string;
   entretienDescription: String;
   entretienFin: string;
+  interviewImage: string;
   constructor(private entretienService: EntretienService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
     this.getEntretien()
-
+    this.interviewImage=this.entretienService.interviewPicture
   }
 
   getEntretien() {

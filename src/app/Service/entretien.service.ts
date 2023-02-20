@@ -12,6 +12,7 @@ export class EntretienService {
   public host = environment.host;
   public clientHost = environment.client;
   constructor(private http:HttpClient) { }
+  public interviewPicture =`${this.host}/image/interview/`;
   
   getAllEntretien(username:string="",pageNo:number = 0,pageSize:number = 10,sortBy:string ="",sortDir:string=""): Observable<Entretienresponse> {
     return this.http.get<Entretienresponse>(`${this.host}/entretien/list?username=${username}&pageNo=${pageNo}&pageSize=${pageSize}&sortBy=${sortBy}&sortDir=${sortDir}`);
