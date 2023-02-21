@@ -25,8 +25,8 @@
         </ion-col>
         <ion-col size="10">
           <ion-card-header>
-            <ion-card-title> {{postulant.prenom}} {{postulant.nom}}</ion-card-title>
-            <ion-card-subtitle>Status: {{postulant.decisionFinal}}</ion-card-subtitle>
+            <ion-card-title> {{postulant?.prenom}} {{postulant?.nom}}</ion-card-title>
+            <ion-card-subtitle>Status: {{postulant?.decisionFinal}}</ion-card-subtitle>
           </ion-card-header>
         </ion-col>
       </ion-row>
@@ -41,13 +41,13 @@
     </ion-toolbar>
   </ion-header>
   <ion-list>
-    <ion-item>N° Matricule: {{postulant.numeroMTCL}} </ion-item>
-    <ion-item>Nom {{postulant.nom}}</ion-item>
-    <ion-item>Prenom {{postulant.prenom}} </ion-item>
-    <ion-item>Email {{postulant.email}} </ion-item>
-    <ion-item>Status {{postulant.decisionFinal}} </ion-item>
-    <ion-item>Total Note {{postulant.noteFinal}} </ion-item>
-    <ion-item>Date d'ajout {{postulant.dateCreation | date : "medium"}} </ion-item>
+    <ion-item>N° Matricule: {{postulant?.numeroMTCL}} </ion-item>
+    <ion-item>Nom {{postulant?.nom}}</ion-item>
+    <ion-item>Prenom {{postulant?.prenom}} </ion-item>
+    <ion-item>Email {{postulant?.email}} </ion-item>
+    <ion-item>Status {{postulant?.decisionFinal}} </ion-item>
+    <ion-item>Total Note {{postulant?.noteFinal}} </ion-item>
+    <ion-item>Date d'ajout {{postulant?.dateCreation | date : "dd/MM/YYYY"}} </ion-item>
   </ion-list>
   <!-- Fin Card postulant -->
 </ion-content>

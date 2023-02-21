@@ -30,23 +30,23 @@
   </ion-header>
   <ion-content>
     <!-- Card jury -->
-    <ng-container *ngSwitchCase="'APP_LOADED'">
-      <ion-card [ngClass]="{true:'ion-card-active', false:'ion-card-inactive'}">
+    <ng-container *ngSwitchCase="'APP_LOADED'" >
+      <ion-card [ngClass]="{true:'ion-card-active', false:'ion-card-inactive'}" *ngFor="let jury of state.appData?.contenu ;let i = index">
         <ion-grid>
-          <ion-row class="ion-align-items-center" *ngFor="let jury of state.appData?.contenu ;let i = index">
+          <ion-row class="ion-align-items-center" >
             <ion-col size="2">
               <ion-avatar>
-                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                <img alt="Silhouette of a person's head" src="{{juryPicture}}{{jury.id}}" />
               </ion-avatar>
             </ion-col>
             <ion-col size="8">
               <ion-card-header>
-                <ion-card-title>{{jury.prenom}} {{jury.nom}}</ion-card-title>
-                <ion-card-subtitle>Status: {{jury.role.roleName}}<br>Postulant jugé: </ion-card-subtitle>
+                <ion-card-title>{{jury?.prenom}} {{jury?.nom}}</ion-card-title>
+                <ion-card-subtitle>Status: {{jury?.role?.roleName}}<br>Postulant jugé: </ion-card-subtitle>
               </ion-card-header>
             </ion-col>
             <ion-col size="2" class="ion-justify-content-center">
-              <ion-button fill="clear" (click)="postulantDetails(jury.username)">
+              <ion-button fill="clear" (click)="postulantDetails(jury?.username)">
                 <ion-icon size="large" name="arrow-forward-circle-outline"></ion-icon>
               </ion-button>
             </ion-col>

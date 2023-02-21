@@ -48,12 +48,14 @@ export class JuryPage implements OnInit {
     this.juryResponse
   );
   currentPage$ = this.currentPageSubject.asObservable();
+  juryPicture: string;
 
   constructor(private accountService: AccountService, private router: Router) {}
 
   ngOnInit() {
     const username = this.accountService.loggInUsername;
     this.getUserInfo(username);
+    this.juryPicture=this.accountService.userPicture
 
     this.juryState$ = this.accountService
       .getAllJuryByEntretien(this.idEntretien)

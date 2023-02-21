@@ -58,19 +58,19 @@
             <ion-col size="8">
               <ion-card-header>
                 <ion-card-title>{{post.prenom}} {{post.nom}}</ion-card-title>
-                <ion-card-subtitle *ngIf="post.decisionFinal == null">Status: Postulant</ion-card-subtitle>
-                <ion-card-subtitle *ngIf="post.decisionFinal == 'Refuser'">Status: Refuser</ion-card-subtitle>
-                <ion-card-subtitle *ngIf="post.decisionFinal == 'Accepter'">Status: Apprenant</ion-card-subtitle>
+                <ion-card-subtitle *ngIf="post?.decisionFinal == null">Status: Postulant</ion-card-subtitle>
+                <ion-card-subtitle *ngIf="post?.decisionFinal == 'Refuser'">Status: Refuser</ion-card-subtitle>
+                <ion-card-subtitle *ngIf="post?.decisionFinal == 'Accepter'">Status: Apprenant</ion-card-subtitle>
               </ion-card-header>
             </ion-col>
             <ion-col size="2" class="ion-justify-content-center">
-              <ion-icon size="large" name="arrow-forward-circle-outline" (click)="postulantDetails(post.id)"></ion-icon>
+?              <ion-icon size="large" name="arrow-forward-circle-outline" (click)="postulantDetails(post?.id)"></ion-icon>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-button fill="outline" class="evaluation">Non Evaluer</ion-button>
             <ion-button [ngClass]="i % 3 == 0 ? ' iorange' : (i % 3 == 1 ? ' iviolet':' ivert')"
-              (click)="postulantDetails(post.id)">Interview</ion-button>
+              (click)="postulantDetails(post?.id)">Interview</ion-button>
           </ion-row>
         </ion-grid>
       </ion-card>
