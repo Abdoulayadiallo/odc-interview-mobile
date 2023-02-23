@@ -13,11 +13,12 @@ export class JuryDetailsPage implements OnInit {
   username: string
   jury:any=Utilisateur
   roleName:any=''
+  juryPicture: string;
   constructor(private accountService: AccountService,private route: ActivatedRoute) { }
 
   ngOnInit(){
     this.username = this.route.snapshot.params['id'];
-
+    this.juryPicture=this.accountService.userPicture
     this.accountService.getUserInformation(this.username).subscribe( data => {
       this.jury = data;
       this.roleName=this.jury.role.roleName
