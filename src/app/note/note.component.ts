@@ -29,11 +29,11 @@ export class NoteComponent implements OnInit {
 
 
   constructor(
-    private modalCtrl: ModalController, 
+    private modalCtrl: ModalController,
     private noteService: NoteService,
     private accountService: AccountService,
     private alertService: AlertService,
-    private questionService:QuestionService) { }
+    private questionService: QuestionService) { }
   ngOnInit(): void {
     this.getUserInfo(this.accountService.loggInUsername);
     this.username = this.accountService.loggInUsername;
@@ -58,9 +58,9 @@ export class NoteComponent implements OnInit {
     return this.modalCtrl.dismiss(null, 'cancel');
   }
   //RECUPERER TOUS LES NOTES POUR RAFRACHIR LES NOUVELLES DONNEES
-  getAllNote(){
-    this.noteService.getAllNote().subscribe(data=>{
-      this.notesList=data;
+  getAllNote() {
+    this.noteService.getAllNote().subscribe(data => {
+      this.notesList = data;
     })
   }
   //RECUPERER TOUS LES QUESTIONS NOTES POUR RAFRACHIR LES NOUVELLES DONNEES
