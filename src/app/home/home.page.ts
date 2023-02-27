@@ -21,7 +21,7 @@ export class HomePage implements OnInit {
   rootPage:any;
   private subscriptions: Subscription[] = [];
   postulantresponse!: Postulantresponse ;
-  jurys: Utilisateur[];
+  jurys: Utilisateur[] = [];
   totalElement=0
   nbreJury:number
   loggInUsername: string;
@@ -30,13 +30,13 @@ export class HomePage implements OnInit {
   userpicture: string;
   userpre: string ='';
   rolename: string ='';
-  entretienNombre: number;
+  entretienNombre: number = 0;
   public idEntretien: number;
-  MasculinNOmbre: any;
-  FemininNOmbre: any;
-  participant: Participant;
+  MasculinNOmbre: any = 0;
+  FemininNOmbre: any = 0;
+  participant: Participant = new Participant;
   idJury: number;
-  usernameconnected: string;
+  usernameconnected: string = '';
 
 
 
@@ -88,7 +88,7 @@ export class HomePage implements OnInit {
        this.nomEntretien= response.entretien.entretienNom
         this.userpre=response.prenom
         this.rolename=response.role.roleName
-        this.idEntretien=response.entretien.id
+        this.idEntretien=response?.entretien?.id
         console.log(this.utilisateur)
       },
       error => {

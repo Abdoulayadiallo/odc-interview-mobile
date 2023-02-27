@@ -64,7 +64,7 @@
       <ion-col size="3">Elimination</ion-col>
       <ion-col size="4">Note</ion-col>
     </ion-row>
-    <ion-row class="contenu" *ngFor="let question of questions; let i=index">
+    <ion-row class="contenu" *ngFor="let question of questionView; let i=index">
       <ion-col size="5">{{question.questionNom}}</ion-col>
       <ion-col *ngIf="question.critere.elimination === true " size="3"><ion-button
           [ngClass]="(question.critere.elimination === true ? ' yes' :' no')">Oui</ion-button></ion-col>

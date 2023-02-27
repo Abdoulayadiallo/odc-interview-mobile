@@ -22,7 +22,11 @@
 </ion-header>
 
 <ion-content>
-  <form #updateProfileForm="ngForm" (ngSubmit)="onUpdateUser(updateProfileForm.value)" enctype="multipart/form-data">
+  <div *ngIf="isLoading" class="ion-text-center">
+    <ion-spinner color="warning"></ion-spinner>
+    Mise à jour en cour 
+  </div>
+  <form *ngIf="!isLoading" #updateProfileForm="ngForm" (ngSubmit)="onUpdateUser(updateProfileForm.value)" enctype="multipart/form-data">
     <ion-grid>
       <ion-row class="ion-justify-content-center marge">
         <div class="form-group">
@@ -39,15 +43,15 @@
     </ion-grid>
     <div class="container">
       <div class="user-details">
-        <input type="hidden" class="form-control" name="id" ngModel="{{ utilisateur.id }}" required />
+        <input type="hidden" class="form-control" name="id" ngModel="{{ utilisateur?.id }}" required />
         <div class="form-group">
           <label for="nom">Nom: </label>
-          <input type="text" ngModel="{{ utilisateur.nom }}" class="form-control" id="nom" name="nom"
+          <input type="text" ngModel="{{ utilisateur?.nom }}" class="form-control" id="nom" name="nom"
             aria-describedby="nom" placeholder="Entrez votre nom" required>
         </div>
         <div class="form-group">
           <label for="prenom">Prenom: </label>
-          <input type="text" id="prenom" name="prenom" ngModel="{{ utilisateur.prenom }}" class="form-control"
+          <input type="text" id="prenom" name="prenom" ngModel="{{ utilisateur?.prenom }}" class="form-control"
             aria-describedby="prenom" placeholder="Entrez votre prenom" required>
         </div>
         <div class="form-group">
@@ -57,17 +61,17 @@
         </div>
         <div class="form-group">
           <label for="email">E-mail: </label>
-          <input type="email" id="email" name="email" ngModel="{{ utilisateur.email }}" class="form-control"
+          <input type="email" id="email" name="email" ngModel="{{ utilisateur?.email }}" class="form-control"
             placeholder="Entrez votre Email" required>
         </div>
         <div class="form-group">
           <label for="numero">Numero: </label>
-          <input type="tel" name="numero" id="numero" ngModel="{{ utilisateur.numero}}" class="form-control"
+          <input type="tel" name="numero" id="numero" ngModel="{{ utilisateur?.numero}}" class="form-control"
             placeholder="Entrez votre numero" required>
         </div>
         <div class="form-group">
           <label for="bio">Bio: </label>
-          <textarea name="bio" id="bio" ngModel="{{ utilisateur.bio }}" class="form-control"
+          <textarea name="bio" id="bio" ngModel="{{ utilisateur?.bio }}" class="form-control"
             placeholder="Entrez votre Bio"></textarea>
         </div>
         <div class="button">

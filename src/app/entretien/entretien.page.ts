@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { info } from 'console';
-import { async, Subscription } from 'rxjs';
+import { async, lastValueFrom, Subscription } from 'rxjs';
 import { Critere } from '../Model/critere';
 import { Note } from '../Model/note';
 import { NoteResponse } from '../Model/noteresponse';
@@ -25,7 +25,7 @@ export class EntretienPage implements OnInit {
   critere: Critere;
   criteres!: Critere[];
   id: number
-  postulant: Postulant
+  postulant: Postulant = new Postulant
   info: FormData;
   critereNombre: number
   note: any = [];
@@ -37,6 +37,7 @@ export class EntretienPage implements OnInit {
   nomQuestion: any = []
   questions: Question[];
   nombreRepond: number;
+  questionView: any;
 
 
 
@@ -50,31 +51,44 @@ export class EntretienPage implements OnInit {
   ngOnInit(): void {
     const username = this.accountService.loggInUsername
     this.getUserInfo(username)
-    setTimeout(() => {
-      // this.getCritere();
-      this.getQuestion();
-    }, 200)
-    setTimeout(() => {
-      this.getNombreQuestionNoteByPostulant()
+    // this.getQuestion()
+    // setTimeout(() => {
+    //   // this.getCritere();
+    //   this.getQuestion();
+    // }, 200)
+    // setTimeout(() => {
+    //   this.getNombreQuestionNoteByPostulant()
 
       
-      for (let i = 1; i < this.questions.length; i++) {
-        if (this.questions[i].id == i) {
-          console.log(this.questions[i].critere.id)
-          this.getNote(this.questions[i].critere.id);
-        }
+    //   // for (let i = 1; i < this.questions.length; i++) {
+    //   //   if (this.questions[i].id == i) {
+    //   //     console.log(this.questions[i].critere.id)
+    //   //     this.getNote(this.questions[i].critere.id);
+    //   //   }
 
-      }
-    }, 400)
+    //   // }
+    // }, 400)
 
 
     this.id = this.route.snapshot.params['id'];
-
-    this.postulant = new Postulant();
-    this.postulantService.getOnePostulantById(this.id).subscribe(data => {
-      this.postulant = data;
-      console.log(data)
+    // this.usernameJury = this.route.snapshot.params['username'];
+    this.getPostulantById().then(() => {
+      this.getQuestion();
+      this.getNombreQuestionNoteByPostulant()
     });
+    // this.postulant = new Postulant();
+    // this.postulantService.getOnePostulantById(this.id).subscribe(data => {
+    //   this.postulant = data;
+    //   console.log(data)
+    // });
+  }
+  async getPostulantById(): Promise<void>{
+    try {
+      const data = await lastValueFrom( this.postulantService.getOnePostulantById(this.id));
+      this.postulant = data;
+    } catch (error) {
+      console.error(error);
+    }
   }
   getUserInfo(username: string): void {
     this.subscriptions.push(
@@ -91,21 +105,21 @@ export class EntretienPage implements OnInit {
         }
       ));
   }
-  getQuestion() {
-    this.questionService.getAllQuestion().subscribe(
-      data => {
-        this.questions = data
-        // console.log(data)
-        //  for (let i = 1; i < this.questions.length; i++) {
-        //   if (this.questions[i].id == i) {
-        //     console.log(this.questions[i].critere.id)
-        //     this.getNote(this.questions[i].critere.id);
-        //   }
+  // getQuestion() {
+  //   this.questionService.getAllQuestion().subscribe(
+  //     data => {
+  //       this.questions = data
+  //       // console.log(data)
+  //       //  for (let i = 1; i < this.questions.length; i++) {
+  //       //   if (this.questions[i].id == i) {
+  //       //     console.log(this.questions[i].critere.id)
+  //       //     this.getNote(this.questions[i].critere.id);
+  //       //   }
 
-        // }
-      }
-    )
-  }
+  //       // }
+  //     }
+  //   )
+  // }
   getNombreQuestionNoteByPostulant() {
     this.questionService.getNombreQuestionNoteByPostulant(this.id).subscribe(data => {
       this.nombreRepond = data.pourcentage
@@ -134,7 +148,12 @@ export class EntretienPage implements OnInit {
     return this.note[i]
   }
 
-
+ //Afficher Question
+  getQuestion() {
+    this.questionService.getAllQuestionByEntretien(this.utilisateur.entretien.id).subscribe(data => {
+      this.questionView = data
+    })
+  }
 
   // getCritere(){
   //   this.critereService.getAllCritere().subscribe(data => {

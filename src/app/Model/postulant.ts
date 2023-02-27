@@ -1,4 +1,4 @@
-import { Participant } from "./participant";
+import { Entretien } from "./entretien";
 
 export class Postulant {
     id!: number;
@@ -14,5 +14,5 @@ export class Postulant {
     decisionFinal!: string;
     commentaireFinal!: string;
     dateCreation!: Date
-    participant!: Participant[];
+    entretien!: Entretien;
 }

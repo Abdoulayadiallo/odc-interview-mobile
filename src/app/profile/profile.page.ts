@@ -5,6 +5,7 @@ import { Utilisateur } from '../Model/utilisateur';
 import { AccountService } from '../Service/account.service';
 import { AlertService } from '../Service/alert.service';
 import { LoadingService } from '../Service/loading.service';
+import { IonSpinner } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -12,6 +13,7 @@ import { LoadingService } from '../Service/loading.service';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
+  isLoading = false;
   profilePicture: File;
   profilePictureChange: boolean;
   private subscriptions: Subscription[] = [];
@@ -62,7 +64,7 @@ export class ProfilePage implements OnInit {
   }
 
   onUpdateUser(updatedUser: Utilisateur): void {
-    this.loadingService.isLoading.next(true);
+    this.isLoading = true;
     this.subscriptions.push(
       this.accountService.updateUser(updatedUser).subscribe(
         response => {
@@ -70,7 +72,7 @@ export class ProfilePage implements OnInit {
           if (this.profilePictureChange) {
             this.accountService.uploadeUserProfilePicture(this.profilePicture);
           }
-          this.loadingService.isLoading.next(false);
+          this.isLoading = false;
           this.alertService.presentToast(
             "Profile mise à jour avec succès.",
             "success"
@@ -87,6 +89,7 @@ export class ProfilePage implements OnInit {
       )
     );
   }
+  
 
   gotoPasswordChangePage(): void {
       this.router.navigate(['/changepassword', this.username]);

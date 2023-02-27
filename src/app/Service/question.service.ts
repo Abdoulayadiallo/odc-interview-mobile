@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -24,6 +24,8 @@ export class QuestionService {
   getNombreQuestionNoteByPostulant(postulantId:number):Observable<NombreQuestionResponse>{
     return this.http.get<NombreQuestionResponse>(`${this.host}/question/repond/${postulantId}`);
   }
-
+  getAllQuestionByEntretien(id:number):Observable<HttpErrorResponse | HttpResponse<any>>{
+    return this.http.get<HttpErrorResponse | HttpResponse<any>>(`${this.host}/question/entretien/${id}`);
+  }
   
 }
