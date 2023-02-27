@@ -1,9 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button ion-button navPop>
-        <ion-icon name="arrow-back-outline"></ion-icon>
-      </ion-button>
+      <ion-back-button text="" icon="arrow-back"></ion-back-button>
     </ion-buttons>
     <ion-title>Postulant detail</ion-title>
     <ion-buttons slot="end">
@@ -27,13 +25,13 @@
         </ion-col>
         <ion-col size="10">
           <ion-card-header>
-            <ion-card-title>Ibrahim Keita</ion-card-title>
-            <ion-card-subtitle>Status: Postulant</ion-card-subtitle>
+            <ion-card-title> {{postulant?.prenom}} {{postulant?.nom}}</ion-card-title>
+            <ion-card-subtitle>Status: {{postulant?.decisionFinal}}</ion-card-subtitle>
           </ion-card-header>
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-button class="evaluation" [routerLink]="['/entretien']">Evaluer</ion-button>
+        <ion-button class="evaluation" [routerLink]="['/entretien',postulant.id]">Evaluer</ion-button>
       </ion-row>
     </ion-grid>
   </ion-card>
@@ -43,16 +41,13 @@
     </ion-toolbar>
   </ion-header>
   <ion-list>
-    <ion-item>N° Matricule </ion-item>
-    <ion-item>Nom </ion-item>
-    <ion-item>Prenom </ion-item>
-    <ion-item>Email </ion-item>
-    <ion-item>Status </ion-item>
-    <ion-item>Date de naissance </ion-item>
-    <ion-item>Evaluation 7</ion-item>
-    <ion-item>Item 8</ion-item>
-    <ion-item>Item 9</ion-item>
-    <ion-item>Item 10</ion-item>
+    <ion-item>N° Matricule: {{postulant?.numeroMTCL}} </ion-item>
+    <ion-item>Nom {{postulant?.nom}}</ion-item>
+    <ion-item>Prenom {{postulant?.prenom}} </ion-item>
+    <ion-item>Email {{postulant?.email}} </ion-item>
+    <ion-item>Status {{postulant?.decisionFinal}} </ion-item>
+    <ion-item>Total Note {{postulant?.noteFinal}} </ion-item>
+    <ion-item>Date d'ajout {{postulant?.dateCreation | date : "dd/MM/YYYY"}} </ion-item>
   </ion-list>
   <!-- Fin Card postulant -->
 </ion-content>

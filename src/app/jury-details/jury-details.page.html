@@ -1,9 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button ion-button navPop>
-        <ion-icon name="arrow-back-outline"></ion-icon>
-      </ion-button>
+      <ion-back-button text="" icon="arrow-back"></ion-back-button>
     </ion-buttons>
     <ion-title>Jury details</ion-title>
     <ion-buttons slot="end">
@@ -28,8 +26,8 @@
         </ion-col>
         <ion-col size="10">
           <ion-card-header>
-            <ion-card-title>Ibrahim Keita</ion-card-title>
-            <ion-card-subtitle>Status: Jury</ion-card-subtitle>
+            <ion-card-title>{{jury?.prenom}} {{jury?.nom}}</ion-card-title>
+            <ion-card-subtitle>Status: {{roleName}}</ion-card-subtitle>
           </ion-card-header>
         </ion-col>
       </ion-row>
@@ -41,14 +39,13 @@
     </ion-toolbar>
   </ion-header>
   <ion-list>
-    <ion-item>N° Matricule </ion-item>
-    <ion-item>Nom </ion-item>
-    <ion-item>Prenom </ion-item>
-    <ion-item>Email </ion-item>
-    <ion-item>Status </ion-item>
-    <ion-item>Date de naissance </ion-item>
+    <ion-item>Nom {{jury?.nom}}</ion-item>
+    <ion-item>Prenom {{jury?.prenom}}</ion-item>
+    <ion-item>Email {{jury?.email}}</ion-item>
+    <ion-item>Status {{roleName}}</ion-item>
+    <ion-item>Date de naissance{{jury?.dateCreation | date:"dd/MM/YYYY" }} </ion-item>
   </ion-list>
   <!-- Fin Card jury -->
-  <ion-button class="evaluation" [routerLink]="['/postulant']">Voir les Postulant</ion-button>
+  <ion-button class="evaluation" [routerLink]="['/postulant-utilisateur',jury?.entretien?.id,jury?.id]">Voir les Postulant</ion-button>
 
 </ion-content>

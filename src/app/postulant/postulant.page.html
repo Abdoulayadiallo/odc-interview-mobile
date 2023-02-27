@@ -1,174 +1,107 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-grid>
-      <ion-row class="ion-justify-content-between">
-        <ion-col size="10">
-          <ion-title>
-            <h5>Postulants</h5>
-          </ion-title>
-        </ion-col>
-        <ion-col size="2">
-          <ion-buttons>
-            <ion-button>
-              <ion-icon slot="icon-only" size="large" name="search"></ion-icon>
-            </ion-button>
-          </ion-buttons>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <p class="postdetail">Total <span>224</span></p>
-    <p class="postdetail">Interview <span>24</span></p>
-    <p class="postdetail">Non-Interview <span>200</span></p>
-  </ion-toolbar>
-</ion-header>
+<ng-container *ngIf="(postulantState$ | async) as state" [ngSwitch]="state.appState">
+  <ion-header>
+    <ion-toolbar>
+      <ion-grid>
+        <ion-row class="ion-justify-content-between" *ngIf="!isSearchBarOpened">
+          <ion-col size="10">
+            <ion-title>
+              <h5>Postulants</h5>
+            </ion-title>
+          </ion-col>
+          <ion-col size="2">
+            <ion-buttons>
+              <ion-button *ngIf="!isSearchBarOpened" (click)="isSearchBarOpened=true">
+                <ion-icon slot="icon-only" size="large" name="search"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="isSearchBarOpened">
+          <ion-col>
+            <form #searchForm="ngForm" (ngSubmit)="gotToPage(searchForm.value.keyword)">
+              <ion-searchbar name="keyword" type="search" ngModel class="form-control" showCancelButton="true"
+                (ionCancel)="isSearchBarOpened=false"></ion-searchbar>
+            </form>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">
+            <p class="postdetail">Total <span>{{state?.appData?.totalElements}}</span></p>
+            <p class="postdetail">Interview <span>24</span></p>
+            <p class="postdetail">Non-Interview <span>20</span></p>
+          </ion-col>
+          <ion-col class="align-items-center">
+            <ion-button id="popover-button" class="head-filter" color="secondary" fill=""><ion-icon
+                name="funnel-outline"></ion-icon> Filtrer </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ng-container *ngSwitchCase="'APP_LOADED'">
+      <!-- Card postulant -->
+      <ion-card *ngFor="let post of state.appData?.contenu ;let i = index"
+        [ngClass]="i % 3 == 0 ? ' orange' : (i % 3 == 1 ? 'violet':'vert')">
+        <ion-grid>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="2">
+              <ion-avatar>
+                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              </ion-avatar>
+            </ion-col>
+            <ion-col size="8">
+              <ion-card-header>
+                <ion-card-title>{{post.prenom}} {{post.nom}}</ion-card-title>
+                <ion-card-subtitle *ngIf="post?.decisionFinal == null">Status: Postulant</ion-card-subtitle>
+                <ion-card-subtitle *ngIf="post?.decisionFinal == 'Refuser'">Status: Refuser</ion-card-subtitle>
+                <ion-card-subtitle *ngIf="post?.decisionFinal == 'Accepter'">Status: Apprenant</ion-card-subtitle>
+              </ion-card-header>
+            </ion-col>
+            <ion-col size="2" class="ion-justify-content-center">
+              <ion-icon size="large" name="arrow-forward-circle-outline" (click)="postulantDetails(post.id)"></ion-icon>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-button fill="outline" class="evaluation">Non Evaluer</ion-button>
+            <ion-button [ngClass]="i % 3 == 0 ? ' iorange' : (i % 3 == 1 ? ' iviolet':' ivert')"
+              (click)="postulantDetails(post.id)">Interview</ion-button>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+      <!-- DEBUT POPUP FILTER IONIC -->
+      <ion-popover trigger="popover-button" [dismissOnSelect]="true">
+        <ng-template>
+          <ion-content>
+            <ion-list>
+              <ion-item class="titre" [detail]="false">Filter par</ion-item>
+              <ion-item [button]="true" [detail]="false" (click)="gotToPage('',0,10,'nom')"> Nom</ion-item>
+              <ion-item [button]="true" [detail]="false" (click)="gotToPage('',0,10,'prenom')"> Prenom</ion-item>
+              <ion-item [button]="true" [detail]="false" (click)="gotToPage('',0,10,'noteFinal')"> Points</ion-item>
+              <ion-item [button]="true" [detail]="false" > Status</ion-item>
+              <ion-item class="titre" [detail]="false">Ordonner par</ion-item>
+              <ion-item [button]="true" [detail]="false" (click)="gotToPage('',0,10,'','asc')"> Ascendant</ion-item>
+              <ion-item [button]="true" [detail]="false" (click)="gotToPage('',0,10,'','desc')"> Descendant</ion-item>
+            </ion-list>
+          </ion-content>
+        </ng-template>
+      </ion-popover>
+      <!-- FIN POPUP FILTER IONIC -->
 
-<ion-content>
-  <!-- Card postulant -->
-  <ion-card [ngClass]="{true:'ion-card-active', false:'ion-card-inactive'}">
-    <ion-grid>
-      <ion-row class="ion-align-items-center">
-        <ion-col size="2">
-          <ion-avatar>
-            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-          </ion-avatar>
-        </ion-col>
-        <ion-col size="8">
-          <ion-card-header>
-            <ion-card-title>Ibrahim Keita</ion-card-title>
-            <ion-card-subtitle>Status: Postulant</ion-card-subtitle>
-          </ion-card-header>
-        </ion-col>
-        <ion-col size="2" class="ion-justify-content-center">
-          <ion-icon size="large" name="arrow-forward-circle-outline"></ion-icon>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-button fill="outline" class="evaluation">Non Evaluer</ion-button>
-        <ion-button class="interview" [routerLink]="['/postulant-details']">Interview</ion-button>
-      </ion-row>
-    </ion-grid>
-  </ion-card>
-  <!-- Fin Card postulant -->
-  <!-- Card postulant -->
-  <ion-card>
-    <ion-grid>
-      <ion-row class="ion-align-items-center">
-        <ion-col size="2">
-          <ion-avatar>
-            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-          </ion-avatar>
-        </ion-col>
-        <ion-col size="8">
-          <ion-card-header>
-            <ion-card-title>Ibrahim Keita</ion-card-title>
-            <ion-card-subtitle>Status: Postulant</ion-card-subtitle>
-          </ion-card-header>
-        </ion-col>
-        <ion-col size="2" class="ion-justify-content-center">
-          <ion-icon size="large" name="arrow-forward-circle-outline"></ion-icon>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-button fill="outline" class="evaluation">Non Evaluer</ion-button>
-        <ion-button class="interview" [routerLink]="['/postulant-details']">Interview</ion-button>
-      </ion-row>
-    </ion-grid>
-  </ion-card>
-  <!-- Fin Card postulant -->
-  <!-- Card postulant -->
-  <ion-card>
-    <ion-grid>
-      <ion-row class="ion-align-items-center">
-        <ion-col size="2">
-          <ion-avatar>
-            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-          </ion-avatar>
-        </ion-col>
-        <ion-col size="8">
-          <ion-card-header>
-            <ion-card-title>Ibrahim Keita</ion-card-title>
-            <ion-card-subtitle>Status: Postulant</ion-card-subtitle>
-          </ion-card-header>
-        </ion-col>
-        <ion-col size="2" class="ion-justify-content-center">
-          <ion-icon size="large" name="arrow-forward-circle-outline"></ion-icon>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-button fill="outline" class="evaluation">Non Evaluer</ion-button>
-        <ion-button class="interview" [routerLink]="['/postulant-details']">Interview</ion-button>
-      </ion-row>
-    </ion-grid>
-  </ion-card>
-  <!-- Fin Card postulant -->
-  <!-- Card postulant -->
-  <ion-card>
-    <ion-grid>
-      <ion-row class="ion-align-items-center">
-        <ion-col size="2">
-          <ion-avatar>
-            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-          </ion-avatar>
-        </ion-col>
-        <ion-col size="8">
-          <ion-card-header>
-            <ion-card-title>Ibrahim Keita</ion-card-title>
-            <ion-card-subtitle>Status: Postulant</ion-card-subtitle>
-          </ion-card-header>
-        </ion-col>
-        <ion-col size="2" class="ion-justify-content-center">
-          <ion-icon size="large" name="arrow-forward-circle-outline"></ion-icon>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-button fill="outline" class="evaluation">Non Evaluer</ion-button>
-        <ion-button class="interview" [routerLink]="['/postulant-details']">Interview</ion-button>
-      </ion-row>
-    </ion-grid>
-  </ion-card>
-  <!-- Fin Card postulant -->
-  <!-- Card postulant -->
-  <ion-card>
-    <ion-grid>
-      <ion-row class="ion-align-items-center">
-        <ion-col size="2">
-          <ion-avatar>
-            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-          </ion-avatar>
-        </ion-col>
-        <ion-col size="8">
-          <ion-card-header>
-            <ion-card-title>Ibrahim Keita</ion-card-title>
-            <ion-card-subtitle>Status: Postulant</ion-card-subtitle>
-          </ion-card-header>
-        </ion-col>
-        <ion-col size="2" class="ion-justify-content-center">
-          <ion-icon size="large" name="arrow-forward-circle-outline"></ion-icon>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-button fill="outline" class="evaluation">Non Evaluer</ion-button>
-        <ion-button class="interview" [routerLink]="['/postulant-details']">Interview</ion-button>
-      </ion-row>
-    </ion-grid>
-  </ion-card>
-  <!-- Fin Card postulant -->
-  <ion-button id="popover-button" class="absolute" color="secondary" fill=""><ion-icon name="funnel-outline"></ion-icon>
-    Filtrer</ion-button>
-  <ion-popover trigger="popover-button" [dismissOnSelect]="true">
-    <ng-template>
-      <ion-content>
-        <ion-list>
-          <ion-item class="titre" [detail]="false">Filter par</ion-item>
-          <ion-item [button]="true" [detail]="false"> Nom</ion-item>
-          <ion-item [button]="true" [detail]="false"> Prenom</ion-item>
-          <ion-item [button]="true" [detail]="false"> Points</ion-item>
-          <ion-item [button]="true" [detail]="false"> Status</ion-item>
-          <ion-item class="titre" [detail]="false">Ordonner par</ion-item>
-          <ion-item [button]="true" [detail]="false"> Ascendant</ion-item>
-          <ion-item [button]="true" [detail]="false"> Descendant</ion-item>
-        </ion-list>
-      </ion-content>
-    </ng-template>
-  </ion-popover>
-</ion-content>
+      <div class="pagination">
+        <li class="page-item pointer" [ngClass]="0 == (currentPage$ | async) ? ' disabled' : ''">
+          <a (click)="goToNextOrPreviousPage('backward','searchForm.value.keyword')"> &laquo;</a>
+        </li>
+        <li *ngFor="let number of [].constructor(state.appData?.totalPages); let i = index">
+          <a [ngClass]="i == (currentPage$ | async) ? ' active' : ''" (click)="gotToPage('',i,10)">{{i+1}}</a>
+        </li>
+        <li class="page-item pointer"
+          [ngClass]=" (state.appData?.totalPages - 1) == (currentPage$ | async) ? ' disabled' : ''">
+          <a (click)="goToNextOrPreviousPage('forward','searchForm.value.keyword')">&raquo;</a>
+        </li>
+      </div>
+    </ng-container>
+  </ion-content>
+</ng-container>

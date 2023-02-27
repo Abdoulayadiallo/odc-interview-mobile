@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
     </ion-buttons>
-    <ion-title>Welcome</ion-title>
+    <ion-title>Note</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="confirm()">Confirm</ion-button>
     </ion-buttons>
@@ -11,16 +11,16 @@
 </ion-header>
 <ion-content class="ion-padding">
   <div class="container">
-    <div class="title"><img src="assets/Logo.png" alt="odc-interview-logo"></div>
-    <form method="post">
+    <div class="title"><img src="assets/note.gif" alt="odc-interview-logo"></div>
+    <form #AddNote="ngForm" (ngSubmit)="ajouterNote()">
       <div class="user-details">
-        <div class="input-box">
-          <label for="email">Note: </label>
-          <input type="text" id="pseudo" name="email" placeholder="Entrez votre Email" required>
+        <div class="form-group">
+          <label for="point">Note: </label>
+          <input type="number" id="point" [(ngModel)]="note.point" class="form-control" name="point" placeholder="Donner une note" required>
         </div>
-        <div class="input-box">
-          <label for="Commentaire">Commentaire: </label>
-          <textarea id="story" name="Commentaire"></textarea>
+        <div class="form-group">
+          <label for="commentaire">Commentaire: </label>
+          <textarea id="Commentaire" class="form-control" [(ngModel)]="note.commentaire" name="commentaire" placeholder="Commenter l'utilisateur"></textarea>
         </div>
       </div>
     </form>

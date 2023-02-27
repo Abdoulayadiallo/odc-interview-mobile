@@ -2,7 +2,8 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button ion-button navPop>
-        <ion-icon name="arrow-back"></ion-icon>
+        <ion-back-button text="" icon="arrow-back"></ion-back-button>
+        <!-- <ion-icon name="arrow-back"></ion-icon> -->
       </ion-button>
     </ion-buttons>
     <ion-title>Entretien</ion-title>
@@ -20,8 +21,9 @@
         </ion-col>
         <ion-col size="10">
           <ion-card-header>
-            <ion-card-title>Ibrahim Keita</ion-card-title>
-            <ion-card-subtitle>Status: Postulant</ion-card-subtitle>
+            <ion-card-title>{{postulant.prenom}} {{postulant.nom}}</ion-card-title>
+            <ion-card-subtitle *ngIf="postulant.decisionFinal == null">Status: Postulant</ion-card-subtitle>
+            <ion-card-subtitle *ngIf="postulant.decisionFinal != null">Status: Apprenant</ion-card-subtitle>
           </ion-card-header>
         </ion-col>
       </ion-row>
@@ -40,15 +42,16 @@
         <div class="container">
           <div class="rowline">
             <div class="col1">
-              <div class="progress violet">
-                <span class="progress-left">
-                  <span class="progress-bar"></span>
-                </span>
-                <span class="progress-right">
-                  <span class="progress-bar"></span>
-                </span>
-                <div class="progress-value">90%</div>
-              </div>
+              <circle-progress
+              [percent]="nombreRepond"
+              [outerStrokeWidth]="10"
+              [innerStrokeWidth]="5"
+              [outerStrokeColor]="'#50BE87'"
+              [innerStrokeColor]="'#C7E596'"
+              [animation]="true"
+              [animationDuration]="300"
+              [radius]="50"
+            ></circle-progress>
             </div>
           </div>
         </div>
@@ -61,31 +64,14 @@
       <ion-col size="3">Elimination</ion-col>
       <ion-col size="4">Note</ion-col>
     </ion-row>
-    <ion-row class="contenu">
-      <ion-col size="5">Disponibilité</ion-col>
-      <ion-col size="3"><ion-button class="pt">Oui</ion-button></ion-col>
-      <ion-col><ion-button class="notez" expand="block" (click)="openModal()">Notez</ion-button>
-      </ion-col>
-    </ion-row>
-    <ion-row class="contenu">
-      <ion-col size="5">Motivation</ion-col>
-      <ion-col size="3"><ion-button class="pt">Oui</ion-button></ion-col>
-      <ion-col size="4">Note</ion-col>
-    </ion-row>
-    <ion-row class="contenu">
-      <ion-col size="5">Ordinateur</ion-col>
-      <ion-col size="3"><ion-button class="pt">Oui</ion-button></ion-col>
-      <ion-col size="4">Note</ion-col>
-    </ion-row>
-    <ion-row class="contenu">
-      <ion-col size="5">Moyen de deplacement</ion-col>
-      <ion-col size="3"><ion-button class="pt">Oui</ion-button></ion-col>
-      <ion-col size="4">Note</ion-col>
-    </ion-row>
-    <ion-row class="contenu">
-      <ion-col size="5">Socialibité</ion-col>
-      <ion-col size="3"><ion-button class="pt">Oui</ion-button></ion-col>
-      <ion-col size="4">Note</ion-col>
+    <ion-row class="contenu" *ngFor="let question of questionView; let i=index">
+      <ion-col size="5">{{question.questionNom}}</ion-col>
+      <ion-col *ngIf="question.critere.elimination === true " size="3"><ion-button
+          [ngClass]="(question.critere.elimination === true ? ' yes' :' no')">Oui</ion-button></ion-col>
+      <ion-col *ngIf="question.critere.elimination === false " size="3"><ion-button class="no">Non</ion-button></ion-col>
+      <ion-col *ngIf="getNote(i+1)==null"><ion-button class="notez" expand="block" (click)="openModal(question.critere.id)">Notez</ion-button></ion-col>
+      <ion-col *ngIf="getNote(i+1)!=null"><ion-button class="notez" expand="block" >{{getNote(i+1)}}</ion-button></ion-col>
+     <!-- <ion-col ><div>{{note}}</div></ion-col> -->
     </ion-row>
   </ion-grid>
 </ion-content>

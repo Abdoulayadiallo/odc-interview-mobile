@@ -4,13 +4,13 @@
       <ion-row class="ion-align-items-center">
         <ion-col size="2">
           <ion-avatar>
-            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            <img src="{{ userpicture }}{{ utilisateur?.id }}.png" />
           </ion-avatar>
         </ion-col>
         <ion-col size="8">
           <ion-card-header>
-            <h6>Bonjour,<span> Ibrahim</span></h6>
-            <p>Juge de <span color="primary">l'entretien 1</span></p>
+            <h6 class="userpre">Bonjour,<strong> {{userpre}}</strong></h6>
+            <p>{{rolename}} de<span class="nomentretien" [routerLink]="['/entretien-details',idEntretien]"> {{nomEntretien}}</span></p>
           </ion-card-header>
         </ion-col>
         <ion-col size="2" class="ion-justify-content-center">
@@ -24,97 +24,144 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-grid class="mesgrid">
-      <ion-row>
-        <ion-col>
-          <h4>Les postulants par genre</h4>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <div class="container">
-          <div class="rowline">
-            <div class="col1">
-              <div class="progress violet">
-                <span class="progress-left">
-                  <span class="progress-bar"></span>
-                </span>
-                <span class="progress-right">
-                  <span class="progress-bar"></span>
-                </span>
-                <div class="progress-value">90%</div>
-              </div>
-              <div class="status">
-                Homme
-              </div>
+  <ion-grid class="mesgrid">
+    <ion-row>
+
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <h4>Les postulants par genre</h4>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <div class="container">
+        <div class="rowline">
+          <div class="col1">
+            <circle-progress [percent]="MasculinNOmbre" [outerStrokeWidth]="10" [innerStrokeWidth]="5"
+              [outerStrokeColor]="'#50BE87'" [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300"
+              [radius]="50"></circle-progress>
+            <div class="status">
+              Homme
             </div>
-            <div class="col2">
-              <div class="progress green">
-                <span class="progress-left">
-                  <span class="progress-bar"></span>
-                </span>
-                <span class="progress-right">
-                  <span class="progress-bar"></span>
-                </span>
-                <div class="progress-value">90%</div>
-              </div>
-              <div class="status">
-                Femme
-              </div>
+          </div>
+          <div class="col2">
+            <circle-progress [percent]="FemininNOmbre" [outerStrokeWidth]="10" [innerStrokeWidth]="5"
+              [outerStrokeColor]="'#845EC2'" [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300"
+              [radius]="50"></circle-progress>
+
+            <div class="status">
+              Femme
             </div>
           </div>
         </div>
-      </ion-row>
-    </ion-grid>
-    <ion-grid class="mesgrid">
-      <ion-row>
-        <ion-col>
-          <ion-card class="desc"color="primary">
-            <div class="cardbody">
-              <h6>Postulant</h6>
-              <p class="nbre">300</p>
-            </div>
-            <div class="cardicon">
-              <ion-icon name="person"></ion-icon>
-            </div>
-          </ion-card>          
-        </ion-col>
-        <ion-col>
-          <ion-card class="desc"color="primary">
-            <div class="cardbody">
-              <h6>Jury</h6>
-              <p class="nbre">300</p>
-            </div>
-            <div class="cardicon">
-              <ion-icon name="person"></ion-icon>
-            </div>
-          </ion-card>          
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-card class="desc"color="primary">
-            <div class="cardbody">
-              <h6>Entretien</h6>
-              <p class="nbre">300</p>
-            </div>
-            <div class="cardicon">
-              <ion-icon name="person"></ion-icon>
-            </div>
-          </ion-card>          
-        </ion-col>
-        <ion-col>
-          <ion-card class="desc"color="primary">
-            <div class="cardbody">
-              <h6>Postulant</h6>
-              <p class="nbre">300</p>
-            </div>
-            <div class="cardicon">
-              <ion-icon name="person"></ion-icon>
-            </div>
-          </ion-card>          
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+      </div>
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="mesgrid">
+    <ion-row>
+      <ion-col>
+        <ion-card class="desc" color="primary">
+          <div class="cardbody">
+            <h6>Postulant</h6>
+            <p class="nbre">{{totalElement}}</p>
+          </div>
+          <div class="cardicon">
+            <ion-icon name="person"></ion-icon>
+          </div>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card class="desc" color="primary">
+          <div class="cardbody">
+            <h6>Jury</h6>
+            <p class="nbre">{{nbreJury}}</p>
+          </div>
+          <div class="cardicon">
+            <svg width="50" height="48" viewBox="0 0 68 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 63.442H67.2499V65.552H0V63.442Z" fill="#CACACA" fill-opacity="0.4" />
+              <path
+                d="M64.68 61.2599H62.57V58.0611C62.57 57.7615 62.3331 57.5173 62.0414 57.5173H39.0909C38.7992 57.5173 38.5624 57.7615 38.5624 58.0611V61.2599H36.4524V58.0611C36.4524 56.5973 37.6361 55.4073 39.0909 55.4073H62.0414C63.4963 55.4073 64.68 56.5973 64.68 58.0611V61.2599Z"
+                fill="#CACACA" fill-opacity="0.4" />
+              <path
+                d="M60.1959 57.5153H40.939C39.4841 57.5153 38.3004 56.3242 38.3004 54.8604V52.4608C38.3004 50.997 39.4841 49.8059 40.939 49.8059H60.1959C61.6502 49.8059 62.8334 50.997 62.8334 52.4608V54.8604C62.8334 56.3247 61.6502 57.5153 60.1959 57.5153ZM40.939 51.9159C40.6473 51.9159 40.4104 52.1601 40.4104 52.4608V54.8604C40.4104 55.1611 40.6473 55.4053 40.939 55.4053H60.1959C60.4871 55.4053 60.7234 55.1611 60.7234 54.8604V52.4608C60.7234 52.1601 60.4871 51.9159 60.1959 51.9159H40.939Z"
+                fill="#CACACA" fill-opacity="0.4" />
+              <path
+                d="M47.6011 38.2352C46.9455 38.2352 46.3299 37.9778 45.8673 37.5099L42.7513 34.3613C41.8039 33.4044 41.8039 31.8456 42.7513 30.8882L55.7072 17.7946C56.1683 17.3278 56.7839 17.0698 57.4396 17.0698C58.0952 17.0698 58.7108 17.3272 59.1734 17.7946L62.2899 20.9448C63.2357 21.9033 63.2352 23.4605 62.2904 24.4168L49.335 37.5099C48.8719 37.9773 48.2563 38.2352 47.6011 38.2352ZM57.4401 19.1798C57.3789 19.1798 57.2887 19.1967 57.209 19.2779L44.2515 32.3715C44.1133 32.5108 44.1133 32.7376 44.2515 32.8769L47.3675 36.025C47.4482 36.1073 47.5394 36.1247 47.6011 36.1247C47.6629 36.1247 47.7541 36.1073 47.8348 36.025L60.7902 22.9335C60.9253 22.7969 60.9247 22.5653 60.7892 22.4282L57.6738 19.279C57.5931 19.1967 57.5023 19.1798 57.4401 19.1798Z"
+                fill="#CACACA" fill-opacity="0.4" />
+              <path
+                d="M30.7103 21.1644C30.0551 21.1644 29.4395 20.9075 28.9769 20.4401L25.8604 17.2909C24.9131 16.3319 24.9131 14.7737 25.8604 13.8168L38.8148 0.724785C39.2774 0.25742 39.8935 0 40.5497 0C41.206 0 41.8221 0.25742 42.2842 0.725313L45.4001 3.87396C46.347 4.83137 46.347 6.38908 45.4001 7.3465L32.4437 20.4396C31.9816 20.9069 31.366 21.1644 30.7103 21.1644ZM40.5497 2.11C40.487 2.11 40.3957 2.12741 40.315 2.20917L27.3612 15.3017C27.223 15.441 27.2235 15.6683 27.3612 15.8081L30.4771 18.9568C30.5573 19.038 30.6486 19.0554 30.7103 19.0554C30.772 19.0554 30.8633 19.0385 30.944 18.9562L43.9004 5.86264C44.0381 5.72338 44.0381 5.49708 43.9004 5.35782L40.784 2.20864C40.7027 2.12688 40.612 2.11 40.5497 2.11Z"
+                fill="#CACACA" fill-opacity="0.4" />
+              <path d="M33.4479 17.4319L45.7606 29.8742L44.2608 31.3584L31.9481 18.9161L33.4479 17.4319Z" fill="#CACACA"
+                fill-opacity="0.4" />
+              <path d="M43.8944 6.87399L56.2071 19.3162L54.7073 20.8004L42.3946 8.35817L43.8944 6.87399Z" fill="#CACACA"
+                fill-opacity="0.4" />
+              <path
+                d="M14.3221 54.6454L8.92212 49.1868L36.8933 20.9165L42.2955 26.3756L14.3221 54.6454ZM11.8904 49.1868L14.3221 51.6449L39.3272 26.375L36.8933 23.9158L11.8904 49.1868Z"
+                fill="#CACACA" fill-opacity="0.4" />
+              <path
+                d="M11.211 59.7506L3.86926 52.3302L9.43492 46.706L16.7756 54.1258L11.211 59.7506ZM6.83751 52.3302L11.211 56.7502L13.8074 54.1258L9.43492 49.7059L6.83751 52.3302Z"
+                fill="#CACACA" fill-opacity="0.4" />
+              <path d="M32.3247 27.2358L36.0568 31.0062L34.5572 32.4905L30.8251 28.7202L32.3247 27.2358Z" fill="#CACACA"
+                fill-opacity="0.4" />
+              <path d="M28.4098 31.196L32.1406 34.9661L30.6408 36.4503L26.91 32.6802L28.4098 31.196Z" fill="#CACACA"
+                fill-opacity="0.4" />
+              <path d="M42.0216 15.9781L47.1984 21.2094L45.6986 22.6935L40.5218 17.4623L42.0216 15.9781Z" fill="#CACACA"
+                fill-opacity="0.4" />
+              <path d="M61.5155 38.8191H67.52V40.9291H61.5155V38.8191Z" fill="#CACACA" fill-opacity="0.4" />
+              <path d="M65.1023 31.2009L66.2427 32.976L61.1752 36.2318L60.0347 34.4566L65.1023 31.2009Z" fill="#CACACA"
+                fill-opacity="0.4" />
+              <path d="M61.1788 43.514L66.2469 46.7706L65.1062 48.5458L60.0382 45.2892L61.1788 43.514Z" fill="#CACACA"
+                fill-opacity="0.4" />
+              <path d="M34.531 38.8191H40.535V40.9291H34.531V38.8191Z" fill="#CACACA" fill-opacity="0.4" />
+              <path d="M40.8724 43.5108L42.0129 45.286L36.9453 48.5417L35.8048 46.7665L40.8724 43.5108Z" fill="#CACACA"
+                fill-opacity="0.4" />
+            </svg>
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="3">
+
+      </ion-col>
+      <ion-col>
+        <ion-card class="desc" color="primary">
+          <div class="cardbody">
+            <h6>Entretien</h6>
+            <p class="nbre">{{entretienNombre}}</p>
+          </div>
+          <div class="cardicon">
+            <svg width="50" height="50" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_347_71)">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M0 6C0 5.46957 0.337142 4.96086 0.937258 4.58579C1.53737 4.21071 2.35131 4 3.2 4H16C16.8487 4 17.6626 4.21071 18.2627 4.58579C18.8629 4.96086 19.2 5.46957 19.2 6C19.2 6.53043 18.8629 7.03914 18.2627 7.41422C17.6626 7.78929 16.8487 8 16 8H3.2C2.35131 8 1.53737 7.78929 0.937258 7.41422C0.337142 7.03914 0 6.53043 0 6ZM25.6 6C25.6 5.46957 25.9371 4.96086 26.5373 4.58579C27.1374 4.21071 27.9513 4 28.8 4H92.8C93.6487 4 94.4626 4.21071 95.0627 4.58579C95.6629 4.96086 96 5.46957 96 6C96 6.53043 95.6629 7.03914 95.0627 7.41422C94.4626 7.78929 93.6487 8 92.8 8H28.8C27.9513 8 27.1374 7.78929 26.5373 7.41422C25.9371 7.03914 25.6 6.53043 25.6 6ZM25.6 18C25.6 17.4696 25.9371 16.9609 26.5373 16.5858C27.1374 16.2107 27.9513 16 28.8 16H73.6C74.4487 16 75.2626 16.2107 75.8627 16.5858C76.4629 16.9609 76.8 17.4696 76.8 18C76.8 18.5304 76.4629 19.0391 75.8627 19.4142C75.2626 19.7893 74.4487 20 73.6 20H28.8C27.9513 20 27.1374 19.7893 26.5373 19.4142C25.9371 19.0391 25.6 18.5304 25.6 18ZM0 30C0 29.4696 0.337142 28.9609 0.937258 28.5858C1.53737 28.2107 2.35131 28 3.2 28H16C16.8487 28 17.6626 28.2107 18.2627 28.5858C18.8629 28.9609 19.2 29.4696 19.2 30C19.2 30.5304 18.8629 31.0392 18.2627 31.4142C17.6626 31.7893 16.8487 32 16 32H3.2C2.35131 32 1.53737 31.7893 0.937258 31.4142C0.337142 31.0392 0 30.5304 0 30ZM25.6 30C25.6 29.4696 25.9371 28.9609 26.5373 28.5858C27.1374 28.2107 27.9513 28 28.8 28H92.8C93.6487 28 94.4626 28.2107 95.0627 28.5858C95.6629 28.9609 96 29.4696 96 30C96 30.5304 95.6629 31.0392 95.0627 31.4142C94.4626 31.7893 93.6487 32 92.8 32H28.8C27.9513 32 27.1374 31.7893 26.5373 31.4142C25.9371 31.0392 25.6 30.5304 25.6 30ZM25.6 42C25.6 41.4696 25.9371 40.9609 26.5373 40.5858C27.1374 40.2107 27.9513 40 28.8 40H73.6C74.4487 40 75.2626 40.2107 75.8627 40.5858C76.4629 40.9609 76.8 41.4696 76.8 42C76.8 42.5305 76.4629 43.0392 75.8627 43.4142C75.2626 43.7893 74.4487 44 73.6 44H28.8C27.9513 44 27.1374 43.7893 26.5373 43.4142C25.9371 43.0392 25.6 42.5305 25.6 42ZM0 54C0 53.4696 0.337142 52.9609 0.937258 52.5858C1.53737 52.2107 2.35131 52 3.2 52H16C16.8487 52 17.6626 52.2107 18.2627 52.5858C18.8629 52.9609 19.2 53.4696 19.2 54C19.2 54.5305 18.8629 55.0392 18.2627 55.4142C17.6626 55.7893 16.8487 56 16 56H3.2C2.35131 56 1.53737 55.7893 0.937258 55.4142C0.337142 55.0392 0 54.5305 0 54ZM25.6 54C25.6 53.4696 25.9371 52.9609 26.5373 52.5858C27.1374 52.2107 27.9513 52 28.8 52H92.8C93.6487 52 94.4626 52.2107 95.0627 52.5858C95.6629 52.9609 96 53.4696 96 54C96 54.5305 95.6629 55.0392 95.0627 55.4142C94.4626 55.7893 93.6487 56 92.8 56H28.8C27.9513 56 27.1374 55.7893 26.5373 55.4142C25.9371 55.0392 25.6 54.5305 25.6 54Z"
+                  fill="#CACACA" fill-opacity="0.4" />
+              </g>
+              <defs>
+                <clipPath id="clip0_347_71">
+                  <rect width="60" height="60" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+        </ion-card>
+      </ion-col>
+      <ion-col size="3">
+        
+      </ion-col>
+      <!-- <ion-col>
+        <ion-card class="desc" color="primary">
+          <div class="cardbody">
+            <h6>Postulant</h6>
+            <p class="nbre">300</p>
+          </div>
+          <div class="cardicon">
+            <ion-icon name="person"></ion-icon>
+          </div>
+        </ion-card>
+      </ion-col> -->
+    </ion-row>
+  </ion-grid>
 
 
 

@@ -1,65 +1,84 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>profile</ion-title>
+    <ion-buttons slot="end">
+      <ion-button id="popover-button">
+        <ion-icon name="ellipsis-horizontal"></ion-icon>
+      </ion-button>
+      <!-- Debut Popup -->
+      <ion-popover trigger="popover-button" [dismissOnSelect]="true">
+        <ng-template>
+          <ion-content>
+            <ion-list>
+              <ion-item [button]="true" [detail]="false" (click)="logOut()">Se deconnecter</ion-item>
+              <ion-item [button]="true" [detail]="false" (click)="gotoPasswordChangePage()">Changer mots de passe</ion-item>
+            </ion-list>
+          </ion-content>
+        </ng-template>
+      </ion-popover>
+      <!-- FIN Popup -->
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
+  <div *ngIf="isLoading" class="ion-text-center">
+    <ion-spinner color="warning"></ion-spinner>
+    Mise à jour en cour 
+  </div>
+  <form *ngIf="!isLoading" #updateProfileForm="ngForm" (ngSubmit)="onUpdateUser(updateProfileForm.value)" enctype="multipart/form-data">
     <ion-grid>
-      <ion-row>
-        <h3>Profil</h3>
-      </ion-row>
-      <ion-row class="ion-align-items-center">
-        <ion-col size="2">
-          <ion-avatar>
+      <ion-row class="ion-justify-content-center marge">
+        <div class="form-group">
+          <ion-avatar class="avtar">
             <label for="image">
-            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-          </label>
-            <input id="image" type="file" style="visibility: hidden;"/>
+              <img src="{{ userpicture }}{{ utilisateur?.id }}.png" />
+            </label>
+            <input id="image" style="visibility: hidden;" (change)="onProfilePictureSelected($event)" #fileToUpload
+              type="file" class="form-control-file" name="image" placeholder="photo" accept="image/*"
+              (click)="fileToUpload.click()" />
           </ion-avatar>
-        </ion-col>
-        <ion-col size="10">
-          <ion-card-header>
-            <ion-card-title>Modifier Photo</ion-card-title>
-            <ion-card-subtitle><ion-button class="eval">Modifier</ion-button></ion-card-subtitle>
-          </ion-card-header>
-        </ion-col>
+        </div>
       </ion-row>
     </ion-grid>
-  </ion-card>
-  <div class="container">
-			<form>
-				<div class="user-details">
-					<div class="input-box">
-						<label for="nom">Nom: </label>
-						<input value="Diallo" type="text" name="nom" placeholder="Entrez votre nom" required>
-					</div>
-					<div class="input-box">
-						<label for="prenom">Prenom: </label>
-						<input value="Abdoulaye" type="text" name="prenom" placeholder="Entrez votre prenom" required>
-					</div>
-					<div class="input-box">
-						<label for="email">E-mail: </label>
-						<input value="d.abdoulayead28@gmail.com" type="text" name="email" placeholder="Entrez votre Email" required>
-					</div>
-          <div class="input-box">
-						<label for="numero">Numero: </label>
-						<input value="Numero" type="text" name="numero" placeholder="Entrez votre numero" required>
-					</div>
-          <div class="input-box">
-						<label for="birthd">Date de naissance: </label>
-						<input value="2018-07-22" type="date" name="birthd" placeholder="Entrez votre date de naissance" required>
-					</div>
-          <div class="input-box">
-						<label for="bio">Bio: </label>
-						<input value="je suis .........................." type="text" name="bio" placeholder="Entrez votre Bio" required>
-					</div>
-					<div class="button">
-					<input type="button" value="Enregistrer">
-					</div>
-				</div>
-			</form>
+    <div class="container">
+      <div class="user-details">
+        <input type="hidden" class="form-control" name="id" ngModel="{{ utilisateur?.id }}" required />
+        <div class="form-group">
+          <label for="nom">Nom: </label>
+          <input type="text" ngModel="{{ utilisateur?.nom }}" class="form-control" id="nom" name="nom"
+            aria-describedby="nom" placeholder="Entrez votre nom" required>
+        </div>
+        <div class="form-group">
+          <label for="prenom">Prenom: </label>
+          <input type="text" id="prenom" name="prenom" ngModel="{{ utilisateur?.prenom }}" class="form-control"
+            aria-describedby="prenom" placeholder="Entrez votre prenom" required>
+        </div>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input ngModel="{{ username }}" type="text" class="form-control" name="username" id="username"
+            placeholder="Username" disabled />
+        </div>
+        <div class="form-group">
+          <label for="email">E-mail: </label>
+          <input type="email" id="email" name="email" ngModel="{{ utilisateur?.email }}" class="form-control"
+            placeholder="Entrez votre Email" required>
+        </div>
+        <div class="form-group">
+          <label for="numero">Numero: </label>
+          <input type="tel" name="numero" id="numero" ngModel="{{ utilisateur?.numero}}" class="form-control"
+            placeholder="Entrez votre numero" required>
+        </div>
+        <div class="form-group">
+          <label for="bio">Bio: </label>
+          <textarea name="bio" id="bio" ngModel="{{ utilisateur?.bio }}" class="form-control"
+            placeholder="Entrez votre Bio"></textarea>
+        </div>
+        <div class="button">
+          <input type="submit" value="Enregistrer" [disabled]="updateProfileForm.invalid">
+        </div>
       </div>
+    </div>
+  </form>
 
 </ion-content>

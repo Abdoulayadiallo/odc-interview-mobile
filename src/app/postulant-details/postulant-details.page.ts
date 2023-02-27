@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Postulant } from '../Model/postulant';
+import { PostulantService } from '../Service/postulant.service';
 
 @Component({
   selector: 'app-postulant-details',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostulantDetailsPage implements OnInit {
 
-  constructor() { }
+  id: number
+  postulant: Postulant
+  constructor(private route: ActivatedRoute, private postulantService: PostulantService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit(): void {
+    this.id = this.route.snapshot.params['id'];
 
-}
+    this.postulant = new Postulant();
+    this.postulantService.getOnePostulantById(this.id).subscribe( data => {
+      this.postulant = data;
+    });
+  }}

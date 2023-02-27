@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>entretien-details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="ios hydrated">
+    <img src="{interviewImage}{id.png}">
+
+    <ion-card-header class="ion-inherit-color ios hydrated">
+        <ion-card-subtitle *ngIf="entretienStatus=='A VENIR'" ><ion-button class="iviolet">{{entretienStatus}}</ion-button></ion-card-subtitle>
+        <ion-card-subtitle *ngIf="entretienStatus=='TERMINE'" ><ion-button class="iorange">{{entretienStatus}}</ion-button></ion-card-subtitle>
+        <ion-card-subtitle *ngIf="entretienStatus=='EN COUR'" ><ion-button class="ivert">{{entretienStatus}}</ion-button></ion-card-subtitle>
+        <ion-card-title>{{entretienNom}}</ion-card-title>
+    </ion-card-header>
+    <ion-item>{{entretienDescription}}</ion-item>
+    <ion-item>date debut: {{entretienDebut | date : "dd/MM/yyyy"}}</ion-item>
+    <ion-item>date Fin: {{entretienFin | date : "dd/MM/yyyy"}}</ion-item>
+    <ion-card-content>
+      
+    </ion-card-content>
+</ion-card>
+</ion-content>
