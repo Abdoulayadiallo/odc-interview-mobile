@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, BehaviorSubject, Subscription, map, startWith, catchError, of } from 'rxjs';
 import { Postulant } from '../Model/postulant';
@@ -13,6 +14,7 @@ import { PostulantService } from '../Service/postulant.service';
   styleUrls: ['./postulant-utilisateur.page.scss'],
 })
 export class PostulantUtilisateurPage implements OnInit {
+  searchForm!: NgForm;
   public isSearchBarOpened = false;
   postulant: Postulant = new Postulant();
   postulants!: Postulant[];

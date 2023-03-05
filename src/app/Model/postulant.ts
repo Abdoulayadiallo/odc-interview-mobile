@@ -15,4 +15,5 @@ export class Postulant {
     commentaireFinal!: string;
     dateCreation!: Date
     entretien!: Entretien;
+    evaluated!:boolean;
 }

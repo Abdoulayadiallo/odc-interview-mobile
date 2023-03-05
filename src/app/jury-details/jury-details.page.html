@@ -43,7 +43,6 @@
     <ion-item>Prenom {{jury?.prenom}}</ion-item>
     <ion-item>Email {{jury?.email}}</ion-item>
     <ion-item>Status {{roleName}}</ion-item>
-    <ion-item>Date de naissance{{jury?.dateCreation | date:"dd/MM/YYYY" }} </ion-item>
   </ion-list>
   <!-- Fin Card jury -->
   <ion-button class="evaluation" [routerLink]="['/postulant-utilisateur',jury?.entretien?.id,jury?.id]">Voir les Postulant</ion-button>

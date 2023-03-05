@@ -1,11 +1,11 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
+      <ion-button color="medium" (click)="cancel()">Fermer</ion-button>
     </ion-buttons>
     <ion-title>Note</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="confirm()">Confirm</ion-button>
+      <ion-button (click)="confirm()">Confirmer</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -20,7 +20,7 @@
         </div>
         <div class="form-group">
           <label for="commentaire">Commentaire: </label>
-          <textarea id="Commentaire" class="form-control" [(ngModel)]="note.commentaire" name="commentaire" placeholder="Commenter l'utilisateur"></textarea>
+          <textarea id="Commentaire" class="form-control" [(ngModel)]="note.commentaire" name="commentaire" placeholder="Commenter la note du postulant"></textarea>
         </div>
       </div>
     </form>

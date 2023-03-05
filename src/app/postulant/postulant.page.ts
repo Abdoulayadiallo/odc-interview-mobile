@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
   map,
@@ -9,6 +10,7 @@ import {
   BehaviorSubject,
   Observable,
   Subscription,
+  lastValueFrom,
 } from 'rxjs';
 import { Participant } from '../Model/participant';
 import { Postulant } from '../Model/postulant';
@@ -25,6 +27,8 @@ import { PostulantService } from '../Service/postulant.service';
   styleUrls: ['./postulant.page.scss'],
 })
 export class PostulantPage implements OnInit {
+  @ViewChild('searchForm', { static: false })
+  searchForm!: NgForm;
   public isSearchBarOpened = false;
   postulant: Postulant = new Postulant();
   postulants!: Postulant[];
@@ -59,46 +63,51 @@ export class PostulantPage implements OnInit {
 
   ngOnInit(): void {
     const username = this.accountService.loggInUsername;
-    this.getUserInfo(username);
-    // this.getOne()
-
+    this.getUserInfo(username).then(() => {
+      this.getPostulants()
+      
+    });
+  }
+  getPostulants(){
     this.postulantState$ = this.postulantService
-      .getAllPostulantByEntretien(this.idEntretien)
-      .pipe(
-        map((response: Postulantresponse) => {
-          // this.loadingService.loadingOff();
-          this.responseSubject.next(response);
-          this.currentPageSubject.next(response.pageNo);
-          console.log(response);
-          return { appState: 'APP_LOADED', appData: response };
-        }),
-        startWith({
-          appState: 'APP_LOADED',
-          appData: this.responseSubject.value,
-        }),
-        catchError((error: HttpErrorResponse) => {
-          // this.loadingService.loadingOff();
-          return of({ appState: 'APP_ERROR', error });
-        })
-      );
+        .getAllPostulantByEntretien(this.idEntretien)
+        .pipe(
+          map((response: Postulantresponse) => {
+            // this.loadingService.loadingOff();
+            this.responseSubject.next(response);
+            this.currentPageSubject.next(response.pageNo);
+            console.log(response);
+            return { appState: 'APP_LOADED', appData: response };
+          }),
+          startWith({
+            appState: 'APP_LOADED',
+            appData: this.responseSubject.value,
+          }),
+          catchError((error: HttpErrorResponse) => {
+            // this.loadingService.loadingOff();
+            return of({ appState: 'APP_ERROR', error });
+          })
+        );
+  }
+  ionViewWillEnter() {
+    this.getPostulants()
+    console.log('MyPage will enter');
   }
 
-  getUserInfo(username: string): void {
-    this.subscriptions.push(
-      this.accountService.getUserInformation(username).subscribe(
-        (response: Utilisateur) => {
-          this.utilisateur = response;
-          this.idEntretien = response.entretien.id;
-          console.log(this.idEntretien);
-          console.log(response);
-          console.log(this.utilisateur);
-        },
-        (error) => {
-          console.log(error);
-          this.utilisateur = null;
-        }
-      )
-    );
+  async getUserInfo(username: string): Promise<void> {
+    try {
+      const response: Utilisateur = await lastValueFrom(
+        this.accountService.getUserInformation(username)
+      );
+      this.utilisateur = response;
+      this.idEntretien = response.entretien.id;
+      console.log(this.idEntretien);
+      console.log(response);
+      console.log(this.utilisateur);
+    } catch (error) {
+      console.log(error);
+      this.utilisateur = null;
+    }
   }
 
   // getOne(){
