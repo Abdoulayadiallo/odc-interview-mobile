@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, catchError, map, Observable, of, startWith, Subscription } from 'rxjs';
+import { BehaviorSubject, catchError, lastValueFrom, map, Observable, of, startWith, Subscription } from 'rxjs';
 import { JuryResponse } from '../Model/jury-response';
 import { Participant } from '../Model/participant';
 import { Postulant } from '../Model/postulant';
@@ -54,28 +54,31 @@ export class JuryPage implements OnInit {
 
   ngOnInit() {
     const username = this.accountService.loggInUsername;
-    this.getUserInfo(username);
-    this.juryPicture=this.accountService.userPicture
+    this.getUserInfo(username).then(()=>{
 
-    this.juryState$ = this.accountService
-      .getAllJuryByEntretien(this.idEntretien)
-      .pipe(
-        map((response: JuryResponse) => {
-          // this.loadingService.loadingOff();
-          this.responseSubject.next(response);
-          this.currentPageSubject.next(response.pageNo);
-          console.log(response);
-          return { appState: 'APP_LOADED', appData: response };
-        }),
-        startWith({
-          appState: 'APP_LOADED',
-          appData: this.responseSubject.value,
-        }),
-        catchError((error: HttpErrorResponse) => {
-          // this.loadingService.loadingOff();
-          return of({ appState: 'APP_ERROR', error });
-        })
-      );
+
+      this.juryPicture=this.accountService.userPicture
+  
+      this.juryState$ = this.accountService
+        .getAllJuryByEntretien(this.idEntretien)
+        .pipe(
+          map((response: JuryResponse) => {
+            // this.loadingService.loadingOff();
+            this.responseSubject.next(response);
+            this.currentPageSubject.next(response.pageNo);
+            console.log(response);
+            return { appState: 'APP_LOADED', appData: response };
+          }),
+          startWith({
+            appState: 'APP_LOADED',
+            appData: this.responseSubject.value,
+          }),
+          catchError((error: HttpErrorResponse) => {
+            // this.loadingService.loadingOff();
+            return of({ appState: 'APP_ERROR', error });
+          })
+        );
+    })
   }
   getAllJurybyEntretien() {
     this.accountService.getAllJury().subscribe((data) => {
@@ -94,27 +97,23 @@ export class JuryPage implements OnInit {
   postulantDetails(id: string) {
     this.router.navigate(['jury-details', id]);
   }
-  getUserInfo(username: string): void {
-    this.subscriptions.push(
-      this.accountService.getUserInformation(username).subscribe(
-        (response: Utilisateur) => {
-          this.utilisateur = response;
-          this.nomEntretien = response.entretien.entretienNom;
-          this.entretienNombre = response.entretien.entretienNom.length;
-          // this.userpre=response.prenom
-          this.rolename = response.role.roleName;
-          this.idEntretien = response.entretien.id;
-          console.log(this.idEntretien);
-          console.log(response);
-          console.log(this.nomEntretien);
-          console.log(this.utilisateur);
-        },
-        (error) => {
-          console.log(error);
-          this.utilisateur = null;
-        }
-      )
-    );
+  async getUserInfo(username: string): Promise<void> {
+    try {
+      const response: Utilisateur = await lastValueFrom(this.accountService.getUserInformation(username));
+      this.utilisateur = response;
+      this.nomEntretien = response.entretien.entretienNom;
+      this.entretienNombre = response.entretien.entretienNom.length;
+      // this.userpre=response.prenom
+      this.rolename = response.role.roleName;
+      this.idEntretien = response.entretien.id;
+      console.log(this.idEntretien);
+      console.log(response);
+      console.log(this.nomEntretien);
+      console.log(this.utilisateur);
+    } catch (error) {
+      console.log(error);
+      this.utilisateur = null;
+    }
   }
 
   gotToPage(

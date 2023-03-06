@@ -69,12 +69,12 @@
   <ion-content>
     <ng-container *ngSwitchCase="'APP_LOADED'">
       <!-- Card postulant -->
-      <div *ngIf="state.appData.contenu.length<1" >
+      <div *ngIf="state.appData?.contenu.length<1" >
         <ion-card class="ion-text-center">
           Aucun postulant trouvé
         </ion-card>
       </div>
-      <div *ngIf="state.appData.contenu.length>0">
+      <div *ngIf="state.appData.contenu?.length>0">
       
         <ion-card
         *ngFor="let post of state.appData?.contenu ;let i = index"
@@ -178,7 +178,7 @@
         [ngClass]="0 == (currentPage$ | async) ? ' disabled' : ''"
         >
         <a
-            (click)="goToNextOrPreviousPage('backward','searchForm.value.keyword')"
+            (click)="goToNextOrPreviousPage('backward',searchForm?.value?.keyword)"
           >
             &laquo;</a
           >
@@ -188,7 +188,7 @@
         >
           <a
             [ngClass]="i == (currentPage$ | async) ? ' active' : ''"
-            (click)="gotToPage(searchForm.value.keyword,i,10)"
+            (click)="gotToPage('',i,10)"
             >{{i+1}}</a
           >
         </li>
@@ -196,8 +196,8 @@
           class="page-item pointer"
           [ngClass]=" (state.appData?.totalPages - 1) == (currentPage$ | async) ? ' disabled' : ''"
         >
-          <a
-            (click)="goToNextOrPreviousPage('forward',searchForm.value.keyword)"
+          <a *ngIf="searchForm?.value?.keyword=='null'"
+            (click)="goToNextOrPreviousPage('forward','')"
             >&raquo;</a
           >
         </li>

@@ -157,7 +157,7 @@ export class PostulantPage implements OnInit {
         })
       );
   }
-  goToNextOrPreviousPage(direction: string, name?: string): void {
+  goToNextOrPreviousPage(direction: string, name?: string ): void {
     this.gotToPage(
       name,
       direction === 'forward'
