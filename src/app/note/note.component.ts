@@ -104,7 +104,7 @@ export class NoteComponent implements OnInit {
           console.log(error);
           //Une alerte d'erreur
           this.alertService.presentToast(
-            "Une erreur est survenu lors de l'ajout ...",
+            "Note superieur au barem ...",
             'danger'
           );
         }
