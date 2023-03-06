@@ -21,7 +21,7 @@
       <ion-row class="ion-align-items-center">
         <ion-col size="2">
           <ion-avatar>
-            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            <img src="{{juryPicture}}{{jury?.id}}.png" />
           </ion-avatar>
         </ion-col>
         <ion-col size="10">
@@ -43,7 +43,6 @@
     <ion-item>Prenom {{jury?.prenom}}</ion-item>
     <ion-item>Email {{jury?.email}}</ion-item>
     <ion-item>Status {{roleName}}</ion-item>
-    <ion-item>Date de naissance{{jury?.dateCreation | date:"dd/MM/YYYY" }} </ion-item>
   </ion-list>
   <!-- Fin Card jury -->
   <ion-button class="evaluation" [routerLink]="['/postulant-utilisateur',jury?.entretien?.id,jury?.id]">Voir les Postulant</ion-button>

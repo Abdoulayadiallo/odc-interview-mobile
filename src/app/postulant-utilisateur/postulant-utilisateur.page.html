@@ -36,7 +36,7 @@
             <p class="postdetail">Total <span>{{state.appData.totalElements}}</span></p>
           </ion-col>
           <ion-col class="align-items-center">
-            <ion-button id="popover-button" class="head-filter" color="secondary" fill=""><ion-icon
+            <ion-button id="popover-button-jp" class="head-filter" color="secondary" fill=""><ion-icon
                 name="funnel-outline"></ion-icon> Filtrer </ion-button>
           </ion-col>
         </ion-row>
@@ -64,7 +64,7 @@
               </ion-card-header>
             </ion-col>
             <ion-col size="2" class="ion-justify-content-center">
-?              <ion-icon size="large" name="arrow-forward-circle-outline" (click)="postulantDetails(post?.id)"></ion-icon>
+              <ion-icon size="large" name="arrow-forward-circle-outline" (click)="postulantDetails(post?.id)"></ion-icon>
             </ion-col>
           </ion-row>
           <ion-row>
@@ -75,7 +75,7 @@
         </ion-grid>
       </ion-card>
       <!-- DEBUT POPUP FILTER IONIC -->
-      <ion-popover trigger="popover-button" [dismissOnSelect]="true">
+      <ion-popover trigger="popover-button-jp" [dismissOnSelect]="true">
         <ng-template>
           <ion-content>
             <ion-list>
@@ -95,14 +95,14 @@
 
       <div class="pagination">
         <li class="page-item pointer" [ngClass]="0 == (currentPage$ | async) ? ' disabled' : ''">
-          <a (click)="goToNextOrPreviousPage('backward','searchForm.value.keyword')"> &laquo;</a>
+          <a (click)="goToNextOrPreviousPage('backward',searchForm.value.keyword)"> &laquo;</a>
         </li>
         <li *ngFor="let number of [].constructor(state.appData?.totalPages); let i = index">
-          <a [ngClass]="i == (currentPage$ | async) ? ' active' : ''" (click)="gotToPage('',i,10)">{{i+1}}</a>
+          <a [ngClass]="i == (currentPage$ | async) ? ' active' : ''" (click)="gotToPage(searchForm.value.keyword,i,10)">{{i+1}}</a>
         </li>
         <li class="page-item pointer"
           [ngClass]=" (state.appData?.totalPages - 1) == (currentPage$ | async) ? ' disabled' : ''">
-          <a (click)="goToNextOrPreviousPage('forward','searchForm.value.keyword')">&raquo;</a>
+          <a (click)="goToNextOrPreviousPage('forward',searchForm.value.keyword)">&raquo;</a>
         </li>
       </div>
     </ng-container>

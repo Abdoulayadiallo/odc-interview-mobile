@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { Critere } from '../Model/critere';
@@ -18,22 +18,24 @@ import { QuestionService } from '../Service/question.service';
 export class NoteComponent implements OnInit {
   private subscriptions: Subscription[] = [];
   name: string;
-  data: any
-  utilisateur: Utilisateur
-  username: string
+  data: any;
+  utilisateur: Utilisateur;
+  username: string;
   note: Note = new Note();
   userconnected: string;
   notesList: Note[];
   critereList: Critere[];
   Repond: Question[];
 
+  @Output() closeModal: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
-    private modalCtrl: ModalController, 
+    private modalCtrl: ModalController,
     private noteService: NoteService,
     private accountService: AccountService,
     private alertService: AlertService,
-    private questionService:QuestionService) { }
+    private questionService: QuestionService
+  ) {}
   ngOnInit(): void {
     this.getUserInfo(this.accountService.loggInUsername);
     this.username = this.accountService.loggInUsername;
@@ -45,33 +47,36 @@ export class NoteComponent implements OnInit {
         (response: Utilisateur) => {
           this.utilisateur = response;
           this.userconnected = response.username;
-          console.log(response)
-          console.log(this.utilisateur)
+          console.log(response);
+          console.log(this.utilisateur);
         },
-        error => {
+        (error) => {
           console.log(error);
           this.utilisateur = null;
         }
-      ));
+      )
+    );
   }
   cancel() {
     return this.modalCtrl.dismiss(null, 'cancel');
   }
   //RECUPERER TOUS LES NOTES POUR RAFRACHIR LES NOUVELLES DONNEES
-  getAllNote(){
-    this.noteService.getAllNote().subscribe(data=>{
-      this.notesList=data;
-    })
+  getAllNote() {
+    this.noteService.getAllNote().subscribe((data) => {
+      this.notesList = data;
+    });
   }
   //RECUPERER TOUS LES QUESTIONS NOTES POUR RAFRACHIR LES NOUVELLES DONNEES
   getNombreQuestionNoteByPostulant() {
-    this.questionService.getAllQuestion().subscribe(data => {
-      this.Repond = data
-    })
+    this.questionService.getAllQuestion().subscribe((data) => {
+      this.Repond = data;
+    });
   }
 
   confirm() {
-    this.ajouterNote()
+    this.modalCtrl.dismiss();
+    this.closeModal.emit();
+    this.ajouterNote();
     setTimeout(() => {
       // Pour rafrachir les nouvelles valeurs
       // this.getAllNote()
@@ -82,23 +87,27 @@ export class NoteComponent implements OnInit {
   }
   //Une methode quiva ajouter des notes a un postulant par l'id critere, l'id postulant et l'id user
   ajouterNote() {
-    this.noteService.addNote(this.note, this.data.critereId, this.data.postulant.id, this.userconnected).subscribe(response => {
-      console.log(response)
-      //Une alerte de succès
-      this.alertService.presentToast(
-        "Note ajouté avec succès.",
-        "success"
+    this.noteService
+      .addNote(
+        this.note,
+        this.data.critereId,
+        this.data.postulant.id,
+        this.userconnected
+      )
+      .subscribe(
+        (response) => {
+          console.log(response);
+          //Une alerte de succès
+          this.alertService.presentToast('Note ajouté avec succès.', 'success');
+        },
+        (error) => {
+          console.log(error);
+          //Une alerte d'erreur
+          this.alertService.presentToast(
+            "Note superieur au barem ...",
+            'danger'
+          );
+        }
       );
-    },
-      error => {
-        console.log(error);
-        //Une alerte d'erreur
-        this.alertService.presentToast(
-          "Une erreur est survenu lors de l'ajout ...",
-          "danger"
-        );
-      })
-
   }
-
 }

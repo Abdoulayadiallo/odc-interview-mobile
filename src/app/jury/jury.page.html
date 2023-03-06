@@ -26,7 +26,7 @@
         </ion-row>
       </ion-grid>
     </ion-toolbar>
-    <ion-item>Total {{state.appData.totalElements}}</ion-item>
+    <ion-item>Total {{state?.appData?.totalElements}}</ion-item>
   </ion-header>
   <ion-content>
     <!-- Card jury -->
@@ -36,7 +36,7 @@
           <ion-row class="ion-align-items-center" >
             <ion-col size="2">
               <ion-avatar>
-                <img alt="Silhouette of a person's head" src="{{juryPicture}}{{jury.id}}" />
+                <img  src="{{juryPicture}}{{jury?.id}}.png" />
               </ion-avatar>
             </ion-col>
             <ion-col size="8">

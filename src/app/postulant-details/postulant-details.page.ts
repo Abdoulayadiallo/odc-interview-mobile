@@ -9,16 +9,24 @@ import { PostulantService } from '../Service/postulant.service';
   styleUrls: ['./postulant-details.page.scss'],
 })
 export class PostulantDetailsPage implements OnInit {
-
-  id: number
-  postulant: Postulant
-  constructor(private route: ActivatedRoute, private postulantService: PostulantService) { }
+  id: number;
+  postulant: Postulant;
+  constructor(
+    private route: ActivatedRoute,
+    private postulantService: PostulantService
+  ) {}
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
 
     this.postulant = new Postulant();
-    this.postulantService.getOnePostulantById(this.id).subscribe( data => {
+    this.postulantService.getOnePostulantById(this.id).subscribe((data) => {
       this.postulant = data;
     });
-  }}
+  }
+  ionViewWillEnter() {
+    this.postulantService.getOnePostulantById(this.id).subscribe((data) => {
+      this.postulant = data;
+    });
+  }
+}

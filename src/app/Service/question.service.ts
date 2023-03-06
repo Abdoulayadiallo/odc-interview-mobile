@@ -24,8 +24,8 @@ export class QuestionService {
   getNombreQuestionNoteByPostulant(postulantId:number):Observable<NombreQuestionResponse>{
     return this.http.get<NombreQuestionResponse>(`${this.host}/question/repond/${postulantId}`);
   }
-  getAllQuestionByEntretien(id:number):Observable<HttpErrorResponse | HttpResponse<any>>{
-    return this.http.get<HttpErrorResponse | HttpResponse<any>>(`${this.host}/question/entretien/${id}`);
+  getAllQuestionByEntretien(id:number):Observable<HttpErrorResponse | HttpResponse<any>|Question[]|any>{
+    return this.http.get<HttpErrorResponse | HttpResponse<any>|Question[]>(`${this.host}/question/entretien/${id}`);
   }
   
 }

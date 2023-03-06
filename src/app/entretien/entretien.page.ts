@@ -38,11 +38,10 @@ export class EntretienPage implements OnInit {
   questions: Question[];
   nombreRepond: number;
   questionView: any;
-
+  myWrapperList: Array<MyWrapper> = []; 
 
 
   constructor(private modalCtrl: ModalController,
-    private critereService: CritereService,
     private questionService: QuestionService,
     private route: ActivatedRoute,
     private postulantService: PostulantService,
@@ -51,36 +50,13 @@ export class EntretienPage implements OnInit {
   ngOnInit(): void {
     const username = this.accountService.loggInUsername
     this.getUserInfo(username)
-    // this.getQuestion()
-    // setTimeout(() => {
-    //   // this.getCritere();
-    //   this.getQuestion();
-    // }, 200)
-    // setTimeout(() => {
-    //   this.getNombreQuestionNoteByPostulant()
-
-      
-    //   // for (let i = 1; i < this.questions.length; i++) {
-    //   //   if (this.questions[i].id == i) {
-    //   //     console.log(this.questions[i].critere.id)
-    //   //     this.getNote(this.questions[i].critere.id);
-    //   //   }
-
-    //   // }
-    // }, 400)
-
-
     this.id = this.route.snapshot.params['id'];
-    // this.usernameJury = this.route.snapshot.params['username'];
     this.getPostulantById().then(() => {
-      this.getQuestion();
-      this.getNombreQuestionNoteByPostulant()
+      this.getNombreQuestionNoteByPostulant();
+      // this.myWrapperList.splice(0, this.myWrapperList.length);
+      // this.getQuestion();
     });
-    // this.postulant = new Postulant();
-    // this.postulantService.getOnePostulantById(this.id).subscribe(data => {
-    //   this.postulant = data;
-    //   console.log(data)
-    // });
+
   }
   async getPostulantById(): Promise<void>{
     try {
@@ -105,83 +81,31 @@ export class EntretienPage implements OnInit {
         }
       ));
   }
-  // getQuestion() {
-  //   this.questionService.getAllQuestion().subscribe(
-  //     data => {
-  //       this.questions = data
-  //       // console.log(data)
-  //       //  for (let i = 1; i < this.questions.length; i++) {
-  //       //   if (this.questions[i].id == i) {
-  //       //     console.log(this.questions[i].critere.id)
-  //       //     this.getNote(this.questions[i].critere.id);
-  //       //   }
 
-  //       // }
-  //     }
-  //   )
-  // }
   getNombreQuestionNoteByPostulant() {
     this.questionService.getNombreQuestionNoteByPostulant(this.id).subscribe(data => {
       this.nombreRepond = data.pourcentage
     })
   }
-
-
-  getNote(i: number): number {
-    this.noteService.getNoteByCritere(i, this.idJury, this.id).subscribe(data => {
-      // console.log(data)
-      this.noteresponse = data
-      if (this.noteresponse.contenu == null) {
-        this.note[i] = null
-        console.log(this.note[i] + "noooooooooooooooooooooooooooooooooooote nullllllllllll")
-      }
-      if (this.noteresponse.contenu != null) {
-        this.isnote = data.noted
-        this.note[i] = data.contenu.point
-        console.log(this.note[i])
-        console.log(this.note[i] + "ppppppppppppppppppppppppppppppppppppppppp nullllllllllll")
-
-      }
-      console.log(this.isnote + "after if")
-
-    })
-    return this.note[i]
-  }
-
  //Afficher Question
   getQuestion() {
     this.questionService.getAllQuestionByEntretien(this.utilisateur.entretien.id).subscribe(data => {
       this.questionView = data
+      data.forEach((question: Question) => {
+        this.noteService.getNoteByCritere(question.critere.id, this.idJury, this.id).subscribe(note => {
+          let myWrapper = new MyWrapper(question,note?.contenu?.point)
+          this.myWrapperList.push(myWrapper);
+        })
+        console.log(this.myWrapperList)
+      });
     })
   }
-
-  // getCritere(){
-  //   this.critereService.getAllCritere().subscribe(data => {
-  //     console.log(data)
-  //     this.criteres = data;
-  //     this.critereNombre=data.length
-  //     for(let i = 0; i < this.critereNombre; i++){
-  //       console.log(this.criteres[i].id)
-  //       if(this.criteres[i].id == i+1){
-  //         this.nomQuestion.push(this.criteres[i].question[0].nomQuestion)
-  //         console.log(this.nomQuestion)
-  //         this.noteService.getNoteByCritere(this.criteres[i].id,this.idJury,this.id,).subscribe(data =>{
-  //           this.noteresponse=data
-  //           this.isnote=data.noted
-  //            this.note.push(data.contenu.point)
-  //         })
-  //       }
-
-  //     }
-  //     console.log(this.note)
-  //   })
-  // }
-  // getnoteByCritere(critereId:number){
-  //   this.noteService.getNoteByCritere(critereId).subscribe(data =>{
-  //     console.log(data)
-  //     this.note=data[0].point
-  //   })
-  // }
+  
+  ionViewWillEnter() {
+    this.myWrapperList.splice(0, this.myWrapperList.length);
+    this.getQuestion();
+    this.getNombreQuestionNoteByPostulant()
+  }
   async openModal(id: number) {
     const modal = await this.modalCtrl.create({
       component: NoteComponent,
@@ -189,12 +113,19 @@ export class EntretienPage implements OnInit {
         'data': { "postulant": this.postulant, "critereId": id }
       }
     });
+    modal.onDidDismiss().then(() => {
+      this.ionViewWillEnter();
+    });
     modal.present();
 
-    const { data, role } = await modal.onWillDismiss();
-
-    if (role === 'confirm') {
-      // this.message = `Hello, ${data}!`;
-    }
+    return await modal.onWillDismiss();
   }
+}
+
+
+export class MyWrapper {
+  constructor(
+    public question: Question,
+    public point: number
+  ){}
 }
