@@ -7,32 +7,11 @@
     align-items: center;
     overflow: hidden; /* Hide scrollbars */
 
-    /* padding: 10px; */
-    /* background: linear-gradient(135deg, #71b7e6, #9b59b6); */
-    /* width: 100%; */
-    /* background: #fff; */
-    // padding: 25px 30px;
-    /* border-radius: 5px; */
 }
 
-.container .title{
-    font-size: 25px;
-    font-weight: 500;
-    position: relative;
-    border-radius: 5px;
-    border-radius: 1px solid #cacaca;
-
+.quest {
+    margin-top: 0px;
 }
-.container .title::before {
-    content:'';
-    position: absolute;
-    left:0;
-    bottom:0;
-    height: 3px;
-    width: 30px;
-    background: linear-gradient(135deg, #71b7e6, #9b59b6);
-}
-
  .container form .user-details{
      margin: 20px 0 12px 0;
 }
@@ -94,3 +73,46 @@ form .button input{
 form .button input:hover {
     background: linear-gradient(-135deg, #FF7900, #9b59b6);
  }
+ 
+////card//////////::after
+.mesgrid{
+    margin: 10px auto;
+    border: solid 1px #cacaca;
+  }
+ion-col{
+    padding: 3pxrgb(245, 244, 247)
+  }
+  .desc{
+    background: #845EC2;
+    display: flex;
+    // justify-content: center;
+    // align-items: center;
+    // padding: 0 5px;
+    padding: 5px;
+    margin: 0;
+    h6{
+      color: #fff;
+      margin: 5px auto;
+      text-align: center;
+    }
+    .cardicon{
+      width: 0px;
+      font-size: 50px;
+      // right: 15px;
+      color: #cacaca;
+      opacity: 0.4;
+      padding-top: 5px;
+    }
+  }
+  .nbre{
+      padding: 5px auto;
+      margin: 5px auto;
+      text-align: center;
+      font-size: 22px;
+      color: #fff;
+      font-weight: 500;
+  }
+
+  .cardbody{
+    width: 65%;
+  }

@@ -11,7 +11,37 @@
 </ion-header>
 <ion-content class="ion-padding">
   <div class="container">
-    <div class="title"><img src="assets/note.gif" alt="odc-interview-logo"></div>
+    <div class="title">
+      <h2 class="quest">{{questionView[0]?.questionNom}}</h2>
+      <!-- <ion-grid class="mesgrid"> -->
+        <ion-row>
+          <ion-col size="12">
+            <ion-card class="desc" color="primary">
+              <div class="cardbody">
+                <h6>Barem</h6>
+                <p class="nbre">{{questionView[0]?.critere.barem}}</p>
+              </div>
+              <div class="cardicon">
+                <ion-icon name="reader-outline"></ion-icon>
+              </div>
+            </ion-card>
+          </ion-col>
+          <ion-col size="12">
+            <ion-card class="desc" color="primary">
+              <div class="cardbody">
+                <h6>Elimination</h6>
+                <p class="nbre" *ngIf="questionView[0]?.critere.elimination==true">Oui</p>
+                <p class="nbre" *ngIf="questionView[0]?.critere.elimination==false">Non</p>
+              </div>
+              <div class="cardicon">
+                <ion-icon name="toggle-outline"></ion-icon>
+              </div>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      <!-- </ion-grid> -->
+      <!-- <img src="assets/note.gif" alt="odc-interview-logo"> -->
+    </div>
     <form #AddNote="ngForm" (ngSubmit)="ajouterNote()">
       <div class="user-details">
         <div class="form-group">

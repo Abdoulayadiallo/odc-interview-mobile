@@ -18,8 +18,8 @@ export class QuestionService {
   getAllQuestion(): Observable<Question[]> {
     return this.http.get<Question[]>(`${this.host}/question/list`);
   }
-  getQuestionByCritere(critereId:number):Observable<Critere>{
-    return this.http.get<Critere>(`${this.host}/question/critere/${critereId}`);
+  getQuestionByCritere(critereId:number):Observable<Question[]>{
+    return this.http.get<Question[]>(`${this.host}/question/critere/${critereId}`);
   }
   getNombreQuestionNoteByPostulant(postulantId:number):Observable<NombreQuestionResponse>{
     return this.http.get<NombreQuestionResponse>(`${this.host}/question/repond/${postulantId}`);
