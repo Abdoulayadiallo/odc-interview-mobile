@@ -28,6 +28,7 @@ export class NoteComponent implements OnInit {
   Repond: Question[];
 
   @Output() closeModal: EventEmitter<any> = new EventEmitter<any>();
+  questionView: Question[];
 
   constructor(
     private modalCtrl: ModalController,
@@ -39,6 +40,7 @@ export class NoteComponent implements OnInit {
   ngOnInit(): void {
     this.getUserInfo(this.accountService.loggInUsername);
     this.username = this.accountService.loggInUsername;
+    this.getQuestion()
   }
 
   getUserInfo(username: string): void {
@@ -70,6 +72,12 @@ export class NoteComponent implements OnInit {
   getNombreQuestionNoteByPostulant() {
     this.questionService.getAllQuestion().subscribe((data) => {
       this.Repond = data;
+    });
+  }
+  //RECUPERER TOUS LES QUESTIONS NOTES POUR RAFRACHIR LES NOUVELLES DONNEES
+  getQuestion() {
+    this.questionService.getQuestionByCritere(this.data.critereId).subscribe((data) => {
+      this.questionView = data;
     });
   }
 

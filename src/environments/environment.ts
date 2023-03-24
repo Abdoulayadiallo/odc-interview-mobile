@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
    host : "http://localhost:8080",
-
+   hostImage : "http://localhost/odcinterviewimage",
    client : 'http://localhost:8100',
 };
 
